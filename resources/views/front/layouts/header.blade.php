@@ -8,8 +8,8 @@
 
         @guest
             <a class="header__login-btn" href="{{ route('login') }}">Вход</a>
+        @else
+            {{-- <x-front.profile-dropdown /> --}}
         @endguest
-
-
     </div>
 </header>

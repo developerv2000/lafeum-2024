@@ -17,7 +17,6 @@ body {
     --text-color: #000000DE;
 }
 
-
 body::-webkit-scrollbar,
 .thin-scrollbar::-webkit-scrollbar {
     width: 7px
@@ -109,12 +108,9 @@ a {
 .header__inner {
     max-width: 1420px;
     display: flex;
+    gap: 32px;
     align-items: flex-end;
     padding: 16px 40px;
-}
-
-.header__logo {
-    margin-right: 16px;
 }
 
 .header__logo .logo__image {
@@ -150,14 +146,92 @@ a {
 }
 
 .header__login-btn {
-    margin-left: 60px;
-    padding: 6px 24px;
+    padding: 6px 20px;
     font-weight: bold;
     text-decoration: none;
     border: none;
     border-radius: 6px;
-    color: var(--accent-color);
+    color: var(--main-color);
     background-color: white;
 }
 
 /* ------------ /end Header ------------ */
+
+
+/* ------------ Footer ------------ */
+.footer {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.footer__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0 20px;
+}
+
+.footer__logo .logo__image {
+    width: 88px;
+}
+
+.footer__nav {
+    max-width: 920px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    padding: 24px 0;
+    border-bottom: 2px solid #fafafa;
+}
+
+.footer__nav-link {
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+}
+
+.footer__nav-link:hover {
+    color: #A4C2FF;
+}
+
+.footer__copyright {
+    margin-bottom: 20px;
+}
+
+.footer__socials {
+    display: flex;
+    gap: 12px;
+}
+
+.footer__socials-link {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #348ba6;
+}
+
+.footer__socials-image {
+    width: 32px;
+}
+
+/* ------------ /end Footer ------------ */
+
+
+/* ------------ Main Wrapper ------------ */
+.main-wrapper {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    /* PUSH FOOTER TO THE BOTTOM */
+    flex-grow: 1;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding: 28px 40px 20px;
+}
+
+/* ------------ /end Main Wrapper ------------ */

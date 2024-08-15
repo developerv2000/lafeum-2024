@@ -10,30 +10,15 @@
     {{-- blade-formatter-disable-next-line --}}
     <title>@isset($title){{ $title . ' — ЛАФЕЮМ' }}@else{{ 'ЛАФЕЮМ' }}@endisset</title>
 
-    @vite('resources/css/front/main.css')
+    @vite('resources/css/front/auth.css')
 </head>
 
 <body class="body {{ $bodyClass }}">
-    @include('front.layouts.header')
-
-    <div class="main-wrapper">
-        @hasSection('leftbar')
-            @yield('leftbar')
-        @endif
-
-        <main class="main">
+    <main class="main">
+        <div class="box">
             @yield('content')
-        </main>
-
-        @includeWhen($includeRightbar, 'front.layouts.rightbar')
-    </div>
-
-    @include('front.layouts.footer')
-
-    {{-- <x-scroll-buttons /> --}}
-    {{-- <x-spinner /> --}}
-
-    @vite('resources/js/front/main.js')
+        </div>
+    </main>
 </body>
 
 </html>
