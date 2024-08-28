@@ -8,7 +8,9 @@ export default defineConfig({
                 'resources/css/front/main.css',
                 'resources/css/front/auth.css',
                 'resources/css/dashboard/dashboard.css',
+                
                 'resources/js/front/main.js',
+                'resources/js/front/auth.js',
                 'resources/js/dashboard/dashboard.js',
             ],
             refresh: true,

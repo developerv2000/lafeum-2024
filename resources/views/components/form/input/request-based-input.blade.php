@@ -8,8 +8,8 @@
 
 <x-form.groups.default-group label="{{ __($label) }}" error-name="{{ $errorName ?: $name }}" :required="$required">
     <input
-        {{ $attributes->merge(['class' => 'input']) }}
+        {{ $attributes->merge(['class' => 'input ' . (request()->has($name) ? 'input--highlight' : '')]) }}
         name="{{ $name }}"
-        value="{{ old($name, $value) }}"
+        value="{{ request()->input($name, $value) }}"
         @if ($required) required @endif>
 </x-form.groups.default-group>

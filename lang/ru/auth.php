@@ -13,8 +13,11 @@ return [
     |
     */
 
-    'failed' => 'Неверный логин или пароль.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Неверный логин или пароль',
+    'password' => 'Предоставленный пароль неверен.',
+    'throttle' => 'Слишком много попыток входа. Повторите попытку через :seconds секунд.',
 
+    'unique_name' => 'Пользователь с таким именем уже существует',
+    'unique_email' => 'Пользователь с такой почтой уже существует',
+    'password_confirmation_failed' => 'Подтверждение пароля не совпадает',
 ];

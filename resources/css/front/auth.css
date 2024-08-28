@@ -58,7 +58,7 @@ button {
 }
 
 .box {
-    min-width: 520px;
+    width: 520px;
     max-width: 100%;
     padding: 48px 60px 60px;
     display: flex;
@@ -78,7 +78,7 @@ button {
 }
 
 .title {
-    margin: 20px 0 8px;
+    margin: 20px 0 12px;
     color: var(--main-color);
 }
 
@@ -108,6 +108,39 @@ button {
     font-weight: 500;
 }
 
+/* ------------ Spinner ------------ */
+.spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    transition: 0.3s;
+    opacity: 0;
+    z-index: 10;
+}
+
+.spinner__inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000063;
+}
+
+.spinner__img {
+    width: 60px;
+}
+
+.spinner--visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ------------ /end Spinner ------------ */
+
 /* Login */
 .login__links-wrapper {
     display: flex;
@@ -116,4 +149,27 @@ button {
 
 .login-link {
     color: var(--main-color);
+}
+
+/* Registration */
+.register .desc a {
+    color: var(--text-color);
+}
+
+/* Verify email prompt */
+.verify-email-prompt .title {
+    margin: 24px 0;
+}
+
+.verify-email-prompt__logout-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.verify-email-prompt__logout-button {
+    background-color: transparent;
+    color: var(--main-color);
+    width: auto;
+    padding: 0;
 }

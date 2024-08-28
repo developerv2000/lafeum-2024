@@ -19,6 +19,10 @@
             @yield('content')
         </div>
     </main>
+
+    <x-front.different.spinner />
+
+    @vite('resources/js/front/auth.js')
 </body>
 
 </html>

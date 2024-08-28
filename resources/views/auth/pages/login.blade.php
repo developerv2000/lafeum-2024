@@ -8,11 +8,23 @@
     <h1 class="title">Вход</h1>
     <p class="desc">Добро пожаловать, мы ждали Вас !</p>
 
-    <form class="form login-form" action="/login" method="POST">
+    <form class="form login-form" action="{{ route('login') }}" method="POST">
         @csrf
 
-        <x-form.input.default-input label="Ваш Email" name="email" type="email" autofocus required />
-        <x-form.input.default-input label="Пароль" name="password" type="password" autocomplete="current-password" minlength="4" required />
+        <x-form.input.default-input
+            label="Ваш Email"
+            name="email"
+            type="email"
+            autofocus
+            required />
+
+        <x-form.input.default-input
+            label="Пароль"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            minlength="4"
+            required />
 
         <div class="login__links-wrapper">
             <a class="login-link" href="{{ route('register') }}">У вас нет аккаунта?</a>
