@@ -20,5 +20,12 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'role_id' => 1,
         ]);
+
+        $this->call([
+            RoleSeeder::class,
+            AuthorGroupSeeder::class,
+            AuthorSeeder::class,
+            TermTypeSeeder::class,
+        ]);
     }
 }

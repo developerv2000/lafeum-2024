@@ -50,6 +50,23 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relations
+    |--------------------------------------------------------------------------
+    */
+    
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators & additional attributes
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Get the user's photo attribute.
      */
@@ -60,8 +77,26 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-    public function getPhotoPathAttribute(): string
+    public function getPhotoAssetPathAttribute(): string
     {
         return asset(self::PHOTO_PATH . '/' . $this->photo);
+    }
+
+    public function getPhotoFilePathAttribute()
+    {
+        return public_path(self::PHOTO_PATH . '/' . $this->photo);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Events
+    |--------------------------------------------------------------------------
+    */
+
+    protected static function booted(): void
+    {
+        static::deleting(function ($record) {
+            $record->roles()->detach();
+        });
     }
 }

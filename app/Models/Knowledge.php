@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Knowledge extends Model
+{
+    use HasFactory;
+
+    public $timestamps = false;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relations
+    |--------------------------------------------------------------------------
+    */
+
+    public function terms()
+    {
+        return $this->belongsToMany(Term::class);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Events
+    |--------------------------------------------------------------------------
+    */
+
+    protected static function booted(): void
+    {
+        static::deleting(function ($record) {
+            $record->terms()->detach();
+        });
+    }
+}
