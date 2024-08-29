@@ -20,7 +20,7 @@
         </div>
     </main>
 
-    <x-front.different.spinner />
+    <x-global.spinner />
 
     @vite('resources/js/front/auth.js')
 </body>

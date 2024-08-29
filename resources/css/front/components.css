@@ -1,0 +1,31 @@
+/* ------------ Dropdown ------------ */
+.dropdown {
+    position: relative;
+    z-index: 2;
+}
+
+.dropdown--arrowed .dropdown__button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown__content {
+    position: absolute;
+    z-index: 1;
+    margin-top: 8px;
+    background-color: white;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    list-style: none;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown--active .dropdown__content {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ------------ /end Dropdown ------------ */

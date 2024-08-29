@@ -2,3 +2,7 @@
     'bodyClass' => 'home',
     'includeRightbar' => false,
 ])
+
+@section('content')
+
+@endsection
