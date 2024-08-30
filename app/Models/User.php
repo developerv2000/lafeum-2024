@@ -55,10 +55,40 @@ class User extends Authenticatable implements MustVerifyEmail
     | Relations
     |--------------------------------------------------------------------------
     */
-    
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function folders()
+    {
+        return $this->hasMany(Folder::class)->orderBy('name', 'asc');
+    }
+
+    public function rootFolders()
+    {
+        return $this->folders()->whereNull('parent_id');
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 
     /*

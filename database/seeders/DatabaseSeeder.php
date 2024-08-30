@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             AuthorGroupSeeder::class,
             AuthorSeeder::class,
             TermTypeSeeder::class,
+            CountrySeeder::class,
+            GenderSeeder::class,
         ]);
     }
 }

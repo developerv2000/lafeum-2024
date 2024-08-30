@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Support\Traits\Favoriteable;
+use App\Support\Traits\Likeable;
+use App\Support\Traits\Publishable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +13,9 @@ class Term extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Publishable;
+    use Likeable;
+    use Favoriteable;
 
     /*
     |--------------------------------------------------------------------------
@@ -53,8 +59,8 @@ class Term extends Model
     protected static function booted(): void
     {
         static::forceDeleting(function ($item) {
-            $item->categories()->detach();
             $item->knowledges()->detach();
+            $item->categories()->detach();
         });
     }
 }
