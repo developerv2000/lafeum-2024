@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quote extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $guarded = ['id'];
 
@@ -22,6 +24,11 @@ class Quote extends Model
         return $this->belongsTo(Author::class);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(QuoteCategory::class, 'category_quote', 'quote_id', 'category_id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Events
@@ -30,8 +37,8 @@ class Quote extends Model
 
     protected static function booted(): void
     {
-        static::deleting(function ($record) {
-            // $record->categories()->detach();
+        static::forceDeleting(function ($record) {
+            $record->categories()->detach();
         });
     }
 }

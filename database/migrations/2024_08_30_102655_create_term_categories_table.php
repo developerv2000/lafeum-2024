@@ -11,26 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('knowledge', function (Blueprint $table) {
+        Schema::create('term_categories', function (Blueprint $table) {
             $table->unsignedSmallInteger('id')->autoIncrement();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->nestedSet();
         });
 
-        Schema::create('knowledge_term', function (Blueprint $table) {
-            $table->unsignedSmallInteger('knowledge_id');
-            $table->foreign('knowledge_id')
-                ->references('id')
-                ->on('knowledge');
-
+        Schema::create('category_term', function (Blueprint $table) {
             $table->unsignedSmallInteger('term_id');
             $table->foreign('term_id')
                 ->references('id')
                 ->on('terms');
 
-            $table->primary(['knowledge_id', 'term_id']);
+            $table->unsignedSmallInteger('category_id');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('term_categories');
+
+            $table->primary(['term_id', 'category_id']);
         });
     }
 
@@ -39,7 +39,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('knowledge');
-        Schema::dropIfExists('knowledge_term');
+        Schema::dropIfExists('term_categories');
+        Schema::dropIfExists('category_term');
     }
 };

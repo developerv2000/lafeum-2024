@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Video extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------
@@ -18,6 +20,11 @@ class Video extends Model
     public function channel()
     {
         return $this->belongsTo(Channel::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(VideoCategory::class, 'category_video', 'video_id', 'category_id');
     }
 
     /*
@@ -39,6 +46,19 @@ class Video extends Model
     public function getYoutubeThumbnailAttribute()
     {
         return 'https://i.ytimg.com/vi/' . $this->host_id . '/mqdefault.jpg';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Events
+    |--------------------------------------------------------------------------
+    */
+
+    protected static function booted(): void
+    {
+        static::forceDeleting(function ($item) {
+            $item->categories()->detach();
+        });
     }
 
     /*
