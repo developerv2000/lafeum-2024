@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Dropdown -->
+    <div class="dropdown">
+        <button class="dropdown__button" aria-expanded="false" aria-controls="dropdown-content">
+            Dropdown
+            <span class="material-symbols-outlined dropdown__icon">arrow_drop_down</span>
+        </button>
+
+        <ul id="dropdown-content" class="dropdown__content" role="menu">
+            <li role="menuitem">Dropdown content item 1</li>
+            <li role="menuitem">Dropdown content item 2</li>
+            <li role="menuitem">Dropdown content item 3</li>
+            <li role="menuitem">Dropdown content item 4</li>
+        </ul>
+    </div>
+
+    <br><br><br><br>
+
+    <!-- Collapse -->
+    <button data-click-action="toggle-collapse" data-collapse-selector=".collapse">Collapse</button>
+
+    <div class="collapse" style="width: 400px;">
+        <p>Collapse Text</p>
+    </div>
+
+    <br><br><br><br>
+
+    <!-- Accordion -->
+    <div class="accordion" style="width: 400px;">
+        <div class="accordion__item">
+            <button class="accordion__button">
+                <span class="accordion__button-text">Accordion 1</span>
+                <span class="material-symbols-outlined accordion__button-icon">arrow_drop_down</span>
+            </button>
+
+            <div class="accordion__content">
+                <p>Accordion 1 Content</p>
+            </div>
+        </div>
+
+        <div class="accordion__item">
+            <button class="accordion__button">
+                <span class="accordion__button-text">Accordion 2</span>
+                <span class="material-symbols-outlined accordion__button-icon">arrow_drop_down</span>
+            </button>
+
+            <div class="accordion__content">
+                <p>Accordion 2 Content</p>
+            </div>
+        </div>
+
+        <div class="accordion__item">
+            <button class="accordion__button">
+                <span class="accordion__button-text">Accordion 3</span>
+                <span class="material-symbols-outlined accordion__button-icon">arrow_drop_down</span>
+            </button>
+
+            <div class="accordion__content">
+                <p>Accordion 3 Content</p>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

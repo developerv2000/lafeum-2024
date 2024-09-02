@@ -8,6 +8,6 @@
 @endsection
 
 @section('content')
-    <p>Content</p>
+    
 @endsection
 
