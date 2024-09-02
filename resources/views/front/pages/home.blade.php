@@ -1,8 +1,13 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'home',
-    'includeRightbar' => false,
+    'includeRightbar' => true,
 ])
 
-@section('content')
-
+@section('leftbar')
+    @include('front.leftbars.home')
 @endsection
+
+@section('content')
+    <p>Content</p>
+@endsection
+

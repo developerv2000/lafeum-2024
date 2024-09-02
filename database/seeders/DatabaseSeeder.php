@@ -13,14 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@mail.com',
-            'password' => bcrypt('12345'),
-            'email_verified_at' => now(),
-            'role_id' => 1,
-        ]);
-
         $this->call([
             RoleSeeder::class,
             AuthorGroupSeeder::class,
@@ -29,5 +21,14 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             GenderSeeder::class,
         ]);
+
+        $user = User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@mail.com',
+            'password' => bcrypt('12345'),
+            'email_verified_at' => now(),
+        ]);
+
+        $user->roles()->attach([1]);
     }
 }

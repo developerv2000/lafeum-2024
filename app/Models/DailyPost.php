@@ -12,6 +12,13 @@ class DailyPost extends Model
     public $timestamps = false;
     protected $guarded = ['id'];
 
+    protected $with = [
+        'quote',
+        'term',
+        'video',
+        'photo',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | Relations

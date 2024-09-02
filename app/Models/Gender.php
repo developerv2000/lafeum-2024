@@ -12,6 +12,8 @@ class Gender extends Model
     const MALE_NAME = 'Мужской';
     const FEMALE_NAME = 'Женский';
 
+    public $timestamps = false;
+
     /*
     |--------------------------------------------------------------------------
     | Relations

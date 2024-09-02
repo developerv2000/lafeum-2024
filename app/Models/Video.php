@@ -41,17 +41,17 @@ class Video extends Model
 
     public function getYoutubeLinkAttribute()
     {
-        return 'https://youtu.be/' . $this->host_id;
+        return 'https://youtu.be/' . $this->youtube_id;
     }
 
     public function getEmbededYoutubeLinkAttribute()
     {
-        return 'https://www.youtube.com/embed/' . $this->host_id;
+        return 'https://www.youtube.com/embed/' . $this->youtube_id;
     }
 
     public function getYoutubeThumbnailAttribute()
     {
-        return 'https://i.ytimg.com/vi/' . $this->host_id . '/mqdefault.jpg';
+        return 'https://i.ytimg.com/vi/' . $this->youtube_id . '/mqdefault.jpg';
     }
 
     /*
@@ -73,7 +73,7 @@ class Video extends Model
     |--------------------------------------------------------------------------
     */
 
-    public static function getHostIdFromYoutubeLink($link)
+    public static function getYoutubeIdFromLink($link)
     {
         $youtubeIdRegEx = '/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/';
 

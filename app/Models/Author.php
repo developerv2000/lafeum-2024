@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Author extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    const PHOTO_PATH = 'img/authors';
 
     /*
     |--------------------------------------------------------------------------
@@ -18,6 +22,22 @@ class Author extends Model
     public function group()
     {
         return $this->belongsTo(AuthorGroup::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional attributes
+    |--------------------------------------------------------------------------
+    */
+
+    public function getPhotoAssetPathAttribute(): string
+    {
+        return asset(self::PHOTO_PATH . '/' . $this->photo);
+    }
+
+    public function getPhotoFilePathAttribute()
+    {
+        return public_path(self::PHOTO_PATH . '/' . $this->photo);
     }
 
     /*

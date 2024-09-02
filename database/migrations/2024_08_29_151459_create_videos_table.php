@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->unsignedSmallInteger('id')->autoIncrement();
-            $table->string('title')->unique();
-            $table->string('host_id'); // youtube
+            $table->string('title');
+            $table->string('youtube_id'); // generated manually
 
             $table->integer('channel_id')
                 ->foreign()
