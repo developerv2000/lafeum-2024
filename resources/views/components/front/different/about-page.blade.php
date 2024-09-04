@@ -6,7 +6,7 @@
     @endif
 
     @if ($desc)
-        <p class="about-page__desc">{{ $desc }}</p>
+        <p class="about-page__desc">{!! $desc !!}</p>
     @endif
 
     @if ($includeSearch)

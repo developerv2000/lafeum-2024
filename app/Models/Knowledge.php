@@ -37,4 +37,15 @@ class Knowledge extends Model
             $record->terms()->detach();
         });
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous
+    |--------------------------------------------------------------------------
+    */
+
+    public function getTermsForFront()
+    {
+        return Term::getFinalizedRecordsForFront($this->terms());
+    }
 }

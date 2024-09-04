@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Knowledge;
 use App\Http\Requests\StoreKnowledgeRequest;
 use App\Http\Requests\UpdateKnowledgeRequest;
+use Illuminate\Http\Request;
 
 class KnowledgeController extends Controller
 {
@@ -19,6 +20,17 @@ class KnowledgeController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Request $request, Knowledge $record)
+    {
+        $terms = $record->getTermsForFront();
+        $knowledges = Knowledge::get()->toTree(); // for leftbar
+
+        return view('front.knowledge.show', compact('record', 'terms', 'knowledges'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -30,14 +42,6 @@ class KnowledgeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreKnowledgeRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Knowledge $knowledge)
     {
         //
     }

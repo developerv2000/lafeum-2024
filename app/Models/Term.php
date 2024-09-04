@@ -17,6 +17,13 @@ class Term extends Model
     use Likeable;
     use Favoriteable;
 
+    const PAGINATION_LIMIT_FOR_FRONT = 20;
+
+    protected $with = [
+        'type',
+        'categories',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | Relations
@@ -49,6 +56,34 @@ class Term extends Model
         return $query->where('show_in_vocabulary', true)
             ->where('name', '!=', '');
     }
+
+    /**
+     * Get finalized records for the front-end based on the specified query and action.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query The query builder instance.
+     * @param string $finaly The action to perform: 'paginate', 'get', or 'query'.
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder The modified query or the retrieved results.
+     */
+    public static function getFinalizedRecordsForFront($query, $finaly = 'paginate')
+    {
+        // Apply common query modifications
+        $query->onlyPublished()
+            ->orderBy('publish_at', 'desc');
+
+        // Return result based on the finaly option
+        switch ($finaly) {
+            case 'paginate':
+                return $query->paginate(self::PAGINATION_LIMIT_FOR_FRONT);
+
+            case 'get':
+                return $query->get();
+
+            case 'query':
+            default:
+                return $query;
+        }
+    }
+
 
     /*
     |--------------------------------------------------------------------------

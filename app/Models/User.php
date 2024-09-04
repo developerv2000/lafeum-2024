@@ -50,6 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    protected $with = [
+        'roles',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | Relations
