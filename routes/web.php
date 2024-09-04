@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\MainController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;

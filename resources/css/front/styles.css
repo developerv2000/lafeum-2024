@@ -111,6 +111,41 @@ a {
     font-weight: 400;
 }
 
+
+/* ------------ Buttons ------------ */
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 48px;
+    color: var(--text-color);
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.button__icon {
+    font-size: 22px;
+}
+
+.button__text {
+    font-weight: 500;
+}
+
+.button__text:empty {
+    display: none;
+}
+
+.button--main {
+    background-color: var(--main-color);
+    color: white;
+}
+
+/* ------------ /end Buttons ------------ */
+
+
 /* ------------ Spinner ------------ */
 .spinner {
     position: fixed;
@@ -324,6 +359,40 @@ a {
 /* ------------ /end Footer ------------ */
 
 
+/* ------------ Scroll Buttons ------------ */
+.scroll-buttons {
+    position: fixed;
+    bottom: 40px;
+    right: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.scroll-buttons--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-buttons button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}
+
+/* ------------ /end Scroll Buttons ------------ */
+
+
 /* ------------ Main Wrapper ------------ */
 .main-wrapper {
     max-width: 1400px;
@@ -331,6 +400,7 @@ a {
     display: flex;
     /* PUSH FOOTER TO THE BOTTOM */
     flex-grow: 1;
+    gap: 24px;
     align-items: flex-start;
     margin: 0 auto;
     padding: 28px 40px 20px;
@@ -361,6 +431,7 @@ a {
     background-color: white;
     border-radius: var(--theme-border-radius);
     padding-bottom: 12px;
+    font-size: 15px;
 }
 
 .leftbar__subtitle {
@@ -402,6 +473,36 @@ a {
 
 .leftbar__nav-link:hover {
     color: var(--main-color);
+}
+
+.home-leftbar__accordions-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 24px 12px;
+}
+
+.home-leftbar .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.home-leftbar .accordion__button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.home-leftbar .accordion__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: var(--main-color);
+}
+
+.home-leftbar .accordion__content a:first-child {
+    margin-top: 4px;
 }
 
 /* ------------ /end Leftbar ------------ */
@@ -495,7 +596,39 @@ a {
     width: 100%;
     margin-bottom: 12px;
 }
+
 /* ------------ /end Rightbar ------------ */
+
+
+/* ------------ Local search ------------ */
+.local-search {
+    display: flex;
+}
+
+.local-search__input {
+    width: 420px;
+    padding: 12px;
+    border: 2px solid #9B9B9B;
+    border-right: 0;
+    border-radius: 8px 0 0 8px;
+    background-color: transparent;
+    outline: none;
+}
+
+.local-search__button {
+    padding: 4px 16px;
+    border-radius: 0 8px 8px 0;
+}
+/* ------------ /end Local search ------------ */
+
+
+/* ------------ About page ------------ */
+.about-page__title {
+    margin-bottom: 20px;
+}
+
+
+/* ------------ /end About page ------------ */
 
 
 /* ------------ Cards ------------ */
@@ -527,4 +660,5 @@ a {
     border-radius: 10%;
     pointer-events: none;
 }
+
 /* ------------ /end Cards ------------ */

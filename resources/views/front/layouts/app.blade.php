@@ -30,7 +30,7 @@
 
     @include('front.layouts.footer')
 
-    {{-- <x-scroll-buttons /> --}}
+    <x-front.different.scroll-buttons />
     <x-global.spinner />
 
     @vite('resources/js/front/main.js')

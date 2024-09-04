@@ -13,7 +13,9 @@ class KnowledgeController extends Controller
      */
     public function index()
     {
-        //
+        $records = Knowledge::get()->toTree();
+
+        return view('front.knowledge.index', compact('records'));
     }
 
     /**
