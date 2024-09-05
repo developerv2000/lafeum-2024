@@ -148,6 +148,7 @@ a {
     border: none;
     background-color: transparent;
 }
+
 /* ------------ /end Buttons ------------ */
 
 
@@ -244,9 +245,6 @@ a {
 
 /* Profile dropdown */
 .profile-dropdown .dropdown__button {
-    padding: 0;
-    border: 0;
-    background-color: transparent;
     color: white;
 }
 
@@ -736,18 +734,39 @@ a {
     color: #9e9e9e;
 }
 
+.default-card__body-text a {
+    color: var(--accent-color);
+}
+
 .default-card__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 16px;
+    padding: 4px 16px 8px;
     border-top: 1px solid #eee;
+}
+
+.default-card__foter-left {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* Categories */
+.default-card__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-top: 4px;
+    font-style: italic;
+    font-size: 13px;
 }
 
 /* Like  */
 .like-container {
     display: flex;
     gap: 8px;
+    align-items: center;
 }
 
 .like-container__icon {
@@ -761,6 +780,79 @@ a {
 .like-container__counter {
     margin: 0;
     font-family: sans-serif;
+}
+
+/* Favorite */
+.favorite-dropdown__icon {
+    color: #cdcdcd;
+}
+
+.favorite-dropdown__icon--liked {
+    color: var(--main-color);
+}
+
+.favorite-dropdown .dropdown__content {
+    width: 180px;
+}
+
+.favorite-form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px;
+}
+
+.favorite-form__title {
+    font-weight: 600;
+    margin: 0;
+}
+
+.favorite-form__folder {
+    position: relative;
+}
+
+.favorite-form__folder-childs {
+    position: absolute;
+    width: 180px;
+    top: -4px;
+    left: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-left: 4px;
+    padding: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+}
+
+.favorite-form__folder:hover .favorite-form__folder-childs {
+    opacity: 1;
+    visibility: visible;
+}
+
+.favorite-form__folder-childs-title {
+    margin: 0;
+    font-weight: 600;
+}
+
+.favorite-form__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.favorite-form__label:hover {
+    background-color: #F6F6F6;
+}
+
+.favorite-form__submit {
+    padding: 6px;
+    margin-top: 8px;
 }
 
 /* Yandex share */
@@ -787,6 +879,7 @@ a {
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
+    font-variation-settings: var(--filled-material-symbols-font-variation);
     font-feature-settings: 'liga';
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;

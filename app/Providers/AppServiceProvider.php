@@ -26,5 +26,12 @@ class AppServiceProvider extends ServiceProvider
         View::composer('front.layouts.rightbar', function ($view) {
             $view->with('todaysPost', DailyPost::getLatestRecord());
         });
+
+        // Favorite folder
+        View::composer(['components.front.cards.default.partials.favorite-form'], function ($view) {
+            if (auth()->check()) {
+                $view->with('userRootFolders', auth()->user()->rootFolders);
+            }
+        });
     }
 }

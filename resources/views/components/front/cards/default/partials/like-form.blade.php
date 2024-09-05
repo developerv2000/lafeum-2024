@@ -3,8 +3,6 @@
 @auth
     <div class="like-container">
         <form class="like-form" action="{{ route('likes.toggle', ['model' => class_basename($record), 'id' => $record->id]) }}" method="POST">
-            @csrf
-
             <button class="button button--transparent like-container__button">
                 <x-global.material-symbol-outlined
                     :class="'like-container__icon' . ($record->isLikedByCurrentUser() ? ' like-container__icon--liked' : '')"

@@ -22,4 +22,15 @@ class Folder extends Model
     {
         return $this->hasMany(self::class, 'parent_id');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous
+    |--------------------------------------------------------------------------
+    */
+
+    public function hasChilds()
+    {
+        return $this->childs()->exists();
+    }
 }

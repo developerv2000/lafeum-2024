@@ -1,4 +1,4 @@
-<x-global.dropdown class="profile-dropdown" include-arrow="true">
+<x-global.dropdown id="profile-dropdown" class="profile-dropdown" button-style="transparent" include-arrow="true">
     <x-slot:button>
         <img class="profile-dropdown__ava" src="{{ auth()->user()->photo_asset_path }}" alt="ava">
     </x-slot:button>

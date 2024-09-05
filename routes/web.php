@@ -19,6 +19,10 @@ Route::middleware(['guest.or.verified'])->group(function () {
         Route::post('/toggle/{model}/{id}', 'toggle')->name('toggle'); // AJAX request
     });
 
+    Route::controller(FavoriteController::class)->name('favorites.')->group(function () {
+        Route::post('/toggle/{model}/{id}', 'toggle')->name('toggle'); // AJAX request
+    });
+
     Route::controller(KnowledgeController::class)->prefix('/knowledge')->name('knowledge.')->group(function () {
         CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showBySlug']);
     });

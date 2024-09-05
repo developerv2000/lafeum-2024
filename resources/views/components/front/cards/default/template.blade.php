@@ -9,7 +9,13 @@
 
     {{-- Footer --}}
     <div class="default-card__footer">
-        <x-front.cards.default.partials.like :record="$record" />
-        <x-front.cards.default.partials.yandex-share :shareUrl="$shareUrl" />
+        <div class="default-card__foter-left">
+            <x-front.cards.default.partials.like-form :record="$record" />
+            <x-front.cards.default.partials.favorite-form :record="$record" />
+        </div>
+
+        <div class="default-card__foter-right">
+            <x-front.cards.default.partials.yandex-share :shareUrl="$shareUrl" />
+        </div>
     </div>
 </div>
