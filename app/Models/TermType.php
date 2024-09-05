@@ -24,4 +24,20 @@ class TermType extends Model
     {
         return $this->hasMany(Term::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous
+    |--------------------------------------------------------------------------
+    */
+
+    public function isScientific()
+    {
+        return $this->name === self::SCIENTIFIC_TERMS;
+    }
+
+    public function isExpertComments()
+    {
+        return $this->name === self::EXPERT_COMMENTS;
+    }
 }

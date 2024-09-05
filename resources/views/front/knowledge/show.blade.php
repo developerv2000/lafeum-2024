@@ -17,5 +17,5 @@
         </div>
     </div>
 
-    
+    <x-front.lists.terms :terms="$terms" />
 @endsection

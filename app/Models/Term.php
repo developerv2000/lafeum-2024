@@ -32,7 +32,7 @@ class Term extends Model
 
     public function type()
     {
-        return $this->belongsTo(TermType::class);
+        return $this->belongsTo(TermType::class, 'term_type_id');
     }
 
     public function knowledges()

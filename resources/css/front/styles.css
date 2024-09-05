@@ -143,6 +143,11 @@ a {
     color: white;
 }
 
+.button--transparent {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
 /* ------------ /end Buttons ------------ */
 
 
@@ -620,6 +625,56 @@ a {
 /* ------------ /end Rightbar ------------ */
 
 
+/* ------------ Pagination ------------ */
+.pagination {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 0px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.pagination__item {
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    transition: 0.3s;
+}
+
+.pagination__link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--text-color);
+}
+
+.pagination__link--active {
+    color: #fff;
+    background-color: var(--main-color);
+}
+
+.pagination__link span {
+    color: #a7a7a7de;
+}
+
+.pagination__dots {
+    display: flex;
+    align-items: flex-end;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 0 4px;
+}
+
+/* ------------ /end Pagination ------------ */
+
+
 /* ------------ Local search ------------ */
 .local-search {
     display: flex;
@@ -639,6 +694,7 @@ a {
     padding: 4px 16px;
     border-radius: 0 8px 8px 0;
 }
+
 /* ------------ /end Local search ------------ */
 
 
@@ -651,7 +707,110 @@ a {
 /* ------------ /end About page ------------ */
 
 
+/* ------------ Lists ------------ */
+.default-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ------------ /end Lists ------------ */
+
+
 /* ------------ Cards ------------ */
+/* Default template */
+.default-card {
+    background-color: white;
+    border-radius: 8px;
+}
+
+.default-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.default-card__header {
+    color: #9e9e9e;
+}
+
+.default-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 16px;
+    border-top: 1px solid #eee;
+}
+
+/* Like  */
+.like-container {
+    display: flex;
+    gap: 8px;
+}
+
+.like-container__icon {
+    color: #cdcdcd;
+}
+
+.like-container__icon--liked {
+    color: red;
+}
+
+.like-container__counter {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Yandex share */
+.ya-share2__link.ya-share2__link_more {
+    background-color: transparent !important;
+    padding: 2px 0 !important;
+}
+
+.ya-share2__icon_more {
+    background-image: none !important;
+}
+
+.ya-share2__icon_more::after {
+    content: "\e80d";
+    color: #cdcdcd;
+    font-size: 24px;
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    font-feature-settings: 'liga';
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Terms */
+.terms-card__type-name {
+    margin-bottom: 0;
+}
+
+.terms-card__type-icons-wrapper {
+    display: flex;
+    color: #00d0ff;
+}
+
+.terms-card__type-icon {
+    width: 18px;
+}
+
+.terms-card .default-card__body {
+    padding: 8px 16px 16px;
+    position: relative;
+}
+
 /* Video */
 .video-card__thumb {
     position: relative;

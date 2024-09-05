@@ -9,6 +9,9 @@ class Like extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    protected $guarded = ['id'];
+
     /*
     |--------------------------------------------------------------------------
     | Relations

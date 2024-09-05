@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KnowledgeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,10 @@ Route::middleware(['guest.or.verified'])->group(function () {
         Route::get('/contacts', 'contacts')->name('contacts');
         Route::get('/privacy-policy', 'privacyPolicy')->name('privacy.policy');
         Route::get('/terms-of-use', 'termsOfUse')->name('terms.of.use');
+    });
+
+    Route::controller(LikeController::class)->name('likes.')->prefix('/likes')->group(function () {
+        Route::post('/toggle/{model}/{id}', 'toggle')->name('toggle'); // AJAX request
     });
 
     Route::controller(KnowledgeController::class)->prefix('/knowledge')->name('knowledge.')->group(function () {
