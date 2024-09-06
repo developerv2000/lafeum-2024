@@ -23,6 +23,7 @@
     {{-- Body --}}
     <x-slot:body>
         <div class="default-card__body-text">{!! $term->body !!}</div>
+        <x-front.cards.default.partials.expand-more />
         <x-front.cards.default.partials.categories :categories="$term->categories" link-route-name="terms.category" />
     </x-slot:body>
 </x-front.cards.default.template>
