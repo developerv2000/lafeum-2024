@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
@@ -19,8 +20,8 @@ Route::middleware(['guest.or.verified'])->group(function () {
         Route::post('/toggle/{model}/{id}', 'toggle')->name('toggle'); // AJAX request
     });
 
-    Route::controller(FavoriteController::class)->name('favorites.')->group(function () {
-        Route::post('/toggle/{model}/{id}', 'toggle')->name('toggle'); // AJAX request
+    Route::controller(FavoriteController::class)->name('favorites.')->prefix('/favorites')->group(function () {
+        Route::post('/refresh/{model}/{id}', 'refresh')->name('refresh'); // AJAX request
     });
 
     Route::controller(KnowledgeController::class)->prefix('/knowledge')->name('knowledge.')->group(function () {

@@ -9,6 +9,7 @@ const scrollBottomBtn = document.querySelector('.scroll-buttons__bottom');
 const spinner = document.querySelector('.spinner');
 
 const likeForms = document.querySelectorAll('.like-form');
+const favoriteForms = document.querySelectorAll('.favorite-form');
 
 // Constants
 const SCROLL_THRESHOLD = 300;
@@ -27,6 +28,12 @@ document.querySelectorAll('input[data-action="local-search"]').forEach((input) =
 likeForms.forEach((form) => {
     form.addEventListener('submit', function (event) {
         handleLikeToggling(event);
+    });
+});
+
+favoriteForms.forEach((form) => {
+    form.addEventListener('submit', function (event) {
+        handleFavoriteRefreshing(event);
     });
 });
 
@@ -97,7 +104,36 @@ function handleLikeToggling(event) {
                 likeIcon.classList.remove('like-container__icon--liked');
             }
 
-            likesCount.innerHTML = response.data.likesCount ?? '';
+            likesCount.innerHTML = response.data.likesCount;
+        })
+        .finally(hideSpinner);
+}
+
+function handleFavoriteRefreshing(event) {
+    event.preventDefault();
+    showSpinner();
+
+    const form = event.target;
+    const favoriteDropdown = form.closest('.favorite-dropdown');
+    const favoriteIcon = favoriteDropdown.querySelector('.favorite-dropdown__icon');
+
+    // Collect checked folder ids
+    const folderIDs = [];
+    form.querySelectorAll('input[name="folder_ids[]"]:checked').forEach((chb) => {
+        folderIDs.push(chb.value);
+    });
+
+    axios.post(form.action, { folder_ids: folderIDs }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            if (response.data.isFavorited) {
+                favoriteIcon.classList.add('favorite-dropdown__icon--favorited');
+            } else {
+                favoriteIcon.classList.remove('favorite-dropdown__icon--favorited');
+            }
         })
         .finally(hideSpinner);
 }

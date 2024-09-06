@@ -10,8 +10,15 @@
     {{-- Footer --}}
     <div class="default-card__footer">
         <div class="default-card__foter-left">
-            <x-front.cards.default.partials.like-form :record="$record" />
-            <x-front.cards.default.partials.favorite-form :record="$record" />
+            @auth
+                <x-front.cards.default.partials.auth-like-form :record="$record" />
+                <x-front.cards.default.partials.auth-favorite-form :record="$record" />
+            @endauth
+
+            @guest
+                <x-front.cards.default.partials.guest-like :record="$record" />
+                <x-front.cards.default.partials.guest-favorite />
+            @endguest
         </div>
 
         <div class="default-card__foter-right">

@@ -10,13 +10,14 @@ class Favorite extends Model
     use HasFactory;
 
     public $timestamps = false;
+    protected $guarded = ['id'];
 
     /*
     |--------------------------------------------------------------------------
     | Relations
     |--------------------------------------------------------------------------
     */
-    
+
     public function favoritable()
     {
         return $this->morphTo();

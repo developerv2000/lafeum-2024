@@ -752,6 +752,10 @@ a {
     align-items: center;
 }
 
+.default-card__foter-left a {
+    display: flex;
+}
+
 /* Categories */
 .default-card__categories {
     display: flex;
@@ -771,6 +775,7 @@ a {
 
 .like-container__icon {
     color: #cdcdcd;
+    display: flex;
 }
 
 .like-container__icon--liked {
@@ -785,9 +790,10 @@ a {
 /* Favorite */
 .favorite-dropdown__icon {
     color: #cdcdcd;
+    display: flex;
 }
 
-.favorite-dropdown__icon--liked {
+.favorite-dropdown__icon--favorited {
     color: var(--main-color);
 }
 

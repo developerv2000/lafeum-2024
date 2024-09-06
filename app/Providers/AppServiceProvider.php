@@ -28,10 +28,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Favorite folder
-        View::composer(['components.front.cards.default.partials.favorite-form'], function ($view) {
-            if (auth()->check()) {
-                $view->with('userRootFolders', auth()->user()->rootFolders);
-            }
+        View::composer(['components.front.cards.default.partials.auth-favorite-form'], function ($view) {
+            $view->with('userRootFolders', auth()->user()->rootFolders);
         });
     }
 }

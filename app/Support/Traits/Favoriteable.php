@@ -94,4 +94,17 @@ trait Favoriteable
     {
         return $this->favorites()->count();
     }
+
+    public function refreshFavoritesFromRequest($request)
+    {
+        // Remove old favorites
+        $this->favorites()->where('user_id', auth()->id())->delete();
+
+        // Attach new ones
+        $folderIDs = $request->input('folder_ids', []);
+
+        foreach ($folderIDs as $folderID) {
+            $this->favoriteByCurrentUser($folderID);
+        }
+    }
 }
