@@ -52,6 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $with = [
         'roles',
+        'rootFolders',
     ];
 
     /*
@@ -132,5 +133,18 @@ class User extends Authenticatable implements MustVerifyEmail
         static::deleting(function ($record) {
             $record->roles()->detach();
         });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous
+    |--------------------------------------------------------------------------
+    */
+
+    public function loadRootFolders()
+    {
+        if (!$this->loaded_root_folders) {
+            $this->loaded_root_folders = $this->rootFolders;
+        }
     }
 }

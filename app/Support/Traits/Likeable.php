@@ -5,6 +5,11 @@ namespace App\Support\Traits;
 use App\Models\Like;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * Important: This trait assumes that the 'likes' relationship is eager loaded.
+ * If the 'likes' relationship is not eager loaded, it will result in additional queries.
+ */
 trait Likeable
 {
     /**
@@ -20,11 +25,14 @@ trait Likeable
     /**
      * Check if the model is liked by the current authenticated user.
      *
+     * Important: This method assumes that the 'likes' relationship is eager loaded.
+     * If the 'likes' relationship is not eager loaded, it will result in additional queries.
+     *
      * @return bool
      */
     public function isLikedByCurrentUser()
     {
-        return $this->likes()->where('user_id', auth()->id())->exists();
+        return $this->likes->contains('user_id', auth()->id());
     }
 
     /**
@@ -74,10 +82,13 @@ trait Likeable
     /**
      * Count the number of likes for the model.
      *
+     * Important: This method assumes that the 'likes' relationship is eager loaded.
+     * If the 'likes' relationship is not eager loaded, it will result in additional queries.
+     *
      * @return int
      */
     public function likesCount()
     {
-        return $this->likes()->count();
+        return $this->likes->count();
     }
 }

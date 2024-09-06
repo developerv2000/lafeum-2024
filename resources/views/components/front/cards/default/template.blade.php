@@ -13,9 +13,7 @@
             @auth
                 <x-front.cards.default.partials.auth-like-form :record="$record" />
                 <x-front.cards.default.partials.auth-favorite-form :record="$record" />
-            @endauth
-
-            @guest
+            @else
                 <x-front.cards.default.partials.guest-like :record="$record" />
                 <x-front.cards.default.partials.guest-favorite />
             @endguest

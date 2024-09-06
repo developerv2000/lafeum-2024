@@ -14,11 +14,10 @@
             action="{{ route('favorites.refresh', ['model' => class_basename($record), 'id' => $record->id]) }}"
             method="POST">
 
-
             <p class="favorite-form__title">Выберите папку:</p>
 
             {{-- Root folders --}}
-            @foreach ($userRootFolders as $folder)
+            @foreach (auth()->user()->rootFolders as $folder)
                 <div class="favorite-form__folder @if ($folder->hasChilds()) favorite-form__folder--has-children @endif">
                     <label class="favorite-form__label">
                         <input type="checkbox" name="folder_ids[]" value="{{ $folder->id }}" @checked($record->isFavoritedByCurrentUser($folder->id))>

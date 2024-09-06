@@ -22,6 +22,8 @@ class Term extends Model
     protected $with = [
         'type',
         'categories',
+        'likes',
+        'favorites',
     ];
 
     /*

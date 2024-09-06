@@ -5,6 +5,10 @@ namespace App\Support\Traits;
 use App\Models\Favorite;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Important: This method assumes that the 'favorites' relationship is eager loaded.
+ * If the 'favorites' relationship is not eager loaded, it will not work as expected.
+ */
 trait Favoriteable
 {
     /**
@@ -20,18 +24,24 @@ trait Favoriteable
     /**
      * Check if the model is favorited by the current authenticated user.
      *
+     * Important: This method assumes that the 'favorites' relationship is eager loaded.
+     * If the 'favorites' relationship is not eager loaded, it will not work as expected.
+     *
      * @param  int|null  $folderId
      * @return bool
      */
     public function isFavoritedByCurrentUser(?int $folderId = null): bool
     {
-        $query = $this->favorites()->where('user_id', auth()->id());
+        // Filter the already eager-loaded favorites collection
+        $favorites = $this->favorites->where('user_id', auth()->id());
 
         if ($folderId !== null) {
-            $query->where('folder_id', $folderId);
+            // Filter by folder_id if provided
+            $favorites = $favorites->where('folder_id', $folderId);
         }
 
-        return $query->exists();
+        // Return whether the filtered collection is not empty
+        return $favorites->isNotEmpty();
     }
 
     /**
@@ -88,11 +98,14 @@ trait Favoriteable
     /**
      * Count the number of favorites for the model.
      *
+     * Important: This method assumes that the 'favorites' relationship is eager loaded.
+     * If the 'favorites' relationship is not eager loaded, it will not work as expected.
+     *
      * @return int
      */
     public function favoritesCount(): int
     {
-        return $this->favorites()->count();
+        return $this->favorites->count();
     }
 
     public function refreshFavoritesFromRequest($request)

@@ -31,6 +31,6 @@ class Folder extends Model
 
     public function hasChilds()
     {
-        return $this->childs()->exists();
+        return $this->childs->count();
     }
 }
