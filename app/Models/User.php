@@ -134,17 +134,4 @@ class User extends Authenticatable implements MustVerifyEmail
             $record->roles()->detach();
         });
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Miscellaneous
-    |--------------------------------------------------------------------------
-    */
-
-    public function loadRootFolders()
-    {
-        if (!$this->loaded_root_folders) {
-            $this->loaded_root_folders = $this->rootFolders;
-        }
-    }
 }

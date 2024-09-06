@@ -13,7 +13,10 @@ class MainController extends Controller
     public function home(Request $request)
     {
         $rootCategories = $this->getCombinedCategoriesTree();
-        $this->addSupportedTypeLinksToCategories($rootCategories);
+
+        // Add supported_type_links for each concrete categories
+        $nestedCategoriesArray = $this->getCategoriesAsNestedArray();
+        $this->addSupportedTypeLinksToCategories($rootCategories, $nestedCategoriesArray);
 
         return view('front.pages.home', compact('rootCategories'));
     }
@@ -34,19 +37,28 @@ class MainController extends Controller
         return $categories->unique('name');
     }
 
+    private function getCategoriesAsNestedArray()
+    {
+        $categories['quotes'] = QuoteCategory::select('id', 'name')->get();
+        $categories['terms'] = TermCategory::select('id', 'name')->get();
+        $categories['videos'] = VideoCategory::select('id', 'name')->get();
+
+        return $categories;
+    }
+
     /**
      * Add supported type links to each category and its children.
      *
      * @param  \Illuminate\Support\Collection  $categories
      * @return void
      */
-    private function addSupportedTypeLinksToCategories(Collection $categories): void
+    private function addSupportedTypeLinksToCategories(Collection $categories, $nestedCategoriesArray): void
     {
-        $categories->each(function ($category) {
-            $category->supported_type_links = $this->getSupportedTypeLinksForCategory($category);
+        $categories->each(function ($category) use ($nestedCategoriesArray) {
+            $category->supported_type_links = $this->getSupportedTypeLinksForCategory($category, $nestedCategoriesArray);
 
             if ($category->children) {
-                $this->addSupportedTypeLinksToCategories($category->children);
+                $this->addSupportedTypeLinksToCategories($category->children, $nestedCategoriesArray);
             }
         });
     }
@@ -57,25 +69,25 @@ class MainController extends Controller
      * @param  \Illuminate\Database\Eloquent\Model  $category
      * @return array
      */
-    private function getSupportedTypeLinksForCategory($category): array
+    private function getSupportedTypeLinksForCategory($category, $nestedCategoriesArray): array
     {
         $links = [];
 
-        if (QuoteCategory::where('name', $category->name)->exists()) {
+        if ($nestedCategoriesArray['quotes']->contains('name', $category->name)) {
             $links[] = [
                 'label' => 'Цитаты и Афоризмы',
                 'href' => route('quotes.category', $category->slug)
             ];
         }
 
-        if (TermCategory::where('name', $category->name)->exists()) {
+        if ($nestedCategoriesArray['terms']->contains('name', $category->name)) {
             $links[] = [
                 'label' => 'Термины',
                 'href' => route('terms.category', $category->slug)
             ];
         }
 
-        if (VideoCategory::where('name', $category->name)->exists()) {
+        if ($nestedCategoriesArray['videos']->contains('name', $category->name)) {
             $links[] = [
                 'label' => 'Видео',
                 'href' => route('videos.category', $category->slug)
@@ -83,7 +95,7 @@ class MainController extends Controller
         }
 
         // Avoid duplicate dictionary links
-        if (TermCategory::where('name', $category->name)->exists() && !array_key_exists('Словарь', $links)) {
+        if ($nestedCategoriesArray['terms']->contains('name', $category->name) && !array_key_exists('Словарь', $links)) {
             $links[] = [
                 'label' => 'Словарь',
                 'href' => route('vocabulary.category', $category->slug)
