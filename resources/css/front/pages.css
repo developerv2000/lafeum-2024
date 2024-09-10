@@ -69,3 +69,14 @@
     color: var(--main-color);
 }
 /* ------------ /end Knowledge pages ------------ */
+
+
+/* ------------ Vocabulary pages ------------ */
+.vocabulary-index__about .local-search__input {
+    width: 100%;
+}
+
+.vocabulary-index__about {
+    margin-bottom: 20px;
+}
+/* ------------ /end Vocabulary pages ------------ */

@@ -12,13 +12,6 @@ class DailyPost extends Model
     public $timestamps = false;
     protected $guarded = ['id'];
 
-    protected $with = [
-        'quote',
-        'term',
-        'video',
-        'photo',
-    ];
-
     /*
     |--------------------------------------------------------------------------
     | Relations
@@ -51,9 +44,31 @@ class DailyPost extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Used in rightbar
+     */
     public static function getLatestRecord()
     {
-        return self::orderBy('id', 'desc')->first();
+        return self::orderBy('id', 'desc')
+            ->with([
+                'quote' => function ($query) {
+                    $query->withOnly(['author']);
+                },
+
+                'term' => function ($query) {
+                    $query->withOnly([]);
+                },
+
+                'video' => function ($query) {
+                    $query->withOnly([]);
+                },
+
+                'photo' => function ($query) {
+                    $query->withOnly([]);
+                },
+
+            ])
+            ->first();
     }
 
     /*

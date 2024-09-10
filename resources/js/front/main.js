@@ -12,6 +12,7 @@ const likeForms = document.querySelectorAll('.like-form');
 const favoriteForms = document.querySelectorAll('.favorite-form');
 const expandMoreButtons = document.querySelectorAll('.expand-more__button');
 const termCardsBodyLinks = document.querySelectorAll('.terms-card__body-text a');
+const vocabularyList = document.querySelector('.vocabulary-list');
 
 // Style variables
 const rootStyles = getComputedStyle(document.documentElement);
@@ -20,6 +21,10 @@ const defaultCardCollapsedTextMaxHeight = rootStyles.getPropertyValue('--default
 // Constants
 const SCROLL_THRESHOLD = 300;
 const TERMS_POPUP_MARGIN_TOP = 32;
+const GET_VOCABULARY_BODY_URL = '/vocabulary/get-body'
+
+// Global variables
+var vocabulary = [];
 
 // Event Listeners
 window.addEventListener('scroll', handleScroll);
@@ -70,6 +75,10 @@ termCardsBodyLinks.forEach((link) => {
             hideAllTermCardPopupsOnBlur();
         });
     }
+});
+
+vocabularyList.addEventListener('mouseover', (evt) => {
+    handleVocabularyListHover(evt);
 });
 
 
@@ -240,6 +249,33 @@ function hideAllTermCardPopupsOnBlur() {
     document.querySelectorAll('.terms-card__popup--visible').forEach((popup) => {
         popup.classList.remove('terms-card__popup--visible');
     });
+}
+
+function handleVocabularyListHover(evt) {
+    const targ = evt.target;
+
+    const isLink = targ.classList.contains('vocabulary-list__link');
+    const contentAlreadyLoaded = targ.dataset.contentLoaded;
+
+    if (isLink && contentAlreadyLoaded != 1) {
+        loadVocabularyLinkContent(targ);
+    }
+}
+
+function loadVocabularyLinkContent(link) {
+    const popup = link.nextElementSibling;
+    const termId = link.dataset.termId;
+
+    axios.post(GET_VOCABULARY_BODY_URL, { term_id: termId }, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+            popup.innerHTML = '<div class="vocabulary-list__popup-inner">' + response.data + '</div>';
+        });
+
+    link.dataset.contentLoaded = 1;
 }
 
 // Initializations (if needed)

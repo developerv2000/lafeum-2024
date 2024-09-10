@@ -4,7 +4,7 @@
 ])
 
 @section('leftbar')
-    @include('front.leftbars.knowledge')
+    @include('front.leftbars.knowledge-show')
 @endsection
 
 @section('content')

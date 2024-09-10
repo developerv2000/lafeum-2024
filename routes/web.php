@@ -4,6 +4,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\VocabularyController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,7 @@ Route::middleware(['guest.or.verified'])->group(function () {
         CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
 
         Route::get('/{category:slug}', 'category')->name('category');
-        Route::get('/get-only-body/{record}', 'getBody')->name('get.only.body'); // AJAX search
+        Route::post('/get-body', 'getBody')->name('get.body'); // AJAX search
     });
 
     Route::controller(QuoteController::class)->prefix('/quotes')->name('quotes.')->group(function () {

@@ -1,7 +1,7 @@
 <x-front.different.leftbar title="Область знаний" subtitle="Поиск" include-search="true" search-placeholder="Введите область знаний">
-    <nav class="leftbar__nav thin-scrollbar">
+    <nav class="leftbar__nav leftbar__nav--limited-height thin-scrollbar">
         @foreach ($knowledges as $parent)
-            <b class="leftbar__nav-title @if($loop->first) leftbar__nav-title--marginless @endif">{{ $parent->name }}</b>
+            <strong class="leftbar__nav-title @if($loop->first) leftbar__nav-title--marginless @endif">{{ $parent->name }}</strong>
 
             @foreach ($parent->children as $child)
                 <a class="leftbar__nav-link" href="{{ route('knowledge.show', $child->slug) }}" target="_blank">{{ $child->name }}</a>

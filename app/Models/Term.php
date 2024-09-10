@@ -110,6 +110,37 @@ class Term extends Model
         }
     }
 
+    /**
+     * Get finalized vocabulary records for the front-end based on the specified query and action.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query The query builder instance.
+     * @param string $finaly The action to perform: 'paginate', 'get', or 'query'.
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder The modified query or the retrieved results.
+     */
+    public static function getFinalizedVocabularyRecordsForFront($query = null, $finaly = 'get')
+    {
+        $query = $query ?: self::query();
+
+        // Apply common query modifications
+        $query->onlyVocabulary()
+            ->onlyPublished()
+            ->select('id', 'name')
+            ->withOnly([])
+            ->orderBy('name', 'asc');
+
+        // Return result based on the finaly option
+        switch ($finaly) {
+            case 'paginate':
+                return $query->paginate(self::PAGINATION_LIMIT_FOR_FRONT);
+
+            case 'get':
+                return $query->get();
+
+            case 'query':
+            default:
+                return $query;
+        }
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -133,6 +164,7 @@ class Term extends Model
 
     /**
      * Generate an associative array of subterms from the given terms collection.
+     * Used in term cards
      *
      * @return array
      */

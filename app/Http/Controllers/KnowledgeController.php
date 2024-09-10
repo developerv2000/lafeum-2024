@@ -26,7 +26,7 @@ class KnowledgeController extends Controller
     public function show(Request $request, Knowledge $record)
     {
         $terms = $record->getTermsForFront();
-        $subtermsArray = Term::generateSubtermsArray($terms); // for subterms popup hover
+        $subtermsArray = Term::generateSubtermsArray($terms); // for subterms popup on hover
         $knowledges = Knowledge::get()->toTree(); // for leftbar
 
         return view('front.knowledge.show', compact('record', 'terms', 'subtermsArray', 'knowledges'));
