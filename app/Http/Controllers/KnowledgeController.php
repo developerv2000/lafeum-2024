@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Knowledge;
 use App\Http\Requests\StoreKnowledgeRequest;
 use App\Http\Requests\UpdateKnowledgeRequest;
+use App\Models\Term;
 use Illuminate\Http\Request;
 
 class KnowledgeController extends Controller
@@ -25,9 +26,10 @@ class KnowledgeController extends Controller
     public function show(Request $request, Knowledge $record)
     {
         $terms = $record->getTermsForFront();
+        $subtermsArray = Term::generateSubtermsArray($terms); // for subterms popup hover
         $knowledges = Knowledge::get()->toTree(); // for leftbar
 
-        return view('front.knowledge.show', compact('record', 'terms', 'knowledges'));
+        return view('front.knowledge.show', compact('record', 'terms', 'subtermsArray', 'knowledges'));
     }
 
     /**

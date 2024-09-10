@@ -11,6 +11,7 @@ const spinner = document.querySelector('.spinner');
 const likeForms = document.querySelectorAll('.like-form');
 const favoriteForms = document.querySelectorAll('.favorite-form');
 const expandMoreButtons = document.querySelectorAll('.expand-more__button');
+const termCardsBodyLinks = document.querySelectorAll('.terms-card__body-text a');
 
 // Style variables
 const rootStyles = getComputedStyle(document.documentElement);
@@ -18,6 +19,7 @@ const defaultCardCollapsedTextMaxHeight = rootStyles.getPropertyValue('--default
 
 // Constants
 const SCROLL_THRESHOLD = 300;
+const TERMS_POPUP_MARGIN_TOP = 32;
 
 // Event Listeners
 window.addEventListener('scroll', handleScroll);
@@ -47,6 +49,29 @@ expandMoreButtons.forEach((button) => {
         handleExpandMoreTogglings(event);
     });
 });
+
+/**
+ * Adds event listeners to each link in `termCardsBodyLinks` for displaying and hiding popups.
+ */
+termCardsBodyLinks.forEach((link) => {
+    // Create a URL object from the link's href attribute
+    const url = new URL(link.href);
+    const hostname = url.hostname;
+
+    // Check if the link's href is not empty and the hostname matches 'lafeum.ru'
+    if (link.href !== '' && hostname === 'lafeum.ru') {
+        // Add a 'mouseover' event listener to display the popup when the link is hovered over
+        link.addEventListener('mouseover', function (event) {
+            displayTermCardsPopupOnLinkHover(event);
+        });
+
+        // Add a 'mouseleave' event listener to hide the popup when the mouse leaves the link
+        link.addEventListener('mouseleave', function (event) {
+            hideAllTermCardPopupsOnBlur();
+        });
+    }
+});
+
 
 // Functions
 function handleScroll() {
@@ -186,6 +211,34 @@ function removeRedundantExpandMoreButtons() {
         if (!isOverflowed) {
             container.remove();
         }
+    });
+}
+
+function displayTermCardsPopupOnLinkHover(evt) {
+    const link = evt.currentTarget;
+    const url = new URL(link.href);
+
+    const card = link.closest('.terms-card');
+    const popup = card.querySelector('.terms-card__popup');
+    const popupInner = card.querySelector('.terms-card__popup-inner');
+
+    // Extract term ID from the URL pathname (expected format: /term/{id})
+    const id = url.pathname.slice(6);
+    link.dataset.subtermId = id; // Store the term ID in the link's dataset
+
+    // Update the popup content only if the term ID has changed
+    if (popupInner.dataset.currentSubtermId !== link.dataset.subtermId) {
+        popupInner.dataset.currentSubtermId = link.dataset.subtermId;
+        popupInner.innerHTML = window.subterms[link.dataset.subtermId];
+        popup.style.top = `${link.offsetTop + TERMS_POPUP_MARGIN_TOP}px`;
+    }
+
+    popup.classList.add('terms-card__popup--visible');
+}
+
+function hideAllTermCardPopupsOnBlur() {
+    document.querySelectorAll('.terms-card__popup--visible').forEach((popup) => {
+        popup.classList.remove('terms-card__popup--visible');
     });
 }
 

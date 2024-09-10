@@ -966,6 +966,34 @@ a {
     position: relative;
 }
 
+/* Subterms popup */
+.terms-card__popup {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 9px 11px -5px rgba(0, 0, 0, .2), 0 18px 28px 2px rgba(0, 0, 0, .14), 0 7px 34px 6px rgba(0, 0, 0, .12);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s, top 0s;
+    z-index: 3;
+}
+
+.terms-card__popup--visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.terms-card__popup-inner {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 14;
+    line-clamp: 14;
+    -webkit-box-orient: vertical;
+}
+
 /* Video */
 .video-card__thumb {
     position: relative;

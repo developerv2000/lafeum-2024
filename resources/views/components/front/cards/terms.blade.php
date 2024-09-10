@@ -22,7 +22,13 @@
 
     {{-- Body --}}
     <x-slot:body>
-        <div class="default-card__body-text">{!! $term->body !!}</div>
+        <div class="default-card__body-text terms-card__body-text">{!! $term->body !!}</div>
+
+        {{-- Subterms popup --}}
+        <div class="terms-card__popup">
+            <div class="terms-card__popup-inner" data-current-subterm-id="0"></div>
+        </div>
+
         <x-front.cards.default.partials.expand-more />
         <x-front.cards.default.partials.categories :categories="$term->categories" link-route-name="terms.category" />
     </x-slot:body>

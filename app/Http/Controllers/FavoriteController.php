@@ -12,6 +12,7 @@ class FavoriteController extends Controller
         $modelFullName = ModelHelper::addFullNameSpaceToModelBasename($request->route('model'));
         $record = $modelFullName::find($request->id);
         $record->refreshFavoritesFromRequest($request);
+        $record->refresh();
 
         return [
             'isFavorited' => $record->isFavoritedByCurrentUser(),

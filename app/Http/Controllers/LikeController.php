@@ -12,6 +12,7 @@ class LikeController extends Controller
         $modelFullName = ModelHelper::addFullNameSpaceToModelBasename($request->route('model'));
         $record = $modelFullName::find($request->id);
         $record->toggleLikeByCurrentUser();
+        $record->refresh();
 
         return [
             'isLiked' => $record->isLikedByCurrentUser(),

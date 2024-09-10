@@ -49,6 +49,30 @@ class Term extends Model
 
     /*
     |--------------------------------------------------------------------------
+    | Additional attributes
+    |--------------------------------------------------------------------------
+    */
+
+    public function getMinifiedSubtermsAttribute()
+    {
+        // get all links
+        preg_match_all('/https?:\/\/(www\.)?lafeum\.ru[^\s]*/', $this->body, $links);
+
+        // extract all ids from links path https://domain.com/term/{id}
+        $ids = array();
+
+        foreach ($links[0] as $link) {
+            $parsed = parse_url($link);
+            $ids[] = substr($parsed['path'], 6);
+        }
+
+        $subterms = self::whereIn('id', $ids)->select('id', 'body')->withOnly([])->get();
+
+        return $subterms;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Queries
     |--------------------------------------------------------------------------
     */
@@ -99,5 +123,39 @@ class Term extends Model
             $item->knowledges()->detach();
             $item->categories()->detach();
         });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Generate an associative array of subterms from the given terms collection.
+     *
+     * @return array
+     */
+    public static function generateSubtermsArray($terms): array
+    {
+        // Extract subterms collections from each term
+        $subtermsCollection = $terms->pluck('minified_subterms');
+
+        // Flatten subterms collections into one collection
+        $combinedSubtermsCollection = $subtermsCollection->flatten();
+
+        // Filter out duplicate subterms by unique 'id'
+        $uniqueCombinedSubtermsCollection = $combinedSubtermsCollection->unique('id');
+
+        // Initialize an empty array to store subterms
+        $subtermsArray = [];
+
+        // Map each unique subterm's id to its body
+        $uniqueCombinedSubtermsCollection->each(function ($subterm) use (&$subtermsArray) {
+            $subtermsArray[$subterm->id] = $subterm->body;
+        });
+
+        // Return the associative array of subterms
+        return $subtermsArray;
     }
 }
