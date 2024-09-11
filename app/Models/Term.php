@@ -90,8 +90,10 @@ class Term extends Model
      * @param string $finaly The action to perform: 'paginate', 'get', or 'query'.
      * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder The modified query or the retrieved results.
      */
-    public static function getFinalizedRecordsForFront($query, $finaly = 'paginate')
+    public static function getFinalizedRecordsForFront($query = null, $finaly = 'paginate')
     {
+        $query = $query ?: self::query();
+
         // Apply common query modifications
         $query->onlyPublished()
             ->orderBy('publish_at', 'desc');

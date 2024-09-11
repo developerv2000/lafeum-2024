@@ -811,6 +811,10 @@ a {
     color: #9e9e9e;
 }
 
+.default-card__body {
+    position: relative;
+}
+
 .default-card__body-text a {
     color: var(--accent-color);
 }
@@ -1038,7 +1042,6 @@ a {
 
 .terms-card .default-card__body {
     padding: 8px 16px 16px;
-    position: relative;
 }
 
 /* Subterms popup */
@@ -1069,14 +1072,35 @@ a {
     -webkit-box-orient: vertical;
 }
 
+/* Quotes */
+.quotes-card__title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.quotes-card__title-icon {
+    color: #9e9e9e;
+}
+
+.quotes-card__title-author-name {
+    margin: 0;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.quotes-card .default-card__body {
+    padding: 8px 16px 16px;
+}
+
 /* Video */
-.video-card__thumb {
+.videos-card__thumb {
     position: relative;
     display: flex;
     width: 50%;
 }
 
-.video-card__thumb-image {
+.videos-card__thumb-image {
     padding: 4px;
     border: 1px solid #dee2e6;
     border-radius: 4px;
@@ -1085,7 +1109,7 @@ a {
     width: 100%;
 }
 
-.video-card__thumb-duration {
+.videos-card__thumb-duration {
     position: absolute;
     right: 12px;
     bottom: 10px;

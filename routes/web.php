@@ -4,6 +4,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\VocabularyController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
@@ -36,10 +37,15 @@ Route::middleware(['guest.or.verified'])->group(function () {
         Route::post('/get-body', 'getBody')->name('get.body'); // AJAX search
     });
 
-    Route::controller(QuoteController::class)->prefix('/quotes')->name('quotes.')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showByID']);
+    Route::controller(QuoteController::class)->name('quotes.')->group(function () {
+        Route::prefix('/quotes')->group(function () {
+            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+            Route::get('/{category:slug}', 'category')->name('category');
+        });
 
-        Route::get('/{category:slug}', 'category')->name('category');
+        Route::prefix('/quote')->group(function () {
+            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['showByID']);
+        });
     });
 
     Route::controller(AuthorController::class)->prefix('/authors')->name('authors.')->group(function () {

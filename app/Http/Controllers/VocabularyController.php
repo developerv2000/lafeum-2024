@@ -21,6 +21,19 @@ class VocabularyController extends Controller
         return view('front.vocabulary.index', compact('recordChunks', 'categories'));
     }
 
+    public function category(TermCategory $category)
+    {
+        $records = Term::getFinalizedVocabularyRecordsForFront($category->terms());
+
+        // Chunk records by half
+        $totalRecords = $records->count();
+        $recordChunks = $records->chunk(ceil($totalRecords / 2));
+
+        $categories = TermCategory::get()->toTree(); // for leftbar
+
+        return view('front.vocabulary.index', compact('category', 'recordChunks', 'categories'));
+    }
+
     /**
      * AJAX request
      */

@@ -24,7 +24,7 @@ const TERMS_POPUP_MARGIN_TOP = 32;
 const GET_VOCABULARY_BODY_URL = '/vocabulary/get-body'
 
 // Global variables
-var vocabulary = [];
+var vocabulary = []; // Used in vocabulary index & category pages
 
 // Event Listeners
 window.addEventListener('scroll', handleScroll);
@@ -77,7 +77,7 @@ termCardsBodyLinks.forEach((link) => {
     }
 });
 
-vocabularyList.addEventListener('mouseover', (evt) => {
+vocabularyList?.addEventListener('mouseover', (evt) => {
     handleVocabularyListHover(evt);
 });
 
