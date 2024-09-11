@@ -20,6 +20,22 @@ class QuoteController extends Controller
         return view('front.quotes.index', compact('records', 'categories'));
     }
 
+    public function category(QuoteCategory $category)
+    {
+        $records = Quote::getFinalizedRecordsForFront($category->quotes());
+        $categories = QuoteCategory::get()->toTree(); // for leftbar
+
+        return view('front.quotes.category', compact('category', 'records', 'categories'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Quote $record)
+    {
+        return view('front.quotes.show', compact('record'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -32,14 +48,6 @@ class QuoteController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreQuoteRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Quote $quote)
     {
         //
     }

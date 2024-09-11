@@ -4,7 +4,7 @@
             <strong class="leftbar__nav-title @if($loop->first) leftbar__nav-title--marginless @endif">{{ $parent->name }}</strong>
 
             @foreach ($parent->children as $child)
-                <a class="leftbar__nav-link" href="{{ route('vocabulary.category', $child->slug) }}" target="_blank">{{ $child->name }}</a>
+                <a class="leftbar__nav-link" href="{{ route('quotes.category', $child->slug) }}" target="_blank">{{ $child->name }}</a>
             @endforeach
         @endforeach
     </nav>

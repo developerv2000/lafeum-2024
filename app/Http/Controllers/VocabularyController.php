@@ -31,7 +31,7 @@ class VocabularyController extends Controller
 
         $categories = TermCategory::get()->toTree(); // for leftbar
 
-        return view('front.vocabulary.index', compact('category', 'recordChunks', 'categories'));
+        return view('front.vocabulary.category', compact('category', 'recordChunks', 'categories'));
     }
 
     /**
