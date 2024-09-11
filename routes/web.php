@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
@@ -49,7 +50,10 @@ Route::middleware(['guest.or.verified'])->group(function () {
     });
 
     Route::controller(AuthorController::class)->prefix('/authors')->name('authors.')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showBySlug']);
+        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+
+        // CrudRouteGenerator is not used because AuthorGroup can be used instead of Author
+        Route::get('/{slug}', 'show')->name('show');
     });
 
     Route::controller(VideoController::class)->prefix('/videos')->name('videos.')->group(function () {

@@ -621,7 +621,7 @@ a {
 }
 
 /* Video */
-.rightbar__video .video-card__thumb {
+.rightbar__video .videos-card__thumb {
     width: 100%;
     margin-bottom: 12px;
 }
@@ -724,12 +724,6 @@ a {
     flex-direction: row;
 }
 
-.vocabulary-list {
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-}
-
 .vocabulary-list__part {
     width: calc(50% - 12px);
     background-color: white;
@@ -787,6 +781,30 @@ a {
     -webkit-line-clamp: 9;
     line-clamp: 9;
     -webkit-box-orient: vertical;
+}
+
+/* Authors lists */
+.authors-list {
+    flex-direction: row;
+}
+
+.authors-list__part {
+    width: calc(33.3% - 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.authors-list__link {
+    line-height: 1.6;
+    display: flex;
+
+    &:hover {
+        color: var(--main-color);
+    }
 }
 
 /* ------------ /end Lists ------------ */
@@ -1081,6 +1099,7 @@ a {
 
 .quotes-card__title-icon {
     color: #9e9e9e;
+    font-size: 22px;
 }
 
 .quotes-card__title-author-name {
@@ -1091,6 +1110,36 @@ a {
 
 .quotes-card .default-card__body {
     padding: 8px 16px 16px;
+}
+
+/* Author cards */
+.authors-card {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+}
+
+.authors-card__image {
+    min-width: 100px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.authors-card__title {
+    margin-bottom: 8px;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.authors-card__biography {
+    font-size: 16px;
+}
+
+.authors-card__biography p {
+    margin: 0;
 }
 
 /* Video */

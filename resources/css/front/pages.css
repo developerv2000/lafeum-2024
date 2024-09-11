@@ -80,3 +80,14 @@
     margin-bottom: 20px;
 }
 /* ------------ /end Vocabulary pages ------------ */
+
+
+/* ------------ Author pages ------------ */
+.authors-index__about {
+    margin-bottom: 20px;
+}
+
+.authors-show__card-wrapper {
+    margin-bottom: 20px;
+}
+/* ------------ /end Author pages ------------ */

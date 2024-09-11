@@ -34,12 +34,49 @@ class AuthorGroup extends Model
 
     /*
     |--------------------------------------------------------------------------
+    | Additional attributes
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Used in authors.show page while AuthorGroup is used instead of Author
+     */
+    public function getBiographyAttribute()
+    {
+        switch ($this->name) {
+            case self::MOVIES_NAME:
+                return self::MOVIES_BIOGRAPHY;
+                break;
+            case self::PROVERBS_NAME:
+                return self::PROVERBS_BIOGRAPHY;
+                break;
+        }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Queries
     |--------------------------------------------------------------------------
     */
 
     public static function findByName($name)
     {
-        return self::where('name', $name)->first();
+        return self::where('name', $name)->firstOrFail();
+    }
+
+    public function getQuotesQuery()
+    {
+        switch ($this->name) {
+            case self::MOVIES_NAME:
+                $authorIDs = Author::onlyMovies()->pluck('id');
+                break;
+            case self::PROVERBS_NAME:
+                $authorIDs = Author::onlyProverbs()->pluck('id');
+                break;
+        }
+
+        $quotesQuery = Quote::whereIn('author_id', $authorIDs);
+
+        return $quotesQuery;
     }
 }
