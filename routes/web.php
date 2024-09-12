@@ -6,6 +6,7 @@ use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\TermController;
 use App\Http\Controllers\VocabularyController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
@@ -66,10 +67,15 @@ Route::middleware(['guest.or.verified'])->group(function () {
         CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showBySlug']);
     });
 
-    Route::controller(TermController::class)->prefix('/terms')->name('terms.')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showByID']);
+    Route::controller(TermController::class)->name('terms.')->group(function () {
+        Route::prefix('/terms')->group(function () {
+            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+            Route::get('/{category:slug}', 'category')->name('category');
+        });
 
-        Route::get('/{category:slug}', 'category')->name('category');
+        Route::prefix('/term')->group(function () {
+            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['showByID']);
+        });
     });
 
     Route::controller(PhotoController::class)->name('photos.')->prefix('/photos')->group(function () {

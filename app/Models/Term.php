@@ -173,7 +173,11 @@ class Term extends Model
     public static function generateSubtermsArray($terms): array
     {
         // Extract subterms collections from each term
-        $subtermsCollection = $terms->pluck('minified_subterms');
+        $subtermsCollection = collect();
+        
+        foreach ($terms as $term) {
+            $subtermsCollection->push($term->minified_subterms);
+        }
 
         // Flatten subterms collections into one collection
         $combinedSubtermsCollection = $subtermsCollection->flatten();

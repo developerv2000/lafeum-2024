@@ -1047,6 +1047,7 @@ a {
 /* Terms */
 .terms-card__type-name {
     margin-bottom: 0;
+    font-weight: 600;
 }
 
 .terms-card__type-icons-wrapper {
