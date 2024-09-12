@@ -3,16 +3,25 @@ import './bootstrap';
 import { debounce, removeElementStylePropertyDelayed } from '../global/utilities';
 
 // DOM Elements
+const spinner = document.querySelector('.spinner');
+
 const scrollButtons = document.querySelector('.scroll-buttons');
 const scrollTopBtn = document.querySelector('.scroll-buttons__top');
 const scrollBottomBtn = document.querySelector('.scroll-buttons__bottom');
-const spinner = document.querySelector('.spinner');
 
 const likeForms = document.querySelectorAll('.like-form');
 const favoriteForms = document.querySelectorAll('.favorite-form');
 const expandMoreButtons = document.querySelectorAll('.expand-more__button');
 const termCardsBodyLinks = document.querySelectorAll('.terms-card__body-text a');
 const vocabularyList = document.querySelector('.vocabulary-list');
+
+const showModalButtons = document.querySelectorAll('[data-click-action="show-modal"]');
+const hideActiveModalButtons = document.querySelectorAll('[data-click-action="hide-active-modals"]');
+const showVideoModalButtons = document.querySelectorAll('[data-click-action="show-youtube-video-modal"]');
+
+const youtubeVideoModal = document.querySelector('.youtube-video-modal');
+const youtubeVideoModalIframeWrapper = youtubeVideoModal.querySelector('.youtube-video-modal__iframe-wrapper');
+const youtubeVideoModalTitle = youtubeVideoModal.querySelector('.modal__title');
 
 // Style variables
 const rootStyles = getComputedStyle(document.documentElement);
@@ -30,6 +39,27 @@ var vocabulary = []; // Used in vocabulary index & category pages
 window.addEventListener('scroll', handleScroll);
 scrollTopBtn.addEventListener('click', scrollTop);
 scrollBottomBtn.addEventListener('click', scrollBottom);
+
+showModalButtons.forEach((button) => {
+    button.addEventListener('click', (evt) => {
+        hideAllActiveModals();
+        showModal(document.querySelector(evt.currentTarget.dataset.modalSelector));
+    });
+});
+
+hideActiveModalButtons.forEach((button) => {
+    button.addEventListener('click', hideAllActiveModals);
+});
+
+// Initialize youtube video modals
+showVideoModalButtons.forEach((button) => {
+    button.addEventListener('click', function (evt) {
+        const title = evt.currentTarget.dataset.videoTitle;
+        const src = evt.currentTarget.dataset.videoSrc;
+
+        showYoutubeVideoModal(title, src);
+    });
+});
 
 // Initialize local search functionality
 document.querySelectorAll('input[data-action="local-search"]').forEach((input) => {
@@ -112,6 +142,19 @@ function showSpinner() {
 
 function hideSpinner() {
     spinner.classList.remove('spinner--visible');
+}
+
+function showModal(modal) {
+    modal.classList.add('modal--visible');
+}
+
+function hideModal(modal) {
+    modal.classList.remove('modal--visible');
+}
+
+function hideAllActiveModals() {
+    document.querySelectorAll('.modal--visible').forEach(hideModal);
+    removeIframeFromYoutubeVideoModal(); // remove iframe to stop video from playing in background
 }
 
 /**
@@ -276,6 +319,28 @@ function loadVocabularyLinkContent(link) {
         });
 
     link.dataset.contentLoaded = 1;
+}
+
+/**
+ * Displays the YouTube video modal with the given title and video source URL.
+ * Clears any existing iframe content, sets the modal title, and adds the new video iframe.
+ * @param {string} title - The title of the video.
+ * @param {string} src - The source URL of the YouTube video.
+ */
+function showYoutubeVideoModal(title, src) {
+    removeIframeFromYoutubeVideoModal();
+    youtubeVideoModalTitle.innerHTML = title;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    youtubeVideoModalIframeWrapper.appendChild(iframe);
+
+    showModal(youtubeVideoModal);
+}
+
+// Used on hiding youtube video modal and changing youtube iframe video
+function removeIframeFromYoutubeVideoModal() {
+    youtubeVideoModalIframeWrapper.innerHTML = null;
 }
 
 // Initializations (if needed)

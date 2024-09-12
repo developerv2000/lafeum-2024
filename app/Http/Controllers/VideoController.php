@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
+use App\Models\VideoCategory;
 
 class VideoController extends Controller
 {
@@ -13,7 +14,26 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $records = Video::getFinalizedRecordsForFront();
+        $categories = VideoCategory::get()->toTree(); // for leftbar
+
+        return view('front.videos.index', compact('records', 'categories'));
+    }
+
+    public function category(VideoCategory $category)
+    {
+        $records = Video::getFinalizedRecordsForFront($category->videos());
+        $categories = VideoCategory::get()->toTree(); // for leftbar
+
+        return view('front.videos.category', compact('category', 'records', 'categories'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Video $record)
+    {
+        return view('front.videos.show', compact('record'));
     }
 
     /**
@@ -28,14 +48,6 @@ class VideoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreVideoRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Video $video)
     {
         //
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\TermController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VocabularyController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
@@ -57,10 +58,15 @@ Route::middleware(['guest.or.verified'])->group(function () {
         Route::get('/{slug}', 'show')->name('show');
     });
 
-    Route::controller(VideoController::class)->prefix('/videos')->name('videos.')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showByID']);
+    Route::controller(VideoController::class)->name('videos.')->group(function () {
+        Route::prefix('/videos')->group(function () {
+            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+            Route::get('/{category:slug}', 'category')->name('category');
+        });
 
-        Route::get('/{category:slug}', 'category')->name('category');
+        Route::prefix('/video')->group(function () {
+            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['showByID']);
+        });
     });
 
     Route::controller(ChannelController::class)->name('channels.')->prefix('/channels')->group(function () {

@@ -31,6 +31,7 @@
     @include('front.layouts.footer')
 
     <x-front.different.scroll-buttons />
+    <x-global.modals.youtube-videos />
     <x-global.spinner />
 
     @vite('resources/js/front/main.js')

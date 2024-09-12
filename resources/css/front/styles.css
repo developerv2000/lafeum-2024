@@ -705,10 +705,8 @@ a {
 
 /* ------------ About page ------------ */
 .about-page__title {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
-
-
 /* ------------ /end About page ------------ */
 
 
@@ -1144,6 +1142,24 @@ a {
 }
 
 /* Video */
+.videos-card .default-card__header {
+    display: none;
+}
+
+.videos-card .default-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 16px 12px;
+}
+
+.videos-card__top-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* Video thumb */
 .videos-card__thumb {
     position: relative;
     display: flex;
@@ -1172,4 +1188,68 @@ a {
     pointer-events: none;
 }
 
+.videos-card__title {
+    max-width: 50%;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #424242;
+    cursor: pointer;
+}
+
+/* Video channel */
+.videos-card__channel {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.videos-card__channel-icon {
+    width: 24px;
+}
+
+.videos-card__channel-name {
+    color: #0645ad;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.videos-card__bottom-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.videos-card .default-card__categories {
+    margin: 0;
+}
 /* ------------ /end Cards ------------ */
+
+
+/* ------------ Modals ------------ */
+.modal__header {
+    background-color: #e0e0e0;
+}
+
+.modal__inner {
+    align-items: center;
+}
+
+/* Youtube video moda */
+.youtube-video-modal .modal__box {
+    width: 50%;
+}
+
+.youtube-video-modal__iframe-wrapper iframe {
+    width: 100%;
+    height: 50vh;
+    border: none;
+}
+
+.youtube-video-modal .modal__footer {
+    display: none;
+}
+/* ------------ /end Modals ------------ */
