@@ -23,3 +23,8 @@ yarn-error.log
 /.htaccess
 
 /public/img/users/*
+!/public/img/users/__default__.png
+/public/img/authors/*
+/public/img/photos/*
+!/public/img/photos/thumbs
+/public/img/photos/thumbs/*
