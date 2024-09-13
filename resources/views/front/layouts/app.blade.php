@@ -32,6 +32,7 @@
 
     <x-front.different.scroll-buttons />
     <x-global.modals.youtube-videos />
+    <x-global.modals.photos />
     <x-global.spinner />
 
     @vite('resources/js/front/main.js')

@@ -711,6 +711,7 @@ a {
 .about-page__title {
     margin-bottom: 16px;
 }
+
 /* ------------ /end About page ------------ */
 
 
@@ -831,6 +832,16 @@ a {
     &:hover {
         color: var(--main-color);
     }
+}
+
+/* Photos */
+.photos-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 24px;
+    flex-wrap: wrap;
+    /* For pagination margin */
+    margin-bottom: 24px;
 }
 
 /* ------------ /end Lists ------------ */
@@ -1254,6 +1265,32 @@ a {
 .videos-card .default-card__categories {
     margin: 0;
 }
+
+/* Photos */
+.photos-card {
+    padding: 16px;
+    background-color: white;
+}
+
+.photos-card__desc {
+    margin: 4px 0 0;
+    font-size: 13px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #00000099;
+}
+
+.photos-card__image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: top right;
+    cursor: pointer;
+}
+
 /* ------------ /end Cards ------------ */
 
 
@@ -1289,5 +1326,18 @@ a {
 
 .youtube-video-modal .modal__footer {
     display: none;
+}
+
+/* Photos modal */
+.photos-modal .modal__box {
+    width: 880px;
+}
+
+.photos-modal .modal__footer {
+    display: none;
+}
+
+.photos-modal__desc {
+    margin: 12px 0 0;
 }
 /* ------------ /end Modals ------------ */

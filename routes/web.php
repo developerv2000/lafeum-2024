@@ -6,6 +6,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\TermController;
 use App\Http\Controllers\VideoController;

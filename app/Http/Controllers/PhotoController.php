@@ -13,7 +13,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $records = Photo::getFinalizedRecordsForFront();
+
+        return view('front.photos.index', compact('records'));
     }
 
     /**

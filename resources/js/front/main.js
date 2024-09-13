@@ -18,10 +18,15 @@ const vocabularyList = document.querySelector('.vocabulary-list');
 const showModalButtons = document.querySelectorAll('[data-click-action="show-modal"]');
 const hideActiveModalButtons = document.querySelectorAll('[data-click-action="hide-active-modals"]');
 const showVideoModalButtons = document.querySelectorAll('[data-click-action="show-youtube-video-modal"]');
+const showPhotoModalButtons = document.querySelectorAll('[data-click-action="show-photos-modal"]');
 
 const youtubeVideoModal = document.querySelector('.youtube-video-modal');
 const youtubeVideoModalIframeWrapper = youtubeVideoModal.querySelector('.youtube-video-modal__iframe-wrapper');
 const youtubeVideoModalTitle = youtubeVideoModal.querySelector('.modal__title');
+
+const photosModal = document.querySelector('.photos-modal');
+const photosModalImage = photosModal.querySelector('.photos-modal__image');
+const photosModalDesc = photosModal.querySelector('.photos-modal__desc');
 
 // Style variables
 const rootStyles = getComputedStyle(document.documentElement);
@@ -58,6 +63,15 @@ showVideoModalButtons.forEach((button) => {
         const src = evt.currentTarget.dataset.videoSrc;
 
         showYoutubeVideoModal(title, src);
+    });
+});
+
+showPhotoModalButtons.forEach((button) => {
+    button.addEventListener('click', function (evt) {
+        const src = evt.currentTarget.dataset.photoSrc;
+        const desc = evt.currentTarget.dataset.photoDesc;
+
+        showPhotosModal(src, desc);
     });
 });
 
@@ -333,7 +347,7 @@ function showYoutubeVideoModal(title, src) {
 
     const iframe = document.createElement('iframe');
     iframe.src = src;
-    iframe.allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('allowscriptaccess', 'always');
     youtubeVideoModalIframeWrapper.appendChild(iframe);
@@ -344,6 +358,13 @@ function showYoutubeVideoModal(title, src) {
 // Used on hiding youtube video modal and changing youtube iframe video
 function removeIframeFromYoutubeVideoModal() {
     youtubeVideoModalIframeWrapper.innerHTML = null;
+}
+
+function showPhotosModal(src, desc) {
+    photosModalImage.src = src;
+    photosModalDesc.innerHTML = desc;
+
+    showModal(photosModal);
 }
 
 // Initializations (if needed)
