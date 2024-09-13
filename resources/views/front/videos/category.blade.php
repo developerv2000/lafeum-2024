@@ -1,23 +1,23 @@
 @extends('front.layouts.app', [
-    'bodyClass' => 'terms-category',
+    'bodyClass' => 'videos-category',
     'includeRightbar' => true,
 ])
 
 @section('leftbar')
-    @include('front.leftbars.terms')
+    @include('front.leftbars.videos')
 @endsection
 
 @section('content')
-    <div class="terms-category__about">
-        <div class="terms-category__about-inner">
+    <div class="videos-category__about">
+        <div class="videos-category__about-inner">
             <x-front.different.about-page
-                class="terms-category__about-page"
+                class="videos-category__about-page"
                 :title="$category->name"
                 :desc="$category->description" />
         </div>
     </div>
 
-    <div class="terms-category__list-wrapper">
-        <x-front.lists.terms :terms="$records" :subterms-array="$subtermsArray" />
+    <div class="videos-category__list-wrapper">
+        <x-front.lists.videos :videos="$records" />
     </div>
 @endsection

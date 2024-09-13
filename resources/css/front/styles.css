@@ -704,6 +704,10 @@ a {
 
 
 /* ------------ About page ------------ */
+.about-page {
+    margin-bottom: 20px;
+}
+
 .about-page__title {
     margin-bottom: 16px;
 }
@@ -797,6 +801,30 @@ a {
 }
 
 .authors-list__link {
+    line-height: 1.6;
+    display: flex;
+
+    &:hover {
+        color: var(--main-color);
+    }
+}
+
+/* Channels lists */
+.channels-list {
+    flex-direction: row;
+}
+
+.channels-list__part {
+    width: calc(33.3% - 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.channels-list__link {
     line-height: 1.6;
     display: flex;
 
@@ -1230,12 +1258,22 @@ a {
 
 
 /* ------------ Modals ------------ */
-.modal__header {
-    background-color: #e0e0e0;
-}
-
 .modal__inner {
     align-items: center;
+}
+
+/* Change animation */
+.modal__box {
+    transform: translateY(0) scale(0);
+}
+
+/* Change animation */
+.modal--visible .modal__box {
+    transform: translateY(0) scale(1);
+}
+
+.modal__header {
+    background-color: #e0e0e0;
 }
 
 /* Youtube video moda */

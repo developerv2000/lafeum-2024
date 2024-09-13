@@ -1,12 +1,8 @@
 @extends('front.layouts.app', [
-    'bodyClass' => 'terms-show',
+    'bodyClass' => 'videos-show',
     'includeRightbar' => true,
 ])
 
 @section('content')
-    <script>
-        var subterms = {{ Illuminate\Support\Js::from($subtermsArray) }};
-    </script>
-
-    <x-front.cards.terms :term="$record" />
+    <x-front.cards.videos :video="$record" />
 @endsection

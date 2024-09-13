@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;

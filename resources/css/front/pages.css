@@ -45,7 +45,6 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    margin: 36px 0;
 }
 
 .knowledge-blocks__category {
@@ -75,19 +74,12 @@
 .vocabulary-index__about .local-search__input {
     width: 100%;
 }
-
-.vocabulary-index__about {
-    margin-bottom: 20px;
-}
 /* ------------ /end Vocabulary pages ------------ */
 
 
 /* ------------ Author pages ------------ */
-.authors-index__about {
-    margin-bottom: 20px;
-}
-
 .authors-show__card-wrapper {
     margin-bottom: 20px;
 }
 /* ------------ /end Author pages ------------ */
+

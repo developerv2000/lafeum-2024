@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Channel;
 use App\Http\Requests\StoreChannelRequest;
 use App\Http\Requests\UpdateChannelRequest;
+use App\Models\Video;
+use App\Models\VideoCategory;
 
 class ChannelController extends Controller
 {
@@ -13,7 +15,24 @@ class ChannelController extends Controller
      */
     public function index()
     {
-        //
+        $records = Channel::getFinalizedRecordsForFront(null, 'get');
+
+        // Chunk records into 3 parts
+        $totalRecords = $records->count();
+        $recordChunks = $records->chunk(ceil($totalRecords / 3));
+
+        return view('front.channels.index', compact('recordChunks'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Channel $record)
+    {
+        $videos = Video::getFinalizedRecordsForFront($record->videos());
+        $channels = Channel::getFinalizedRecordsForFront(null, 'get'); // for leftbar
+
+        return view('front.channels.show', compact('record', 'videos', 'channels'));
     }
 
     /**
@@ -28,14 +47,6 @@ class ChannelController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreChannelRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Channel $channel)
     {
         //
     }

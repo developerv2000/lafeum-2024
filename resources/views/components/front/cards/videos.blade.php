@@ -11,7 +11,10 @@
             <x-front.cards.partials.videos-thumbnail :video="$video" />
 
             {{-- Title --}}
-            <h3 class="videos-card__title" data-click-action="show-youtube-video-modal" data-video-src="{{ $video->embeded_youtube_link }}">
+            <h3 class="videos-card__title"
+                data-click-action="show-youtube-video-modal"
+                data-video-src="{{ $video->embeded_youtube_link }}"
+                data-video-title="{{ $video->title }}">
                 {{ $video->title }}
             </h3>
         </div>

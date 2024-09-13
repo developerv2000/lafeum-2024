@@ -333,6 +333,9 @@ function showYoutubeVideoModal(title, src) {
 
     const iframe = document.createElement('iframe');
     iframe.src = src;
+    iframe.allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('allowscriptaccess', 'always');
     youtubeVideoModalIframeWrapper.appendChild(iframe);
 
     showModal(youtubeVideoModal);
