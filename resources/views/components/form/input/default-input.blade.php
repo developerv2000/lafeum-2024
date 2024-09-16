@@ -1,12 +1,19 @@
 @props([
-    'label', // The label text for the input field.
-    'name', // The name of the input field.
-    'value' => null, // Default value for the input field
-    'errorName' => null, // Case bagged error names is used.
-    'required' => $attributes->has('required'), // Indicates whether the input field is required.
+    'label', // The label text displayed for the input field.
+    'name', // The 'name' attribute for the input field.
+    'value' => null, // The initial value of the input field.
+    'baggedErrorName' => false, // Optional: the error bag name for validation messages.
+    'required' => $attributes->has('required'), // Whether the field is required (based on attributes).
 ])
 
-<x-form.groups.default-group :label="__($label)" :error-name="$errorName ?: $name" :required="$required">
+{{-- Include the default-group wrapper with proper error handling --}}
+<x-form.groups.default-group
+    :label="__($label)"
+    :error-name="$name"
+    :bagged-error-name="$baggedErrorName"
+    :required="$required" >
+
+    {{-- The input field, with merged attributes and old value handling --}}
     <input
         {{ $attributes->merge(['class' => 'input']) }}
         name="{{ $name }}"

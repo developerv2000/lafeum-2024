@@ -8,6 +8,7 @@ use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\TermController;
 use App\Http\Controllers\VideoController;
@@ -27,6 +28,11 @@ Route::middleware(['guest.or.verified'])->group(function () {
     Route::controller(FeedbackController::class)->prefix('/feedbacks')->name('feedbacks.')->group(function () {
         Route::post('/store', 'store')->name('store');
         CrudRouteGenerator::defineDefaultCrudRoutesOnly(['store']);
+    });
+
+    Route::controller(ProfileController::class)->prefix('/profile')->name('profile.')->group(function () {
+        Route::get('/edit', 'edit')->name('edit');
+        Route::patch('/update', 'update')->name('update');
     });
 
     Route::controller(LikeController::class)->name('likes.')->prefix('/likes')->group(function () {

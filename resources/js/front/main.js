@@ -33,7 +33,7 @@ var vocabulary = []; // Used in vocabulary index & category pages
 
 // Spinners
 const spinner = document.querySelector('.spinner');
-const spinnableForms = document.querySelector('[data-on-submit="show-spinner]');
+const spinnableForms = document.querySelectorAll('[data-on-submit="show-spinner]');
 
 // Scroll buttons
 const scrollButtons = document.querySelector('.scroll-buttons');

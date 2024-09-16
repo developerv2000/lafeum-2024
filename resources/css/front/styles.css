@@ -115,6 +115,13 @@ a {
     font-weight: 400;
 }
 
+.styled-box {
+    padding: 24px 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+}
+
 .styled-text-box {
     padding: 24px 24px 12px;
     font-size: 15px;

@@ -4,7 +4,7 @@
     </x-slot:button>
 
     <x-slot:content>
-        <a class="profile-dropdown__link" href="{{ route('home') }}">
+        <a class="profile-dropdown__link" href="{{ route('profile.edit') }}">
             <x-global.material-symbol-outlined icon="account_circle" filled="true" />
             Мой профиль
         </a>

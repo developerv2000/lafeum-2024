@@ -46,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'birthday' => 'date',
+            // 'birthday' => 'date',
         ];
     }
 
@@ -133,5 +133,29 @@ class User extends Authenticatable implements MustVerifyEmail
         static::deleting(function ($record) {
             $record->roles()->detach();
         });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous
+    |--------------------------------------------------------------------------
+    */
+
+    public function updateProfileFromRequest($request)
+    {
+        $this->fill($request->safe()->except('photo'));
+
+        // Handle email update
+        if ($this->isDirty('email')) {
+            $this->email_verified_at = null;
+            $this->sendEmailVerificationNotification();
+        }
+
+        // Handle photo update
+        if ($request->hasFile('photo')) {
+            $this->updatePhoto($request->file('photo'));
+        }
+
+        $this->save();
     }
 }

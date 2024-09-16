@@ -1,38 +1,43 @@
 @props([
-    'label', // Label text for the form field
-    'errorName' => false, // Error name for validation error handling, defaults to false if not provided
-    'required' => false, // Flag indicating if the field is required, defaults to false
+    'label', // Label text for the form field.
+    'required' => false, // Indicates whether the field is required (defaults to false).
+    'errorName' => false, // The name of the input field used to check for errors.
+    'baggedErrorName' => false, // The error bag name for validation messages (if any).
 ])
 
-@php
-    // Check if there's an error for this field
-    $hasError = $errorName && $errors->has($errorName);
-@endphp
+{{-- If an error name is provided, check for errors in the appropriate bag --}}
+@if ($errorName)
+    @php
+        // Select the correct error bag or use default errors object.
+        $inputErrors = $baggedErrorName ? $errors->{$baggedErrorName} : $errors;
+        // Check if there's an error for the given field name.
+        $hasError = $inputErrors->has($errorName);
+    @endphp
+@endif
 
 <div {{ $attributes->merge(['class' => 'form-group ' . ($hasError ? 'form-group--error' : '')]) }}>
     <label class="label">
-        {{-- Display the label text --}}
+        {{-- Render the label and indicate if the field is required --}}
         <p class="label__text">
             {{ $label }}
-            {{-- Display an asterisk (*) if the field is required --}}
             @if ($required)
                 <span class="label__required">*</span>
             @endif
         </p>
 
         <div class="form-group__input-container">
-            {{-- Render the slot content (input field) --}}
+            {{-- Render the slot (usually an input field) --}}
             {{ $slot }}
 
-            {{-- Display error icon if there's an error --}}
+            {{-- Show an error icon if there's an error --}}
             @if ($hasError)
                 <span class="form-group__error-icon material-symbols-outlined">error</span>
             @endif
         </div>
     </label>
 
-    {{-- Display error message if there's an error --}}
+    {{-- Display the first error message if there is one --}}
     @if ($hasError)
-        <p class="form-group__error-message">{{ $errors->first($errorName) }}</p>
+        <p class="form-group__error-message">{{ $inputErrors->first($errorName) }}</p>
     @endif
 </div>
