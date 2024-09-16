@@ -1,6 +1,10 @@
 import { removeElementStylePropertyDelayed } from './utilities'
 
-// ********** Utility Functions **********
+/*
+|--------------------------------------------------------------------------
+| Components helper functions
+|--------------------------------------------------------------------------
+*/
 
 /**
  * Function to collapse an element with smooth transition.
@@ -22,7 +26,11 @@ function expandElement(element) {
     removeElementStylePropertyDelayed(element, 'height', 300);
 }
 
-// ********** Dropdown Component **********
+/*
+|--------------------------------------------------------------------------
+| Dropdown
+|--------------------------------------------------------------------------
+*/
 
 function initDropdowns() {
     const dropdownButtons = document.querySelectorAll('.dropdown__button');
@@ -50,7 +58,11 @@ function initDropdowns() {
     });
 }
 
-// ********** Collapse Component **********
+/*
+|--------------------------------------------------------------------------
+| Collapse
+|--------------------------------------------------------------------------
+*/
 
 function initCollapsibles() {
     const togglers = document.querySelectorAll('[data-click-action="toggle-collapse"]');
@@ -71,7 +83,11 @@ function initCollapsibles() {
     });
 }
 
-// ********** Accordion Component **********
+/*
+|--------------------------------------------------------------------------
+| Accordion
+|--------------------------------------------------------------------------
+*/
 
 function initAccordions() {
     const accordions = document.querySelectorAll('.accordion');
@@ -105,7 +121,11 @@ function initAccordions() {
     });
 }
 
-// ********** Initialization **********
+/*
+|--------------------------------------------------------------------------
+| Initialization
+|--------------------------------------------------------------------------
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
     initDropdowns();

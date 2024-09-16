@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
@@ -21,6 +22,11 @@ Route::middleware(['guest.or.verified'])->group(function () {
         Route::get('/contacts', 'contacts')->name('contacts');
         Route::get('/privacy-policy', 'privacyPolicy')->name('privacy.policy');
         Route::get('/terms-of-use', 'termsOfUse')->name('terms.of.use');
+    });
+
+    Route::controller(FeedbackController::class)->prefix('/feedbacks')->name('feedbacks.')->group(function () {
+        Route::post('/store', 'store')->name('store');
+        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['store']);
     });
 
     Route::controller(LikeController::class)->name('likes.')->prefix('/likes')->group(function () {

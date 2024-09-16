@@ -1,25 +1,59 @@
-// Import necessary dependencies
+/*
+|--------------------------------------------------------------------------
+| Necessary dependencies
+|--------------------------------------------------------------------------
+*/
+
 import './bootstrap';
 import { debounce, removeElementStylePropertyDelayed } from '../global/utilities';
 
-// DOM Elements
-const spinner = document.querySelector('.spinner');
+/*
+|--------------------------------------------------------------------------
+| Constants
+|--------------------------------------------------------------------------
+*/
 
+const SCROLL_THRESHOLD = 300;
+const TERMS_POPUP_MARGIN_TOP = 32;
+const GET_VOCABULARY_BODY_URL = '/vocabulary/get-body'
+
+/*
+|--------------------------------------------------------------------------
+| Global variables
+|--------------------------------------------------------------------------
+*/
+
+var vocabulary = []; // Used in vocabulary index & category pages
+
+/*
+|--------------------------------------------------------------------------
+| DOM Elements
+|--------------------------------------------------------------------------
+*/
+
+// Spinners
+const spinner = document.querySelector('.spinner');
+const spinnableForms = document.querySelector('[data-on-submit="show-spinner]');
+
+// Scroll buttons
 const scrollButtons = document.querySelector('.scroll-buttons');
 const scrollTopBtn = document.querySelector('.scroll-buttons__top');
 const scrollBottomBtn = document.querySelector('.scroll-buttons__bottom');
 
+// Card components
 const likeForms = document.querySelectorAll('.like-form');
 const favoriteForms = document.querySelectorAll('.favorite-form');
 const expandMoreButtons = document.querySelectorAll('.expand-more__button');
 const termCardsBodyLinks = document.querySelectorAll('.terms-card__body-text a');
 const vocabularyList = document.querySelector('.vocabulary-list');
 
+// Modal buttons
 const showModalButtons = document.querySelectorAll('[data-click-action="show-modal"]');
 const hideActiveModalButtons = document.querySelectorAll('[data-click-action="hide-active-modals"]');
 const showVideoModalButtons = document.querySelectorAll('[data-click-action="show-youtube-video-modal"]');
 const showPhotoModalButtons = document.querySelectorAll('[data-click-action="show-photos-modal"]');
 
+// Modals and components
 const youtubeVideoModal = document.querySelector('.youtube-video-modal');
 const youtubeVideoModalIframeWrapper = youtubeVideoModal.querySelector('.youtube-video-modal__iframe-wrapper');
 const youtubeVideoModalTitle = youtubeVideoModal.querySelector('.modal__title');
@@ -32,15 +66,16 @@ const photosModalDesc = photosModal.querySelector('.photos-modal__desc');
 const rootStyles = getComputedStyle(document.documentElement);
 const defaultCardCollapsedTextMaxHeight = rootStyles.getPropertyValue('--default-card-collapsed-text-max-height').trim();
 
-// Constants
-const SCROLL_THRESHOLD = 300;
-const TERMS_POPUP_MARGIN_TOP = 32;
-const GET_VOCABULARY_BODY_URL = '/vocabulary/get-body'
+/*
+|--------------------------------------------------------------------------
+| Event Listeners
+|--------------------------------------------------------------------------
+*/
 
-// Global variables
-var vocabulary = []; // Used in vocabulary index & category pages
+spinnableForms.forEach((form) => {
+    button.addEventListener('submit', showSpinner);
+});
 
-// Event Listeners
 window.addEventListener('scroll', handleScroll);
 scrollTopBtn.addEventListener('click', scrollTop);
 scrollBottomBtn.addEventListener('click', scrollBottom);
@@ -125,8 +160,12 @@ vocabularyList?.addEventListener('mouseover', (evt) => {
     handleVocabularyListHover(evt);
 });
 
+/*
+|--------------------------------------------------------------------------
+| Functions
+|--------------------------------------------------------------------------
+*/
 
-// Functions
 function handleScroll() {
     const isScrolledPastThreshold = window.scrollY > SCROLL_THRESHOLD;
     toggleScrollButtonsVisibility(isScrolledPastThreshold);
@@ -367,11 +406,15 @@ function showPhotosModal(src, desc) {
     showModal(photosModal);
 }
 
-// Initializations (if needed)
+/*
+|--------------------------------------------------------------------------
+| Initializations
+|--------------------------------------------------------------------------
+*/
+
 init();
 
 function init() {
-    // Check scroll position on page load
-    handleScroll();
+    handleScroll(); // Check scroll position on page load
     removeRedundantExpandMoreButtons();
 }

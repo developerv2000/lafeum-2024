@@ -83,3 +83,55 @@
 }
 /* ------------ /end Author pages ------------ */
 
+
+/* ------------ Contact page ------------ */
+.contacts__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 120px;
+}
+
+.contacts__desc {
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.contacts__email {
+    font-size: 18px;
+}
+
+.contacts__email-title {
+    margin-bottom: 0;
+}
+
+/* Feedback form */
+.feedback {
+    min-width: 480px;
+    max-width: 100%;
+}
+
+.feedback-form {
+    width: 100%;
+    padding: 32px 40px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.feedback-form__submit {
+    margin-top: 20px;
+}
+/* ------------ /end Contect page ------------ */
+
+
+/* ------------ Privacy policy & Terms of use pages ------------ */
+.privacy-policy .styled-text-box a,
+.terms-of-use .styled-text-box a {
+    color: var(--accent-color);
+}
+
+.privacy-policy .styled-text-box h4,
+.terms-of-use .styled-text-box h4 {
+    font-size: 16px;
+}
+/* ------------ /end Privacy policy & Terms of use pages ------------ */
+

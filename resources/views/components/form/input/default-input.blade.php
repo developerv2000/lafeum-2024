@@ -6,7 +6,7 @@
     'required' => $attributes->has('required'), // Indicates whether the input field is required.
 ])
 
-<x-form.groups.default-group label="{{ __($label) }}" error-name="{{ $errorName ?: $name }}" :required="$required">
+<x-form.groups.default-group :label="__($label)" :error-name="$errorName ?: $name" :required="$required">
     <input
         {{ $attributes->merge(['class' => 'input']) }}
         name="{{ $name }}"

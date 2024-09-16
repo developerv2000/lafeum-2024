@@ -15,6 +15,7 @@ body {
     --main-color: #04718C;
     --accent-color: #0645AD;
     --text-color: #000000DE;
+    --danger-color: red;
 
     --theme-border-radius: 8px;
 
@@ -108,11 +109,19 @@ a {
 }
 
 .main-title {
+    margin-bottom: 16px;
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 400;
 }
 
+.styled-text-box {
+    padding: 24px 24px 12px;
+    font-size: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+}
 
 /* ------------ Buttons ------------ */
 .button {
@@ -408,7 +417,7 @@ a {
     gap: 24px;
     align-items: flex-start;
     margin: 0 auto;
-    padding: 28px 40px 20px;
+    padding: 28px 40px;
 }
 
 /* ------------ /end Main Wrapper ------------ */
@@ -706,10 +715,6 @@ a {
 /* ------------ About page ------------ */
 .about-page {
     margin-bottom: 20px;
-}
-
-.about-page__title {
-    margin-bottom: 16px;
 }
 
 /* ------------ /end About page ------------ */

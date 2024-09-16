@@ -7,6 +7,9 @@
 /* Normalize CSS */
 @import '../../../public/plugins/normalize.css';
 
+/* Form */
+@import 'form.css';
+
 /* Components */
 @import 'components.css';
 

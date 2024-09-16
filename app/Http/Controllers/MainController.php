@@ -21,6 +21,26 @@ class MainController extends Controller
         return view('front.pages.home', compact('rootCategories'));
     }
 
+    public function aboutUs()
+    {
+        return view('front.pages.about-us');
+    }
+
+    public function contacts()
+    {
+        return view('front.pages.contacts');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('front.pages.privacy-policy');
+    }
+
+    public function termsOfUse()
+    {
+        return view('front.pages.terms-of-use');
+    }
+
     /**
      * Combine all categories and return a unique collection of categories.
      *
