@@ -1,9 +1,9 @@
 @props([
     'label', // Label text for the input field.
     'name', // Name attribute for the input field.
-    'record', // The record being edited, used to populate the field value.
-    'baggedErrorName' => false, // Optional: Custom error name for validation messages.
-    'required' => $attributes->has('required'), // Whether the input field is required.
+    'record', // Record being edited, used to populate the field value.
+    'baggedErrorName' => false, // Optional: the error bag name for validation messages.
+    'required' => $attributes->has('required'), // Whether the field is required (based on attributes).
 ])
 
 {{-- Include the default-group wrapper with proper error handling --}}
@@ -18,6 +18,6 @@
         {{ $attributes->merge(['class' => 'input']) }}
         name="{{ $name }}"
         value="{{ old($name, $record->{$name}) }}"
-        @if ($required) required @endif >
+        @if ($required) required @endif>
 
 </x-form.groups.default-group>

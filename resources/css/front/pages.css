@@ -135,3 +135,19 @@
 }
 /* ------------ /end Privacy policy & Terms of use pages ------------ */
 
+
+/* ------------ Profile edit page ------------ */
+.profile-edit .main-wrapper {
+    align-items: normal;
+}
+
+.profile-edit__password-update {
+    margin-top: 20px;
+}
+
+.profile-edit__form-submit {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+/* ------------ /end Profile edit page ------------ */
+

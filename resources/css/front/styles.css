@@ -115,6 +115,11 @@ a {
     font-weight: 400;
 }
 
+.secondary-title {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
 .styled-box {
     padding: 24px 24px;
     background-color: white;
@@ -550,6 +555,15 @@ a {
     margin-top: 4px;
 }
 
+/* Account leftbar */
+.account-leftbar {
+    display: flex;
+    flex-direction: column;
+}
+
+.account-leftbar .leftbar__body {
+    flex-grow: 1;
+}
 /* ------------ /end Leftbar ------------ */
 
 
