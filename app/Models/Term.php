@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Support\Traits\Favoriteable;
-use App\Support\Traits\Likeable;
-use App\Support\Traits\Publishable;
+use App\Support\Traits\Model\Favoriteable;
+use App\Support\Traits\Model\Likeable;
+use App\Support\Traits\Model\Publishable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -174,7 +174,7 @@ class Term extends Model
     {
         // Extract subterms collections from each term
         $subtermsCollection = collect();
-        
+
         foreach ($terms as $term) {
             $subtermsCollection->push($term->minified_subterms);
         }

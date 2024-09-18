@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Support\Traits\Model\FindsRecordByName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class AuthorGroup extends Model
 {
     use HasFactory;
+    use FindsRecordByName;
 
     const PEOPLE_NAME = 'Автор';
 
@@ -58,11 +60,6 @@ class AuthorGroup extends Model
     | Queries
     |--------------------------------------------------------------------------
     */
-
-    public static function findByName($name)
-    {
-        return self::where('name', $name)->firstOrFail();
-    }
 
     public function getQuotesQuery()
     {

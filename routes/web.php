@@ -27,7 +27,7 @@ Route::middleware(['guest.or.verified'])->group(function () {
 
     Route::controller(FeedbackController::class)->prefix('/feedbacks')->name('feedbacks.')->group(function () {
         Route::post('/store', 'store')->name('store');
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['store']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['store']);
     });
 
     Route::controller(ProfileController::class)->prefix('/profile')->name('profile.')->group(function () {
@@ -44,11 +44,11 @@ Route::middleware(['guest.or.verified'])->group(function () {
     });
 
     Route::controller(KnowledgeController::class)->prefix('/knowledge')->name('knowledge.')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showBySlug']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'showBySlug']);
     });
 
     Route::controller(VocabularyController::class)->prefix('/vocabulary')->name('vocabulary.')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
 
         Route::get('/{category:slug}', 'category')->name('category');
         Route::post('/get-body', 'getBody')->name('get.body'); // AJAX search
@@ -56,17 +56,17 @@ Route::middleware(['guest.or.verified'])->group(function () {
 
     Route::controller(QuoteController::class)->name('quotes.')->group(function () {
         Route::prefix('/quotes')->group(function () {
-            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
             Route::get('/{category:slug}', 'category')->name('category');
         });
 
         Route::prefix('/quote')->group(function () {
-            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['showByID']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['showByID']);
         });
     });
 
     Route::controller(AuthorController::class)->prefix('/authors')->name('authors.')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
 
         // CrudRouteGenerator is not used because AuthorGroup can be used instead of Author
         Route::get('/{slug}', 'show')->name('show');
@@ -74,32 +74,32 @@ Route::middleware(['guest.or.verified'])->group(function () {
 
     Route::controller(VideoController::class)->name('videos.')->group(function () {
         Route::prefix('/videos')->group(function () {
-            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
             Route::get('/{category:slug}', 'category')->name('category');
         });
 
         Route::prefix('/video')->group(function () {
-            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['showByID']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['showByID']);
         });
     });
 
     Route::controller(ChannelController::class)->name('channels.')->prefix('/channels')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index', 'showBySlug']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'showBySlug']);
     });
 
     Route::controller(TermController::class)->name('terms.')->group(function () {
         Route::prefix('/terms')->group(function () {
-            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
             Route::get('/{category:slug}', 'category')->name('category');
         });
 
         Route::prefix('/term')->group(function () {
-            CrudRouteGenerator::defineDefaultCrudRoutesOnly(['showByID']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['showByID']);
         });
     });
 
     Route::controller(PhotoController::class)->name('photos.')->prefix('/photos')->group(function () {
-        CrudRouteGenerator::defineDefaultCrudRoutesOnly(['index']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
     });
 });
 

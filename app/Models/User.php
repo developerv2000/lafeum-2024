@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Support\Helpers\FileHelper;
+use App\Support\Traits\Model\UploadsFile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,9 +13,12 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
+    use UploadsFile;
 
     const PHOTO_PATH = 'img/users';
     const DEFAULT_PHOTO_NAME = '__default__.png';
+    const PHOTO_WIDTH = 320;
+    const PHOTO_HEIGHT = 320;
 
     /**
      * The attributes that are mass assignable.
@@ -157,9 +162,18 @@ class User extends Authenticatable implements MustVerifyEmail
 
         // Handle photo update
         if ($request->hasFile('photo')) {
-            $this->updatePhoto($request->file('photo'));
+            $this->updatePhoto($request);
         }
 
         $this->save();
+    }
+
+    public function updatePhoto($request)
+    {
+        // Upload photo
+        $fullPath = $this->uploadFile('photo', public_path(self::PHOTO_PATH), $this->name, $request);
+
+        // Resize photo
+        FileHelper::resizeImage($fullPath, self::PHOTO_WIDTH, self::PHOTO_HEIGHT);
     }
 }

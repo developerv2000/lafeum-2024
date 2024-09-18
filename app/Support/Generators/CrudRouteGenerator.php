@@ -101,7 +101,7 @@ class CrudRouteGenerator
      * @param array $excepts The routes to exclude from the definition.
      * @return void
      */
-    public static function defineDefaultCrudRoutesExcept($excepts)
+    public static function defineDefaultRoutesExcept($excepts)
     {
         // Define default routes
         $defaultRoutes = self::getDefaultRouteNames();
@@ -121,7 +121,7 @@ class CrudRouteGenerator
      * @param array $only The routes to include in the definition.
      * @return void
      */
-    public static function defineDefaultCrudRoutesOnly($only = [])
+    public static function defineDefaultRoutesOnly($only = [])
     {
         foreach ($only as $name) {
             self::defineRouteByName($name);
