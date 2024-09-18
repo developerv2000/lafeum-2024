@@ -14,32 +14,35 @@ class FileHelper
      *
      * @param UploadedFile $file The file from the request.
      * @param string $path The path to upload the file to.
-     * @param string $name The desired filename (without extension).
+     * @param string|null $name The desired filename (without extension), or null to use the original filename.
      * @return string The unique filename of the uploaded file.
      */
-    public static function uploadFile(UploadedFile $file, string $path, string $name): string
+    public static function uploadFile(UploadedFile $file, string $path, ?string $name = null): string
     {
         // Ensure the directory exists or create it.
         if (!file_exists($path)) {
             mkdir($path, 0755, true);
         }
 
+        // Use the provided name or fall back to the original filename (without extension).
+        $filenameWithoutExtension = $name ?? pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+
         // Get the file extension.
         $extension = $file->getClientOriginalExtension();
 
-        // Combine the provided name with the extension.
-        $customFilename = $name . '.' . $extension;
+        // Combine the provided or original name with the extension.
+        $customFilename = $filenameWithoutExtension . '.' . $extension;
 
-        // Sanitize a filename by removing unexpected symbols and characters.
+        // Sanitize the filename by removing unexpected symbols and characters.
         $sanitizedFilename = self::sanitizeFilename($customFilename);
 
         // Ensure the filename is unique in the given path.
-        $filename = self::ensureUniqueFilename($sanitizedFilename, $path);
+        $uniqueFilename = self::ensureUniqueFilename($sanitizedFilename, $path);
 
         // Move the file to the destination path.
-        $file->move($path, $filename);
+        $file->move($path, $uniqueFilename);
 
-        return $filename;
+        return $uniqueFilename;
     }
 
     /**

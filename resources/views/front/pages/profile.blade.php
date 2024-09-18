@@ -65,7 +65,7 @@
     </div>
 
     {{-- Password update --}}
-    <div class="profile-edit__password-update styled-box">
+    <div class="profile-edit__password-update styled-box" id="password-update">
         <h2 class="profile-edit__form-title secondary-title">Смена пароля</h2>
 
         <form class="profile-edit__form form" action="{{ route('password.update') }}" method="POST" data-on-submit="show-spinner">
