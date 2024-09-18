@@ -19,4 +19,15 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Querying
+    |--------------------------------------------------------------------------
+    */
+    
+    public static function findByName($name)
+    {
+        return self::where('name', $name)->firstOrFail();
+    }
 }

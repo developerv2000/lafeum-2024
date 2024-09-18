@@ -33,7 +33,7 @@ var vocabulary = []; // Used in vocabulary index & category pages
 
 // Spinners
 const spinner = document.querySelector('.spinner');
-const spinnableForms = document.querySelectorAll('[data-on-submit="show-spinner]');
+const spinnableForms = document.querySelectorAll('[data-on-submit="show-spinner"]');
 
 // Scroll buttons
 const scrollButtons = document.querySelector('.scroll-buttons');
@@ -73,7 +73,7 @@ const defaultCardCollapsedTextMaxHeight = rootStyles.getPropertyValue('--default
 */
 
 spinnableForms.forEach((form) => {
-    button.addEventListener('submit', showSpinner);
+    form.addEventListener('submit', showSpinner);
 });
 
 window.addEventListener('scroll', handleScroll);

@@ -22,12 +22,12 @@
                 </p>
             </div>
         </div>
-        
+
         {{-- Feedback --}}
         <div class="feedback">
             <h2 class="feedback__title main-title">Свяжитесь с нами</h2>
 
-            <form class="feedback-form form" action="{{ route('feedbacks.store') }}" method="POST">
+            <form class="feedback-form form" action="{{ route('feedbacks.store') }}" method="POST" data-on-submit="show-spinner">
                 @csrf
 
                 <x-form.input.default-input

@@ -91,3 +91,9 @@
 .form-group--error .select {
     border-color: var(--danger-color);
 }
+
+/* File input */
+.input[type="file"]::-webkit-file-upload-button,
+.input[type="file"]::file-selector-button {
+    display: none;
+}

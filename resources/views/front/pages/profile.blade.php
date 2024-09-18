@@ -14,8 +14,9 @@
     <div class="profile-edit__personal-data styled-box">
         <h2 class="profile-edit__form-title secondary-title">Личные данные</h2>
 
-        <form class="profile-edit__form form" action="{{ route('profile.edit') }}" method="POST">
+        <form class="profile-edit__form form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" data-on-submit="show-spinner">
             @csrf
+            @method('PATCH')
 
             <x-form.input.record-edit-input
                 label="Имя пользователя"
@@ -36,11 +37,23 @@
                 :record="$record" />
 
             <x-form.select.native.id-based-single-select.record-edit-select
+                label="Пол"
+                name="gender_id"
+                :record="$record"
+                :options="$genders"
+                placeholder="Не выбрано" />
+
+            <x-form.select.native.id-based-single-select.record-edit-select
                 label="Страна"
                 name="country_id"
                 :record="$record"
                 :options="$countries"
                 placeholder="Не выбрано" />
+
+            <x-form.input.default-input
+                label="Фото"
+                name="photo"
+                type="file" />
 
             <x-form.textarea.record-edit-textarea
                 label="Коротко о себе"
@@ -55,7 +68,7 @@
     <div class="profile-edit__password-update styled-box">
         <h2 class="profile-edit__form-title secondary-title">Смена пароля</h2>
 
-        <form class="profile-edit__form form" action="{{ route('password.update') }}" method="POST">
+        <form class="profile-edit__form form" action="{{ route('password.update') }}" method="POST" data-on-submit="show-spinner">
             @csrf
             @method('PUT')
 

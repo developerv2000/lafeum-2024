@@ -24,4 +24,15 @@ class Gender extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Querying
+    |--------------------------------------------------------------------------
+    */
+
+    public static function getAll()
+    {
+        return self::orderBy('name', 'asc')->get();
+    }
 }

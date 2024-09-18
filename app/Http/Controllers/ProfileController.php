@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Country;
+use App\Models\Gender;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,9 @@ class ProfileController extends Controller
     {
         $record = $request->user();
         $countries = Country::getAll();
+        $genders = Gender::getAll();
 
-        return view('front.pages.profile', compact('record', 'countries'));
+        return view('front.pages.profile', compact('record', 'countries', 'genders'));
     }
 
     /**
