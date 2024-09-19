@@ -21,32 +21,32 @@
             <x-form.input.record-edit-input
                 label="Имя пользователя"
                 name="name"
-                :record="$record"
+                :record="$user"
                 required />
 
             <x-form.input.record-edit-input
                 label="Электронная почта"
                 name="email"
-                :record="$record"
+                :record="$user"
                 required />
 
             <x-form.input.record-edit-input
                 label="День рождения"
                 name="birthday"
                 type="date"
-                :record="$record" />
+                :record="$user" />
 
             <x-form.select.native.id-based-single-select.record-edit-select
                 label="Пол"
                 name="gender_id"
-                :record="$record"
+                :record="$user"
                 :options="$genders"
                 placeholder="Не выбрано" />
 
             <x-form.select.native.id-based-single-select.record-edit-select
                 label="Страна"
                 name="country_id"
-                :record="$record"
+                :record="$user"
                 :options="$countries"
                 placeholder="Не выбрано" />
 
@@ -58,7 +58,7 @@
             <x-form.textarea.record-edit-textarea
                 label="Коротко о себе"
                 name="biography"
-                :record="$record" />
+                :record="$user" />
 
             <x-global.button class="profile-edit__form-submit">Обновить</x-global.button>
         </form>

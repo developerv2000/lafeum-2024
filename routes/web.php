@@ -36,10 +36,12 @@ Route::middleware(['guest.or.verified'])->group(function () {
     });
 
     Route::controller(LikeController::class)->name('likes.')->prefix('/likes')->middleware(['auth'])->group(function () {
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
         Route::post('/toggle/{model}/{id}', 'toggle')->name('toggle'); // AJAX request
     });
 
     Route::controller(FavoriteController::class)->name('favorites.')->prefix('/favorites')->middleware(['auth'])->group(function () {
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
         Route::post('/refresh/{model}/{id}', 'refresh')->name('refresh'); // AJAX request
     });
 

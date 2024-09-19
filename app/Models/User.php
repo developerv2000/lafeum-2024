@@ -146,6 +146,20 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /*
     |--------------------------------------------------------------------------
+    | Roles Check
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * All privileges
+     */
+    public function isAdmin()
+    {
+        return $this->roles->contains('name', Role::ADMINISTRATOR_NAME);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Miscellaneous
     |--------------------------------------------------------------------------
     */
