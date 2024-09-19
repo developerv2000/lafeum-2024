@@ -34,6 +34,27 @@
         ]) href="{{ route('favorites.index') }}">
             <x-global.material-symbol-outlined icon="folder_open" filled="1" /> Мои избранные
         </a>
+
+        {{-- Folders --}}
+        <div class="accout-leftbar__folders-wrapper">
+            {{-- Root folders --}}
+            @foreach ($user->rootFolders as $root)
+                <a class="leftbar__nav-link" href="{{ route('favorites.folder', $root->id) }}">
+                    <x-global.material-symbol-outlined icon="subdirectory_arrow_right" filled="1" /> {{ $root->name }}
+                </a>
+
+                {{-- Child folders --}}
+                @if ($root->childs->count())
+                    <div class="accout-leftbar__subfolders-wrapper">
+                        @foreach ($root->childs as $child)
+                            <a class="leftbar__nav-link" href="{{ route('favorites.folder', $child->id) }}">
+                                <x-global.material-symbol-outlined icon="reply_all" filled="1" /> {{ $child->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
+            @endforeach
+        </div>
     </nav>
 
     {{-- Divider --}}

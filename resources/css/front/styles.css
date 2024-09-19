@@ -626,6 +626,28 @@ a {
     color: var(--main-color);
 }
 
+.accout-leftbar__folders-wrapper {
+    margin-top: -4px;
+}
+
+.accout-leftbar__folders-wrapper,
+.accout-leftbar__subfolders-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-left: 12px;
+}
+
+.accout-leftbar__folders-wrapper .material-symbols-outlined {
+    font-size: 16px;
+    color: #CCCCCC;
+}
+
+.accout-leftbar__subfolders-wrapper .material-symbols-outlined {
+    transform: rotate(180deg);
+}
+
 .account-leftbar .leftbar__body-divider {
     margin: 20px 24px;
 }

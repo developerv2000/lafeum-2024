@@ -42,6 +42,8 @@ Route::middleware(['guest.or.verified'])->group(function () {
 
     Route::controller(FavoriteController::class)->name('favorites.')->prefix('/favorites')->middleware(['auth'])->group(function () {
         CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
+        Route::get('/{folder}', 'folder')->name('folder');
+        
         Route::post('/refresh/{model}/{id}', 'refresh')->name('refresh'); // AJAX request
     });
 
