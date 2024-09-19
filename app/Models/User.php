@@ -190,4 +190,9 @@ class User extends Authenticatable implements MustVerifyEmail
         // Resize photo
         FileHelper::resizeImage($fullPath, self::PHOTO_WIDTH, self::PHOTO_HEIGHT);
     }
+
+    public function getLikedRecords()
+    {
+        return $this->likes()->orderBy('id', 'asc')->with('likeable')->paginate(20);
+    }
 }

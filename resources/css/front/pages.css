@@ -151,3 +151,10 @@
 }
 /* ------------ /end Profile edit page ------------ */
 
+
+/* ------------ Likes page ------------ */
+.likes-index .main-wrapper {
+    align-items: normal;
+}
+/* ------------ /end Likes page ------------ */
+
