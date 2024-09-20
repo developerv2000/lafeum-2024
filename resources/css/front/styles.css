@@ -644,10 +644,6 @@ a {
     color: #CCCCCC;
 }
 
-.accout-leftbar__subfolders-wrapper .material-symbols-outlined {
-    transform: rotate(180deg);
-}
-
 .account-leftbar .leftbar__body-divider {
     margin: 20px 24px;
 }
@@ -970,6 +966,58 @@ a {
     flex-wrap: wrap;
     /* For pagination margin */
     margin-bottom: 24px;
+}
+
+/* Manage folders */
+.manage-folders__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-folders__list-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    transition: 0.3s;
+}
+
+.manage-folders__list-item:hover {
+    background-color: #EEEEEE;
+}
+
+.manage-folders__list-item--root {
+    padding-bottom: 4px;
+    border-bottom: 1px solid #c2ccd9
+}
+
+.manage-folders__list-childs-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0 0 28px;
+}
+
+.manage-folders__list-link {
+    margin-right: 28px;
+}
+
+.manage-folders__list-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.manage-folders__list-item:hover .manage-folders__list-actions {
+    opacity: 1;
+    visibility: visible;
+}
+
+.manage-folders__list-item .material-symbols-outlined {
+    font-size: 18px;
 }
 
 /* ------------ /end Lists ------------ */

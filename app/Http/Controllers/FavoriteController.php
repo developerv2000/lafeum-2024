@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
+    public function index(Request $request)
+    {
+        $rootFolders = $request->user()->rootFolders;
+
+        return view('front.favorites.index', compact('rootFolders'));
+    }
+
     public function refresh(Request $request)
     {
         $modelFullName = ModelHelper::addFullNameSpaceToModelBasename($request->route('model'));

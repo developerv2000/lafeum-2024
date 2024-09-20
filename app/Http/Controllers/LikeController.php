@@ -11,7 +11,7 @@ class LikeController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $records = $user->getLikedRecords();
+        $records = $user->getLikedRecordsPaginated();
 
         // Generate subterms array for subterm popup on hover
         $terms = $records->where('likeable_type', 'App\Models\Term')->pluck('likeable');

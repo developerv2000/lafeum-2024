@@ -9,6 +9,7 @@ class Folder extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     protected $guarded = ['id'];
     protected $with = ['childs'];
 
@@ -23,6 +24,24 @@ class Folder extends Model
         return $this->hasMany(self::class, 'parent_id');
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Events
+    |--------------------------------------------------------------------------
+    */
+
+    protected static function booted(): void
+    {
+        static::deleting(function ($record) {
+            $record->childs()->delete();
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Miscellaneous
@@ -32,5 +51,10 @@ class Folder extends Model
     public function hasChilds()
     {
         return $this->childs->count();
+    }
+
+    public function getFavoritesPaginated()
+    {
+        return $this->favorites()->orderBy('id', 'desc')->with('favoritable')->paginate(20);
     }
 }

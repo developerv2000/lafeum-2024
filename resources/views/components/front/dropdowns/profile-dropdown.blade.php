@@ -9,12 +9,12 @@
             Мой профиль
         </a>
 
-        <a class="profile-dropdown__link" href="{{ route('home') }}">
+        <a class="profile-dropdown__link" href="{{ route('likes.index') }}">
             <x-global.material-symbol-outlined icon="favorite" />
             Лайки
         </a>
 
-        <a class="profile-dropdown__link" href="{{ route('home') }}">
+        <a class="profile-dropdown__link" href="{{ route('favorites.index') }}">
             <x-global.material-symbol-outlined icon="folder_open" filled="true" />
             Избранное
         </a>

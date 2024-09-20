@@ -1,4 +1,4 @@
-@props(['records', 'subtermsArray' => null])
+@props(['records', 'relationName', 'modelTypeColumn', 'subtermsArray' => null])
 
 <div class="default-list mixed-list">
     <script>
@@ -6,17 +6,17 @@
     </script>
 
     @foreach ($records as $record)
-        @switch($record->likeable_type)
+        @switch($record->{$modelTypeColumn})
             @case('App\Models\Quote')
-                <x-front.cards.quotes :quote="$record->likeable" />
+                <x-front.cards.quotes :quote="$record->{$relationName}" />
             @break
 
             @case('App\Models\Term')
-                <x-front.cards.terms :term="$record->likeable" />
+                <x-front.cards.terms :term="$record->{$relationName}" />
             @break
 
             @case('App\Models\Video')
-                <x-front.cards.videos :video="$record->likeable" />
+                <x-front.cards.videos :video="$record->{$relationName}" />
             @break
         @endswitch
     @endforeach

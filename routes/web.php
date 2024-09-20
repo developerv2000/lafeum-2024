@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FolderController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MainController;
@@ -42,9 +43,12 @@ Route::middleware(['guest.or.verified'])->group(function () {
 
     Route::controller(FavoriteController::class)->name('favorites.')->prefix('/favorites')->middleware(['auth'])->group(function () {
         CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
-        Route::get('/{folder}', 'folder')->name('folder');
-        
+
         Route::post('/refresh/{model}/{id}', 'refresh')->name('refresh'); // AJAX request
+    });
+
+    Route::controller(FolderController::class)->name('folders.')->prefix('/folders')->middleware(['auth'])->group(function () {
+        CrudRouteGenerator::defineDefaultRoutesOnly(['showByID', 'store', 'delete']);
     });
 
     Route::controller(KnowledgeController::class)->prefix('/knowledge')->name('knowledge.')->group(function () {

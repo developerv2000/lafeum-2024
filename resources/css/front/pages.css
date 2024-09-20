@@ -158,3 +158,26 @@
 }
 /* ------------ /end Likes page ------------ */
 
+
+/* ------------ Favorite pages ------------ */
+.favorites-index .main-wrapper {
+    align-items: normal;
+}
+
+.create-folder__form-submit {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
+.manage-folders {
+    margin-top: 20px;
+}
+/* ------------ /end Favorite page ------------ */
+
+
+/* ------------ Folder pages ------------ */
+.folders-show .main-wrapper {
+    align-items: normal;
+}
+/* ------------ /end Folder page ------------ */
+
