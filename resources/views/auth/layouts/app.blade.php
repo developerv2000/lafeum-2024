@@ -10,6 +10,8 @@
     {{-- blade-formatter-disable-next-line --}}
     <title>@isset($title){{ $title . ' — ЛАФЕЮМ' }}@else{{ 'ЛАФЕЮМ' }}@endisset</title>
 
+    <x-global.noindex-tags />
+
     @vite('resources/css/front/auth.css')
 </head>
 

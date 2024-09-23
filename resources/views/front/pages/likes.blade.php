@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'likes-index',
     'includeRightbar' => false,
+    'noindex' => true,
     'title' => 'Мои лайки',
 ])
 

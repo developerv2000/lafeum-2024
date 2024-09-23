@@ -10,6 +10,14 @@
     {{-- blade-formatter-disable-next-line --}}
     <title>@isset($title){{ $title . ' — ЛАФЕЮМ' }}@else{{ 'ЛАФЕЮМ' }}@endisset</title>
 
+    {{-- !!!!!!!!!!!!!!!!!!!!!!!!!! Remove after development !!!!!!!!!!!!!!!!!!!!!!!!!! --}}
+    <x-global.noindex-tags />
+
+    {{-- Noindex tags --}}
+    @if (isset($noindex) && $noindex)
+        <x-global.noindex-tags />
+    @endif
+
     @vite('resources/css/front/main.css')
 </head>
 

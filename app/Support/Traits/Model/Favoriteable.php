@@ -112,6 +112,7 @@ trait Favoriteable
     {
         // Remove old favorites
         $this->favorites()->where('user_id', auth()->id())->delete();
+        $this->refresh();
 
         // Attach new ones
         $folderIDs = $request->input('folder_ids', []);

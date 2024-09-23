@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'contacts',
     'includeRightbar' => false,
+    'title' => 'Контакты',
 ])
 
 @section('content')

@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'terms-of-use',
     'includeRightbar' => true,
+    'title' => 'Пользовательское соглашение',
 ])
 
 @section('content')

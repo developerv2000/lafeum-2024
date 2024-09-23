@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'profile-edit',
     'includeRightbar' => false,
+    'noindex' => true,
     'title' => 'Мой профиль',
 ])
 

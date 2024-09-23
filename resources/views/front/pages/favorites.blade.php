@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'favorites-index',
     'includeRightbar' => false,
+    'noindex' => true,
     'title' => 'Мои избранные',
 ])
 

@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'about-us',
     'includeRightbar' => true,
+    'title' => 'О Сайте',
 ])
 
 @section('content')

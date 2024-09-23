@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'privacy-policy',
     'includeRightbar' => true,
+    'title' => 'Политика конфиденциальности',
 ])
 
 @section('content')
