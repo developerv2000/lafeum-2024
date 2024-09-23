@@ -21,5 +21,9 @@
         @endswitch
     @endforeach
 
+    @unless ($records->count())
+        <p>Здесь пусто...</p>
+    @endunless
+
     {{ $records->links('front.layouts.pagination') }}
 </div>

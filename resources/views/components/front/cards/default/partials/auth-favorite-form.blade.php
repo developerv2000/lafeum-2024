@@ -16,6 +16,14 @@
 
             <p class="favorite-form__title">Выберите папку:</p>
 
+            @unless (auth()->user()->rootFolders->count())
+                <p class="favorite-form__manage-folders-info">
+                    Перейдите на страницу
+                    <a href="{{ route('favorites.index') }}">"Мои избранные"</a>
+                    для управления папками.
+                </p>
+            @endunless
+
             {{-- Root folders --}}
             @foreach (auth()->user()->rootFolders as $folder)
                 <div class="favorite-form__folder @if ($folder->hasChilds()) favorite-form__folder--has-children @endif">

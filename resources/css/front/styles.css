@@ -1163,6 +1163,10 @@ a {
 }
 
 /* Favorite */
+.favorite-dropdown {
+    z-index: unset;
+}
+
 .favorite-dropdown__icon {
     color: #cdcdcd;
     display: flex;
@@ -1173,7 +1177,7 @@ a {
 }
 
 .favorite-dropdown .dropdown__content {
-    width: 180px;
+    width: 200px;
 }
 
 .favorite-form {
@@ -1186,6 +1190,15 @@ a {
 .favorite-form__title {
     font-weight: 600;
     margin: 0;
+}
+
+.favorite-form__manage-folders-info {
+    margin: 0;
+}
+
+.favorite-form__manage-folders-info a {
+    color: var(--main-color);
+    text-decoration: underline;
 }
 
 .favorite-form__folder {

@@ -20,4 +20,8 @@
             </div>
         @endif
     @endforeach
+
+    @unless ($rootFolders->count())
+        <p>Здесь пусто...</p>
+    @endunless
 </div>
