@@ -52,6 +52,8 @@ const showModalButtons = document.querySelectorAll('[data-click-action="show-mod
 const hideActiveModalButtons = document.querySelectorAll('[data-click-action="hide-active-modals"]');
 const showVideoModalButtons = document.querySelectorAll('[data-click-action="show-youtube-video-modal"]');
 const showPhotoModalButtons = document.querySelectorAll('[data-click-action="show-photos-modal"]');
+const renameFolderButtons = document.querySelectorAll('[data-click-action="rename-folder"]');
+const destroyFolderButtons = document.querySelectorAll('[data-click-action="destroy-folder"]');
 
 // Modals and components
 const youtubeVideoModal = document.querySelector('.youtube-video-modal');
@@ -61,6 +63,13 @@ const youtubeVideoModalTitle = youtubeVideoModal.querySelector('.modal__title');
 const photosModal = document.querySelector('.photos-modal');
 const photosModalImage = photosModal.querySelector('.photos-modal__image');
 const photosModalDesc = photosModal.querySelector('.photos-modal__desc');
+
+const renameFolderModal = document.querySelector('.rename-folder-modal');
+const renameFolderIdInput = renameFolderModal.querySelector('input[name="id"]');
+const renameFolderNameInput = renameFolderModal.querySelector('input[name="name"]');
+
+const destroyFolderModal = document.querySelector('.destroy-folder-modal');
+const destroyFolderIdInput = destroyFolderModal.querySelector('input[name="id"]');
 
 // Style variables
 const rootStyles = getComputedStyle(document.documentElement);
@@ -91,7 +100,7 @@ hideActiveModalButtons.forEach((button) => {
     button.addEventListener('click', hideAllActiveModals);
 });
 
-// Initialize youtube video modals
+// Initialize modals
 showVideoModalButtons.forEach((button) => {
     button.addEventListener('click', function (evt) {
         const title = evt.currentTarget.dataset.videoTitle;
@@ -107,6 +116,22 @@ showPhotoModalButtons.forEach((button) => {
         const desc = evt.currentTarget.dataset.photoDesc;
 
         showPhotosModal(src, desc);
+    });
+});
+
+renameFolderButtons.forEach((button) => {
+    button.addEventListener('click', function (evt) {
+        const folderId = evt.currentTarget.dataset.folderId;
+        const folderName = evt.currentTarget.dataset.folderName;
+
+        showRenameFolderModal(folderId, folderName);
+    });
+});
+
+destroyFolderButtons.forEach((button) => {
+    button.addEventListener('click', function (evt) {
+        const folderId = evt.currentTarget.dataset.folderId;
+        destroyRenameFolderModal(folderId);
     });
 });
 
@@ -404,6 +429,18 @@ function showPhotosModal(src, desc) {
     photosModalDesc.innerHTML = desc;
 
     showModal(photosModal);
+}
+
+function showRenameFolderModal(folderId, folderName) {
+    renameFolderIdInput.value = folderId;
+    renameFolderNameInput.value = folderName;
+
+    showModal(renameFolderModal);
+}
+
+function destroyRenameFolderModal(folderId) {
+    destroyFolderIdInput.value = folderId;
+    showModal(destroyFolderModal);
 }
 
 /*

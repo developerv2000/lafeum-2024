@@ -43,12 +43,12 @@ Route::middleware(['guest.or.verified'])->group(function () {
 
     Route::controller(FavoriteController::class)->name('favorites.')->prefix('/favorites')->middleware(['auth'])->group(function () {
         CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
-
         Route::post('/refresh/{model}/{id}', 'refresh')->name('refresh'); // AJAX request
     });
 
     Route::controller(FolderController::class)->name('folders.')->prefix('/folders')->middleware(['auth'])->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesOnly(['showByID', 'store', 'delete']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['showByID', 'store', 'destroy']);
+        Route::patch('/rename', 'rename')->name('rename');
     });
 
     Route::controller(KnowledgeController::class)->prefix('/knowledge')->name('knowledge.')->group(function () {

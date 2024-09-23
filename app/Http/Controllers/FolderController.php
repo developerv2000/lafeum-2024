@@ -26,13 +26,15 @@ class FolderController extends Controller
             'parent_id' => 'nullable|integer',
         ]);
 
-        $request->user()->folders()->create([$validatedData]);
+        $request->user()->folders()->create($validatedData);
 
         return redirect()->back();
     }
 
-    public function update(Request $request, Folder $record)
+    public function rename(Request $request)
     {
+        $record = Folder::find($request->input('id'));
+
         // Escape hacks
         $hasAccess = $request->user()->folders()->where('id', $record->id)->exists();
 

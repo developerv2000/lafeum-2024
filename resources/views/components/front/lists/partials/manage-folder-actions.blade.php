@@ -6,13 +6,13 @@
         icon="edit"
         title="Переименовать"
         data-click-action="rename-folder"
-        :folder-id="$folder->id"
-        :folder-name="$folder->name"></x-global.button>
+        data-folder-id="{{ $folder->id }}"
+        data-folder-name="{{ $folder->name }}"></x-global.button>
 
     <x-global.button class="manage-folders__list-action-button"
         style="transparent"
         icon="delete"
         title="Удалить"
-        data-click-action="delete-folder"
-        :folder-id="$folder->id"></x-global.button>
+        data-click-action="destroy-folder"
+        data-folder-id="{{ $folder->id }}"></x-global.button>
 </div>

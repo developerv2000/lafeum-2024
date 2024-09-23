@@ -30,9 +30,12 @@
 
     @include('front.layouts.footer')
 
+    <x-front.modals.youtube-videos />
+    <x-front.modals.photos />
+    <x-front.modals.rename-folder />
+    <x-front.modals.destroy-folder />
+
     <x-front.different.scroll-buttons />
-    <x-global.modals.youtube-videos />
-    <x-global.modals.photos />
     <x-global.spinner />
 
     @vite('resources/js/front/main.js')

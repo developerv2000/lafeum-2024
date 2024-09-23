@@ -39,7 +39,7 @@
         <div class="accout-leftbar__folders-wrapper">
             {{-- Root folders --}}
             @foreach ($user->rootFolders as $root)
-                <a class="leftbar__nav-link" href="{{ route('folders.show', $root->id) }}">
+                <a class="leftbar__nav-link @if(request()->routeIs('folders.show') && request()->route('record')->id == $root->id) leftbar__nav-link--active @endif" href="{{ route('folders.show', $root->id) }}">
                     <x-global.material-symbol-outlined icon="folder_open" filled="1" /> {{ $root->name }}
                 </a>
 
@@ -47,7 +47,7 @@
                 @if ($root->childs->count())
                     <div class="accout-leftbar__subfolders-wrapper">
                         @foreach ($root->childs as $child)
-                            <a class="leftbar__nav-link" href="{{ route('folders.show', $child->id) }}">
+                            <a class="leftbar__nav-link @if(request()->routeIs('folders.show') && request()->route('record')->id == $child->id) leftbar__nav-link--active @endif" href="{{ route('folders.show', $child->id) }}">
                                 <x-global.material-symbol-outlined icon="sort" filled="1" /> {{ $child->name }}
                             </a>
                         @endforeach

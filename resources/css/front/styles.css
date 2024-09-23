@@ -172,6 +172,15 @@ a {
     background-color: transparent;
 }
 
+.button--cancel {
+    background-color: #e0e0e0;
+}
+
+.button--danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
 /* ------------ /end Buttons ------------ */
 
 
