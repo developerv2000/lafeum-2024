@@ -256,7 +256,7 @@ a {
 .header__inner {
     max-width: 1420px;
     display: flex;
-    gap: 32px;
+    gap: 24px;
     align-items: flex-end;
     padding: 16px 40px;
 }
@@ -619,7 +619,6 @@ a {
 .account-leftbar .leftbar__nav-link {
     gap: 16px;
     align-items: center;
-    font-weight: 500;
     color: #676767;
 }
 
