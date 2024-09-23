@@ -1218,6 +1218,17 @@ a {
     position: relative;
 }
 
+.favorite-form__label-arrow {
+    display: none;
+    margin-left: auto;
+    font-size: 16px;
+    color: #c1c1c1;
+}
+
+.favorite-form__folder--has-children .favorite-form__label-arrow {
+    display: inline-block;
+}
+
 .favorite-form__folder-childs {
     position: absolute;
     width: 180px;

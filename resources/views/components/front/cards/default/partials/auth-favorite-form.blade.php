@@ -29,7 +29,8 @@
                 <div class="favorite-form__folder @if ($folder->hasChilds()) favorite-form__folder--has-children @endif">
                     <label class="favorite-form__label">
                         <input type="checkbox" name="folder_ids[]" value="{{ $folder->id }}" @checked($record->isFavoritedByCurrentUser($folder->id))>
-                        {{ $folder->name }}
+                        <span class="favorite-form__label-folder-name">{{ $folder->name }}</span>
+                        <x-global.material-symbol-outlined class="favorite-form__label-arrow" icon="arrow_forward_ios" />
                     </label>
 
                     {{-- Child folders --}}
@@ -40,7 +41,7 @@
                             @foreach ($folder->childs as $child)
                                 <label class="favorite-form__label">
                                     <input type="checkbox" name="folder_ids[]" value="{{ $child->id }}" @checked($record->isFavoritedByCurrentUser($child->id))>
-                                    {{ $child->name }}
+                                    <span class="favorite-form__label-folder-name">{{ $child->name }}</span>
                                 </label>
                             @endforeach
                         </div>
