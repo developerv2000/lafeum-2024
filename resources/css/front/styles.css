@@ -4,8 +4,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'Raleway', sans-serif;
     font-size: 14px;
+    font-weight: 500;
+    font-family: 'Raleway', sans-serif;
     line-height: 1.5;
     color: var(--text-color);
     background-color: #EEEEEE;
@@ -112,7 +113,7 @@ a {
     margin-bottom: 16px;
     font-size: 18px;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .secondary-title {
@@ -726,7 +727,6 @@ a {
 .rightbar__quote-author {
     margin-bottom: 0;
     font-size: 14px;
-    font-weight: 600;
     color: var(--main-color);
 }
 
@@ -1463,7 +1463,7 @@ a {
 .videos-card__channel-name {
     color: #0645ad;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1;
 }
 
