@@ -20,6 +20,11 @@ return new class extends Migration
             $table->text('biography')->nullable();
             $table->string('photo')->nullable();
 
+            $table->ipAddress('registered_ip_address')->nullable();
+            $table->string('registered_browser')->nullable();
+            $table->string('registered_device')->nullable();
+            $table->string('registered_country')->nullable();
+
             $table->unsignedSmallInteger('country_id')
                 ->foreign()
                 ->references('id')

@@ -33,6 +33,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender_id',
         'country_id',
         'biography',
+        'registered_ip_address',
+        'registered_browser',
+        'registered_device',
+        'registered_country',
     ];
 
     /**
@@ -194,5 +198,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getLikedRecordsPaginated()
     {
         return $this->likes()->orderBy('id', 'desc')->with('likeable')->paginate(20);
+    }
+
+    public static function getCountryFromIP($ip)
+    {
+        $response = @file_get_contents('http://ipinfo.io/' . $ip . '/json');
+        $details = json_decode($response);
+
+        return $details->country ?? 'Unknown';
     }
 }
