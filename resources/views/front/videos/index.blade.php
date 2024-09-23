@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'videos-index',
     'includeRightbar' => true,
+    'title' => 'Видео',
 ])
 
 @section('leftbar')

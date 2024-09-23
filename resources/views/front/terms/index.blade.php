@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'terms-index',
     'includeRightbar' => true,
+    'title' => 'Термины',
 ])
 
 @section('leftbar')

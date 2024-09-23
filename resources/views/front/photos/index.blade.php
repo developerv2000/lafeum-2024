@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'photos-index',
     'includeRightbar' => false,
+    'title' => 'Фотографии',
 ])
 
 @section('content')

@@ -53,6 +53,13 @@
                 <h3 class="rightbar__item-title">Фотография дня</h3>
 
                 <div class="rightbar__photo">
+                    <img class="rightbar__photo-image"
+                        src="{{ $todaysPost->photo->thumb_asset_path }}"
+                        alt="Изображение дня"
+                        data-click-action="show-photos-modal"
+                        data-photo-src="{{ $todaysPost->photo->asset_path }}"
+                        data-photo-desc="{{ $todaysPost->photo->description }}">
+
                     <p class="rightbar__photo-body">{{ $todaysPost->photo->description }}</p>
                 </div>
 

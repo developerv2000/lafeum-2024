@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'vocabulary-index',
     'includeRightbar' => true,
+    'title' => 'Словарь',
 ])
 
 @section('leftbar')

@@ -11,7 +11,7 @@ class FavoriteController extends Controller
     {
         $rootFolders = $request->user()->rootFolders;
 
-        return view('front.favorites.index', compact('rootFolders'));
+        return view('front.pages.favorites', compact('rootFolders'));
     }
 
     public function refresh(Request $request)

@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'folders-show',
     'includeRightbar' => false,
+    'title' => $record->name,
 ])
 
 @section('leftbar')

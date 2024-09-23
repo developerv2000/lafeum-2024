@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'channels-index',
     'includeRightbar' => true,
+    'title' => 'Каналы YouTube',
 ])
 
 @section('content')

@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'vocabulary-category',
     'includeRightbar' => true,
+    'title' => $category->name,
 ])
 
 @section('leftbar')

@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'terms-category',
     'includeRightbar' => true,
+    'title' => $category->name,
 ])
 
 @section('leftbar')

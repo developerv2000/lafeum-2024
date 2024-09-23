@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'channels-show',
     'includeRightbar' => true,
+    'title' => $record->name,
 ])
 
 @section('leftbar')

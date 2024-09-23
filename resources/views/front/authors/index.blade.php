@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'authors-index',
     'includeRightbar' => true,
+    'title' => 'Авторы',
 ])
 
 @section('content')

@@ -714,6 +714,7 @@ a {
     background-color: #F4F4F4;
 }
 
+/* Quote */
 .rightbar__quote-header {
     display: flex;
     gap: 8px;
@@ -729,7 +730,6 @@ a {
     color: var(--main-color);
 }
 
-/* Quote */
 .rightbar__quote-image {
     width: 48px;
     height: 48px;
@@ -763,6 +763,20 @@ a {
     margin-bottom: 12px;
 }
 
+/* Photo */
+.rightbar__photo-image {
+    display: flex;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.rightbar__photo-body {
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 5;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
 /* ------------ /end Rightbar ------------ */
 
 

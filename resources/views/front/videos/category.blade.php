@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'videos-category',
     'includeRightbar' => true,
+    'title' => $category->name,
 ])
 
 @section('leftbar')

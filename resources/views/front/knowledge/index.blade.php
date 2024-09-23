@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'knowledge-index',
     'includeRightbar' => true,
+    'title' => 'Области знаний'
 ])
 
 @section('content')

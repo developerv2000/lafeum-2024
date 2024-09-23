@@ -18,7 +18,7 @@ class DailyPostSeeder extends Seeder
             'quote_id' => 1,
             'term_id' => 1,
             'video_id' => 1,
-            'photo_id' => 1,
+            'photo_id' => 116,
         ]);
     }
 }

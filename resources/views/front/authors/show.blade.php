@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'authors-show',
     'includeRightbar' => true,
+    'title' => $author->name,
 ])
 
 @section('leftbar')

@@ -443,6 +443,27 @@ function destroyRenameFolderModal(folderId) {
     showModal(destroyFolderModal);
 }
 
+/**
+ * Registers a Service Worker for Progressive Web Apps (PWA).
+ * This function checks if the browser supports Service Workers and, if so, registers
+ * a Service Worker script located at the root of the site. It logs the registration
+ * status to the console.
+ */
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        // Register the Service Worker script located at the root of the site
+        navigator.serviceWorker.register(`${document.location.origin}/service-worker.js`)
+            .then(function (registration) {
+                console.log('Service worker registration succeeded:', registration);
+            })
+            .catch(function (error) {
+                console.log('Service worker registration failed:', error);
+            });
+    } else {
+        console.log('Service workers are not supported.');
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Initializations
@@ -455,3 +476,7 @@ function init() {
     handleScroll(); // Check scroll position on page load
     removeRedundantExpandMoreButtons();
 }
+
+window.addEventListener('load', function () {
+    registerServiceWorker();
+});

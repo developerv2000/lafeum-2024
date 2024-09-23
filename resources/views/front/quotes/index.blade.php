@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'quotes-index',
     'includeRightbar' => true,
+    'title' => 'Цитаты и Афоризмы',
 ])
 
 @section('leftbar')
