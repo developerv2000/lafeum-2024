@@ -890,6 +890,10 @@ a {
 .vocabulary-list__link {
     line-height: 1.6;
     display: flex;
+
+    &:hover {
+        color: var(--main-color);
+    }
 }
 
 .vocabulary-list__popup {
@@ -900,6 +904,7 @@ a {
     line-clamp: 9;
     -webkit-box-orient: vertical;
     padding: 16px;
+    border-radius: 8px;
     background-color: white;
     box-shadow: 0 9px 11px -5px rgba(0, 0, 0, .2), 0 18px 28px 2px rgba(0, 0, 0, .14), 0 7px 34px 6px rgba(0, 0, 0, .12);
     top: 20px;
@@ -1348,6 +1353,10 @@ a {
     -webkit-line-clamp: 14;
     line-clamp: 14;
     -webkit-box-orient: vertical;
+}
+
+.terms-card__popup a {
+    color: var(--accent-color);
 }
 
 /* Quotes */

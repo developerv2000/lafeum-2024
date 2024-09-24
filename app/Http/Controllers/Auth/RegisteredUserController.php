@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'registered_ip_address' => $ip,
             'registered_browser' => $agent->browser(),
-            'registered_device' => $agent->device(),
+            'registered_device' => $this->getDeviceType($agent),
             'registered_country' => $country,
         ]);
 
@@ -54,5 +54,18 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         return redirect()->intended(route('home'));
+    }
+
+    protected function getDeviceType($agent)
+    {
+        if ($agent->isMobile()) {
+            return 'mobile';
+        } elseif ($agent->isTablet()) {
+            return 'tablet';
+        } elseif ($agent->isDesktop()) {
+            return 'laptop';
+        } else {
+            return 'unknown';
+        }
     }
 }
