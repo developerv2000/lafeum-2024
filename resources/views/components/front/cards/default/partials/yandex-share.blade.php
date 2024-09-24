@@ -4,6 +4,6 @@
         data-url="{{ $shareUrl }}"
         data-curtain data-shape="round" data-limit="0"
         data-more-button-type="short"
-        data-services="vkontakte,odnoklassniki,telegram,twitter,viber,whatsapp">
+        data-services="vkontakte,odnoklassniki,twitter,viber,whatsapp,telegram">
     </div>
 </div>

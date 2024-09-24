@@ -12,6 +12,7 @@
                 title="Авторы"
                 desc="Полный список всех авторов по алфавиту, а также есть возможность поиска."
                 include-search="true"
+                search-placeholder="Введите имя автора"
                 search-selector=".authors-list__link" />
         </div>
     </div>

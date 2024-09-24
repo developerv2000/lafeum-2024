@@ -1,7 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'knowledge-index',
     'includeRightbar' => true,
-    'title' => 'Области знаний'
+    'title' => 'Области знаний',
 ])
 
 @section('content')
@@ -12,6 +12,7 @@
                 title="Области знаний"
                 desc="В этой рубрике термины и комментарии специалистов классифицированы более развернуто по группам и направлениям."
                 include-search="true"
+                search-placeholder="Введите область знаний"
                 search-selector=".knowledge-blocks__subcategories-link" />
         </div>
     </section>

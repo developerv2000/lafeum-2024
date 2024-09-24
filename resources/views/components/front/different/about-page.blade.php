@@ -1,4 +1,4 @@
-@props(['title' => null, 'desc' => null, 'includeSearch' => false, 'searchSelector' => null])
+@props(['title' => null, 'desc' => null, 'includeSearch' => false, 'searchSelector' => null, 'searchPlaceholder' => null])
 
 <div {{ $attributes->merge(['class' => 'about-page']) }}>
     @if ($title)
@@ -10,6 +10,6 @@
     @endif
 
     @if ($includeSearch)
-        <x-front.different.local-search class="about-page__search" target-selector="{{ $searchSelector }}" placeholder="Введите область знаний" />
+        <x-front.different.local-search class="about-page__search" target-selector="{{ $searchSelector }}" placeholder="{{ $searchPlaceholder }}" />
     @endif
 </div>

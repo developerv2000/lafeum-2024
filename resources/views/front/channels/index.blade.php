@@ -12,6 +12,7 @@
                 title="Каналы"
                 desc="Каналы. Полный список всех авторов по алфавиту, а также есть возможность поиска."
                 include-search="true"
+                search-placeholder="Введите название канала"
                 search-selector=".channels-list__link" />
         </div>
     </div>
