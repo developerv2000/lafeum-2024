@@ -12,11 +12,40 @@
 @section('content')
     <h1 class="profile-edit__title main-title">Мой профиль</h1>
 
+    {{-- Ava --}}
+    <div class="profile-edit__update-ava styled-box">
+        <h2 class="secondary-title">Фото профиля</h2>
+
+        <div class="profile-edit__update-ava-row">
+            <img class="profile-edit__update-ava-image" src="{{ $user->photo_asset_path }}" alt="ava">
+
+            {{-- Update Ava --}}
+            <form class="update-ava-form" action="{{ route('profile.update.ava') }}" method="POST" enctype="multipart/form-data" data-on-submit="show-spinner">
+                @csrf
+                @method('PATCH')
+
+                <label class="update-ava-form__label button button--main">
+                    <input class="update-ava-form__input visually-hidden" type="file" name="photo" accept=".png, .jpg, .jpeg" required>
+                    <span class="update-ava-form__span">Изменить</span>
+                </label>
+            </form>
+
+            {{-- Delete Ava --}}
+            @if ($user->photo)
+                <form class="delete-ava-form" action="{{ route('profile.delete.ava') }}" method="POST" data-on-submit="show-spinner">
+                    @csrf
+                    @method('PATCH')
+                    <x-global.button style="cancel">Удалить</x-global.button>
+                </form>
+            @endif
+        </div>
+    </div>
+
     {{-- Personal data --}}
     <div class="profile-edit__personal-data styled-box">
-        <h2 class="profile-edit__form-title secondary-title">Личные данные</h2>
+        <h2 class="secondary-title">Личные данные</h2>
 
-        <form class="profile-edit__form form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" data-on-submit="show-spinner">
+        <form class="profile-edit__personal-data-form form" action="{{ route('profile.update') }}" method="POST" data-on-submit="show-spinner">
             @csrf
             @method('PATCH')
 
@@ -52,25 +81,20 @@
                 :options="$countries"
                 placeholder="Не выбрано" />
 
-            <x-form.input.default-input
-                label="Фото"
-                name="photo"
-                type="file" />
-
             <x-form.textarea.record-edit-textarea
                 label="Коротко о себе"
                 name="biography"
                 :record="$user" />
 
-            <x-global.button class="profile-edit__form-submit">Обновить</x-global.button>
+            <x-global.button>Обновить</x-global.button>
         </form>
     </div>
 
     {{-- Password update --}}
     <div class="profile-edit__password-update styled-box" id="password-update">
-        <h2 class="profile-edit__form-title secondary-title">Смена пароля</h2>
+        <h2 class="secondary-title">Смена пароля</h2>
 
-        <form class="profile-edit__form form" action="{{ route('password.update') }}" method="POST" data-on-submit="show-spinner">
+        <form class="profile-edit__password-update-form form" action="{{ route('password.update') }}" method="POST" data-on-submit="show-spinner">
             @csrf
             @method('PUT')
 
@@ -101,7 +125,7 @@
                 minlength="4"
                 required />
 
-            <x-global.button class="profile-edit__form-submit">Обновить</x-global.button>
+            <x-global.button>Обновить</x-global.button>
         </form>
     </div>
 @endsection

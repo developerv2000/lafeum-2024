@@ -67,6 +67,7 @@
     line-height: 1.8;
     color: var(--main-color);
 }
+
 /* ------------ /end Knowledge pages ------------ */
 
 
@@ -78,6 +79,7 @@
 .vocabulary-category__about .local-search__input {
     width: 100%;
 }
+
 /* ------------ /end Vocabulary pages ------------ */
 
 
@@ -85,7 +87,16 @@
 .authors-show__card-wrapper {
     margin-bottom: 20px;
 }
+
 /* ------------ /end Author pages ------------ */
+
+
+/* ------------ Channel pages ------------ */
+.channels-index .main {
+    overflow: hidden;
+}
+
+/* ------------ /end Channel pages ------------ */
 
 
 /* ------------ Contact page ------------ */
@@ -121,9 +132,6 @@
     border-radius: 8px;
 }
 
-.feedback-form__submit {
-    margin-top: 20px;
-}
 /* ------------ /end Contect page ------------ */
 
 
@@ -137,6 +145,7 @@
 .terms-of-use .styled-text-box h4 {
     font-size: 16px;
 }
+
 /* ------------ /end Privacy policy & Terms of use pages ------------ */
 
 
@@ -145,14 +154,39 @@
     align-items: normal;
 }
 
-.profile-edit__password-update {
-    margin-top: 20px;
+/* Ava */
+.profile-edit__update-ava-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.profile-edit__form-submit {
+.profile-edit__update-ava-image {
+    width: 84px;
+    border-radius: 50%;
+}
+
+.update-ava-form__label {
+    cursor: pointer;
+    line-height: 1.15;
+}
+
+/* Personal data */
+.profile-edit__personal-data {
+    margin: 20px 0;
+}
+
+.profile-edit__personal-data-form .button {
     align-self: flex-start;
     margin-top: 4px;
 }
+
+/* Password update */
+.profile-edit__password-update-form .button {
+    align-self: flex-start;
+    margin-top: 4px;
+}
+
 /* ------------ /end Profile edit page ------------ */
 
 
@@ -160,6 +194,7 @@
 .likes-index .main-wrapper {
     align-items: normal;
 }
+
 /* ------------ /end Likes page ------------ */
 
 
@@ -176,6 +211,7 @@
 .manage-folders {
     margin-top: 20px;
 }
+
 /* ------------ /end Favorite page ------------ */
 
 
@@ -183,5 +219,5 @@
 .folders-show .main-wrapper {
     align-items: normal;
 }
-/* ------------ /end Folder page ------------ */
 
+/* ------------ /end Folder page ------------ */

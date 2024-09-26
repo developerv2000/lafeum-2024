@@ -174,7 +174,7 @@ a {
 }
 
 .button--cancel {
-    background-color: #e0e0e0;
+    background-color: #f1f1f1;
 }
 
 .button--danger {
@@ -182,6 +182,14 @@ a {
     color: white;
 }
 
+/* Hovers */
+.button--main:hover {
+    box-shadow: 0 0 12px var(--main-color);
+}
+
+.button--cancel:hover {
+    box-shadow: 0 0 12px #d7d7d7;
+}
 /* ------------ /end Buttons ------------ */
 
 
@@ -978,7 +986,11 @@ a {
 
 .channels-list__link {
     line-height: 1.6;
-    display: flex;
+    width : 100%;
+    overflow:hidden;
+    display:inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &:hover {
         color: var(--main-color);
@@ -1157,6 +1169,7 @@ a {
     margin-top: 4px;
     font-style: italic;
     font-size: 13px;
+    color: #646464;
 }
 
 /* Like  */
@@ -1325,6 +1338,10 @@ a {
 
 .terms-card .default-card__body {
     padding: 8px 16px 16px;
+}
+
+.terms-card .default-card__body strong{
+    font-family: sans-serif;
 }
 
 /* Subterms popup */

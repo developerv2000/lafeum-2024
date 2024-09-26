@@ -7,7 +7,6 @@ use App\Models\Gender;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
 
 class ProfileUpdateRequest extends FormRequest
 {
@@ -24,7 +23,6 @@ class ProfileUpdateRequest extends FormRequest
             'birthday' => ['date', 'nullable'],
             'gender_id' => [Rule::exists(Gender::class, 'id'), 'nullable'],
             'country_id' => [Rule::exists(Country::class, 'id'), 'nullable'],
-            'photo' => ['file', File::types(['png', 'jpg', 'jpeg']), 'nullable'],
             'biography' => ['string', 'nullable'],
         ];
     }

@@ -31,6 +31,9 @@
             <form class="feedback-form form" action="{{ route('feedbacks.store') }}" method="POST" data-on-submit="show-spinner">
                 @csrf
 
+                {{-- reCAPTCHA v3 Token. Set automatically on form submit --}}
+                <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+
                 <x-form.input.default-input
                     label="Ваше имя"
                     name="name"

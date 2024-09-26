@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rules\File;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -33,6 +34,26 @@ class ProfileController extends Controller
         $request->user()->updateProfileFromRequest($request);
 
         return redirect()->back()->with('status', 'profile-updated');
+    }
+
+    public function updateAva(Request $request)
+    {
+        $request->validate([
+            'photo' => ['file', File::types(['png', 'jpg', 'jpeg']), 'required'],
+        ]);
+
+        $request->user()->updatePhoto($request);
+
+        return redirect()->back();
+    }
+
+    public function deleteAva(Request $request)
+    {
+        $user = $request->user();
+        $user->photo = null;
+        $user->save();
+
+        return redirect()->back();
     }
 
     // /**

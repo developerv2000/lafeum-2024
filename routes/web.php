@@ -34,6 +34,9 @@ Route::middleware(['guest.or.verified'])->group(function () {
     Route::controller(ProfileController::class)->prefix('/profile')->name('profile.')->middleware(['auth'])->group(function () {
         Route::get('/edit', 'edit')->name('edit');
         Route::patch('/update', 'update')->name('update');
+
+        Route::patch('/update-ava', 'updateAva')->name('update.ava');
+        Route::patch('/delete-ava', 'deleteAva')->name('delete.ava');
     });
 
     Route::controller(LikeController::class)->name('likes.')->prefix('/likes')->middleware(['auth'])->group(function () {

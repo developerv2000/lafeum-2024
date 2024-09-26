@@ -178,11 +178,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $this->sendEmailVerificationNotification();
         }
 
-        // Handle photo update
-        if ($request->hasFile('photo')) {
-            $this->updatePhoto($request);
-        }
-
         $this->save();
     }
 

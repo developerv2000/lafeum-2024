@@ -11,7 +11,7 @@
             <a class="footer__nav-link" href="{{ route('terms.of.use') }}">Пользовательское соглашение</a>
         </nav>
 
-        <p class="footer__copyright">© 2017 - 2023 — Lafeum. Все права защищены.</p>
+        <p class="footer__copyright">© 2017 - {{ date('Y') }} — Lafeum. Все права защищены.</p>
 
         <nav class="footer__socials">
             <a class="footer__socials-link" href="https://vk.com/club209177677" target="_blank">

@@ -19,19 +19,11 @@ const GET_VOCABULARY_BODY_URL = '/vocabulary/get-body'
 
 /*
 |--------------------------------------------------------------------------
-| Global variables
-|--------------------------------------------------------------------------
-*/
-
-var vocabulary = []; // Used in vocabulary index & category pages
-
-/*
-|--------------------------------------------------------------------------
 | DOM Elements
 |--------------------------------------------------------------------------
 */
 
-// Spinners
+// Spinner
 const spinner = document.querySelector('.spinner');
 const spinnableForms = document.querySelectorAll('[data-on-submit="show-spinner"]');
 
@@ -75,6 +67,14 @@ const destroyFolderIdInput = destroyFolderModal.querySelector('input[name="id"]'
 const rootStyles = getComputedStyle(document.documentElement);
 const defaultCardCollapsedTextMaxHeight = rootStyles.getPropertyValue('--default-card-collapsed-text-max-height').trim();
 
+// Update ava form elements
+const updateAvaForm = document.querySelector('.update-ava-form');
+const updateAvaInput = document.querySelector('.update-ava-form__input');
+
+// Feedback form elements
+const feedbackForm = document.querySelector('.feedback-form');
+const recaptchaToken = document.querySelector('#recaptcha_token');
+
 /*
 |--------------------------------------------------------------------------
 | Event Listeners
@@ -99,6 +99,10 @@ showModalButtons.forEach((button) => {
 hideActiveModalButtons.forEach((button) => {
     button.addEventListener('click', hideAllActiveModals);
 });
+
+updateAvaInput?.addEventListener('change', handleUpdateAvaInputChange);
+
+feedbackForm?.addEventListener('submit', handleFeedbackFormSubmit);
 
 // Initialize modals
 showVideoModalButtons.forEach((button) => {
@@ -190,6 +194,20 @@ vocabularyList?.addEventListener('mouseover', (evt) => {
 | Functions
 |--------------------------------------------------------------------------
 */
+
+function handleFeedbackFormSubmit(evt) {
+    evt.preventDefault();
+
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LeTtHcpAAAAANDcYSO5J8Kbpd6tYjERQ4-vocAG', { action: 'submit' }).then(function(token) {
+            // Add the generated reCAPTCHA token to the hidden input field
+            recaptchaToken.value = token;
+
+            // Once reCAPTCHA is validated, submit the form programmatically
+            feedbackForm.submit();
+        });
+    });
+}
 
 function handleScroll() {
     const isScrolledPastThreshold = window.scrollY > SCROLL_THRESHOLD;
@@ -441,6 +459,19 @@ function showRenameFolderModal(folderId, folderName) {
 function destroyRenameFolderModal(folderId) {
     destroyFolderIdInput.value = folderId;
     showModal(destroyFolderModal);
+}
+
+function handleUpdateAvaInputChange(evt) {
+    evt.preventDefault();
+    showSpinner();
+
+    const file = evt.target.files?.[0];
+
+    if (file) {
+        updateAvaForm.submit();
+    } else {
+        hideSpinner();
+    }
 }
 
 /**
