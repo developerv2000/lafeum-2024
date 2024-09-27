@@ -9,7 +9,7 @@
         @endif
 
         @if ($includeSearch)
-            <x-front.different.local-search target-selector=".leftbar__nav-link" placeholder="{{ $searchPlaceholder }}" />
+            <x-front.different.local-search target-selector=".leftbar__nav-link" placeholder="{{ $searchPlaceholder }}" labeled="true" />
         @endif
 
         {{ $slot }}

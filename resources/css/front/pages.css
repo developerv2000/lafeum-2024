@@ -72,11 +72,11 @@
 
 
 /* ------------ Vocabulary pages ------------ */
-.vocabulary-index__about .local-search__input {
+.vocabulary-index__about .local-search__input-wrapper {
     width: 100%;
 }
 
-.vocabulary-category__about .local-search__input {
+.vocabulary-category__about .local-search__input-wrapper {
     width: 100%;
 }
 

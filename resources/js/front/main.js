@@ -75,6 +75,9 @@ const updateAvaInput = document.querySelector('.update-ava-form__input');
 const feedbackForm = document.querySelector('.feedback-form');
 const recaptchaToken = document.querySelector('#recaptcha_token');
 
+// Local search elements
+const localSearchClearButtons = document.querySelectorAll('.local-search__clear-button');
+
 /*
 |--------------------------------------------------------------------------
 | Event Listeners
@@ -187,6 +190,10 @@ termCardsBodyLinks.forEach((link) => {
 
 vocabularyList?.addEventListener('mouseover', (evt) => {
     handleVocabularyListHover(evt);
+});
+
+localSearchClearButtons.forEach((button) => {
+    button.addEventListener('click', handleLocalSearchClearing);
 });
 
 /*
@@ -472,6 +479,22 @@ function handleUpdateAvaInputChange(evt) {
     } else {
         hideSpinner();
     }
+}
+
+function handleLocalSearchClearing(evt) {
+    const localSearch = evt.target.parentElement;
+    const input = localSearch.querySelector('.local-search__input');
+
+    input.value = '';
+    input.setAttribute('value', '');
+
+    // Trigger local searchs input 'onInput' event to display hidden elements
+    const event = new Event('input', {
+        bubbles: true, // Allows event to bubble up through the DOM
+        cancelable: true // Allows the event to be canceled
+    });
+
+    input.dispatchEvent(event);
 }
 
 /**
