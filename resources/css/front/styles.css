@@ -279,7 +279,7 @@ a {
     gap: 16px;
 }
 
-.header__navbar .navbar_link {
+.header__navbar .navbar__link {
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
@@ -288,17 +288,23 @@ a {
     text-decoration: none;
 }
 
-.header__navbar .navbar_link:hover {
+.header__navbar .navbar__link:hover {
     color: #A4C2FF;
 }
 
 /* Only mobile visible */
-.header__navbar .navbar_link:first-child {
+.menu-viewer {
+    display: none;
+    color: white;
+}
+
+/* Only mobile visible */
+.header__navbar .navbar__link:first-child {
     display: none;
 }
 
 /* Only mobile visible */
-.header__navbar .navbar_link span {
+.header__navbar .navbar__link span {
     display: none;
 }
 
@@ -364,6 +370,71 @@ a {
     width: 100%;
 }
 
+/* Mobile menu */
+.mobile-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    visibility: hidden;
+}
+
+.mobile-menu--visible {
+    visibility: visible;
+}
+
+.mobile-menu__overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000063;
+}
+
+.mobile-menu__navbar-wrapper {
+    width: 256px;
+    background-color: white;
+    height: 100%;
+    box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2), 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12);
+    padding: 12px 8px;
+    position: relative;
+    transform: translateX(-100%);
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.mobile-menu--visible .mobile-menu__navbar-wrapper {
+    transform: translateX(0%);
+}
+
+.menu-dismiss {
+    position: absolute;
+    right: 12px;
+    margin-top: 4px;
+    color: grey;
+}
+
+.mobile-menu__navbar {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-menu__navbar .navbar__link {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 10px 12px;
+    font-size: 13px;
+}
+
+.mobile-menu__navbar .navbar__link .material-symbols-outlined {
+    font-size: 21px;
+    font-variation-settings: var(--filled-material-symbols-font-variation);
+    color: #6a6666;
+}
 /* ------------ /end Header ------------ */
 
 

@@ -27,6 +27,10 @@ const GET_VOCABULARY_BODY_URL = '/vocabulary/get-body'
 const spinner = document.querySelector('.spinner');
 const spinnableForms = document.querySelectorAll('[data-on-submit="show-spinner"]');
 
+// Mobile menu
+const mobileMenu = document.querySelector('.mobile-menu');
+const mobileMenuTogglers = document.querySelectorAll('[data-click-action="toggle-mobile-menu"]');
+
 // Scroll buttons
 const scrollButtons = document.querySelector('.scroll-buttons');
 const scrollTopBtn = document.querySelector('.scroll-buttons__top');
@@ -86,6 +90,10 @@ const localSearchClearButtons = document.querySelectorAll('.local-search__clear-
 
 spinnableForms.forEach((form) => {
     form.addEventListener('submit', showSpinner);
+});
+
+mobileMenuTogglers.forEach((button) => {
+    button.addEventListener('click', toggleMobileMenu);
 });
 
 window.addEventListener('scroll', handleScroll);
@@ -201,6 +209,11 @@ localSearchClearButtons.forEach((button) => {
 | Functions
 |--------------------------------------------------------------------------
 */
+
+function toggleMobileMenu(evt) {
+    mobileMenu.classList.toggle('mobile-menu--visible');
+    evt.stopPropagation();
+}
 
 function handleFeedbackFormSubmit(evt) {
     evt.preventDefault();

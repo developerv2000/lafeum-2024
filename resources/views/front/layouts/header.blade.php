@@ -4,6 +4,10 @@
             <img class="logo__image" src="{{ asset('img/main/logo-light-ru.png') }}" alt="Лафеюм лого">
         </a>
 
+        {{-- Only tablet & mobile --}}
+        <x-global.material-symbol-outlined class="menu-viewer" icon="menu" data-click-action="toggle-mobile-menu" />
+        <x-front.different.mobile-menu />
+
         <x-front.different.navbar class="header__navbar" />
 
         @guest
