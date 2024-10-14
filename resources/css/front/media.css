@@ -8,19 +8,43 @@
 
     .leftbar {
         order: 1;
+        /* 50% - .main-wrapper: gap */
+        max-width: calc(50% - 12px);
+        min-width: unset;
         width: 340px;
-        min-width: auto;
+    }
+
+    .account-leftbar {
+        display: none;
     }
 
     .rightbar {
         order: 2;
+        /* 50% - .main-wrapper: gap */
+        max-width: calc(50% - 12px);
         width: 340px;
-        min-width: auto;
+        min-width: unset;
     }
 
     .main {
         order: 3;
         width: 100%;
+    }
+
+    .scroll-buttons {
+        bottom: 28px;
+        right: 28px;
+    }
+
+    /* Different components */
+    /* Modal */
+    .modal__inner {
+        padding: 40px;
+    }
+
+    /* 90vh - .modal__inner: padding-top + padding-bottom */
+    .modal__body {
+        max-height: calc(90vh - 80px);
     }
 
     /* Header */
@@ -39,4 +63,56 @@
     .menu-viewer {
         display: block;
     }
+
+    /* Page rightbars */
+    .knowledge-index .rightbar,
+    .authors-index .rightbar,
+    .channels-index .rightbar,
+    .videos-show .rightbar,
+    .quotes-show .rightbar,
+    .terms-show .rightbar,
+    .about-us .rightbar,
+    .terms-of-use .rightbar,
+    .privacy-policy .rightbar {
+        display: none;
+    }
+
+    /* Home page */
+    .intro__logo {
+        width: 140px;
+        margin: 12px 0 28px;
+    }
+
+    /* Knowledge pages */
+    .knowledge-blocks__subcategories-link {
+        width: auto;
+    }
+
+    /* Videos page */
+    .youtube-video-modal .modal__box {
+        width: 100%;
+    }
+
+    .youtube-video-modal__iframe-wrapper iframe {
+        height: 60vh;
+    }
+
+    /* Photos page */
+    .photos-list {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    /* Contacts page */
+    .contacts__row {
+        gap: 40px;
+    }
+
+    /* 50% - .contacts__row: gap / 2 */
+    .feedback {
+        min-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 640px) {
+    /* Main layout */
 }
