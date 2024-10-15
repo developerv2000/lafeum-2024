@@ -67,6 +67,7 @@ collapseTogglers.forEach(toggler => {
         }
 
         collapse.classList.toggle('collapse--open');
+        toggler.classList.toggle('collapse-button--active');
 
         // Remove the inline height style after the transition duration (300ms)
         removeElementStylePropertyDelayed(collapse, 'height', 300);

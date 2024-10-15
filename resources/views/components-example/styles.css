@@ -35,6 +35,24 @@
 
 
 /* ------------ Collapse ------------ */
+.collapse-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.collapse-button__text {
+    margin: 0;
+}
+
+.collapse-button__icon {
+    transition: transform 0.3s ease;
+}
+
+.collapse-button--active .collapse-button__icon {
+    transform: rotate(180deg);
+}
+
 .collapse {
     overflow: hidden;
     transition: all 0.3s ease;
@@ -65,9 +83,12 @@
     cursor: pointer;
 }
 
+.accordion__button-icon {
+    transition: transform 0.3s ease;
+}
+
 .accordion-item--open .accordion__button-icon {
     transform: rotate(180deg);
-    transition: transform 0.3s ease;
 }
 
 /* ------------ /end Accordion ------------ */

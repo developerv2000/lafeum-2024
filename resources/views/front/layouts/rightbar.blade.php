@@ -1,6 +1,12 @@
-    <aside class="rightbar">
-        <h3 class="main-title rightbar__title">Материал дня</h3>
+<aside class="rightbar">
+    {{-- Collapse button --}}
+    <button class="collapse-button rightbar__collapse-button" data-click-action="toggle-collapse" data-collapse-selector=".rightbar__collapse">
+        <h3 class="main-title collapse-button__text">Материал дня</h3>
+        <span class="material-symbols-outlined collapse-button__icon">keyboard_arrow_down</span>
+    </button>
 
+    {{-- Collapse --}}
+    <div class="collapse rightbar__collapse">
         <div class="rightbar__body">
             {{-- Quote --}}
             <div class="rightbar__item">
@@ -8,7 +14,7 @@
                     Цитата дня
                     <x-global.material-symbol-outlined icon="more_horiz" />
                 </h3>
-
+ 
                 <div class="rightbar__quote">
                     <div class="rightbar__quote-header">
                         <h4 class="rightbar__quote-author">
@@ -66,4 +72,5 @@
                 <x-front.different.rightbar-more link="{{ route('photos.index') }}" />
             </div>
         </div>
-    </aside>
+    </div>
+</aside>

@@ -1,4 +1,18 @@
+@media (min-width: 581px) {
+
+    /* Set leftbar collapse always opened for PC & Tablet */
+    .leftbar__collapse:not(.collapse--open) {
+        height: auto !important;
+    }
+
+    /* Set rightbar collapse always opened for PC & Tablet */
+    .rightbar__collapse:not(.collapse--open) {
+        height: auto !important;
+    }
+}
+
 @media (max-width: 1199px) {
+
     /* Main layout */
     .main-wrapper {
         max-width: 940px;
@@ -84,6 +98,10 @@
     }
 
     /* Knowledge pages */
+    .knowledge-blocks__subcategories-nav {
+        column-count: 2;
+    }
+
     .knowledge-blocks__subcategories-link {
         width: auto;
     }
@@ -113,6 +131,234 @@
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 580px) {
+
     /* Main layout */
+    .main-wrapper {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .default-list {
+        gap: 20px;
+    }
+
+    .styled-text-box {
+        padding: 20px 20px 12px;
+    }
+
+    /* Components */
+    /* Dropdown */
+    /* Remove overflow-x for mobiles (x-overflowed on favorite-dropdown) */
+    .favorite-dropdown .dropdown__content {
+        display: none;
+    }
+
+    .favorite-dropdown.dropdown--active .dropdown__content {
+        display: block;
+    }
+
+    /* Modal */
+    .modal__inner {
+        padding: 20px;
+    }
+
+    .modal__box {
+        width: 100%;
+        min-width: unset;
+        max-width: calc(100vw - 20px);
+    }
+
+    .modal__header {
+        padding: 8px 20px;
+    }
+
+    .modal__title {
+        font-size: 16px;
+    }
+
+    .modal__body {
+        padding: 12px;
+    }
+
+    .youtube-video-modal__iframe-wrapper iframe {
+        height: 50vh;
+    }
+
+    /* Leftbar & Rightbar */
+    .rightbar,
+    .leftbar {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .rightbar {
+        margin-top: -8px;
+    }
+
+    .rightbar__collapse-button,
+    .leftbar__collapse-button {
+        width: 100%;
+        background-color: white;
+        padding: 16px 28px;
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+
+    .rightbar__collapse-button .collapse-button__text,
+    .leftbar__collapse-button .collapse-button__text {
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .rightbar__collapse-button .collapse-button__icon,
+    .leftbar__collapse-button .collapse-button__icon {
+        display: inline;
+    }
+
+    .rightbar__body,
+    .leftbar__body {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    .leftbar__body {
+        padding-top: 0;
+    }
+
+    .leftbar__subtitle {
+        display: none;
+    }
+
+    .leftbar .local-search {
+        padding-top: 0;
+    }
+
+
+    /* Header */
+    .header__navbar {
+        display: none;
+    }
+
+    .scroll-buttons {
+        bottom: 24px;
+        right: 24px;
+    }
+
+    .header__inner {
+        width: 100%;
+        padding: 12px 20px;
+        justify-content: space-between;
+    }
+
+    .header__logo .logo__image {
+        width: 60px;
+    }
+
+    .profile-dropdown__link,
+    .profile-dropdown__button {
+        min-height: 32px;
+    }
+
+    /* Footer */
+    .footer__nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Home page */
+    .intro__logo {
+        margin: 0 0 20px;
+    }
+
+    .intro__inner {
+        padding: 0;
+    }
+
+    .intro__title {
+        max-width: 100%;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    .intro__subtitle {
+        margin-bottom: 20px;
+    }
+
+    /* Knowledge pages */
+    .knowledge-blocks__subcategories-nav {
+        column-count: 1;
+    }
+
+    /* Vocabulary page */
+    .vocabulary-list {
+        flex-direction: column;
+    }
+
+    .vocabulary-list__part {
+        width: 100%;
+    }
+
+    /* Author pages */
+    .authors-list {
+        flex-direction: column;
+    }
+
+    .authors-list__part {
+        width: 100%;
+    }
+
+    .authors-card__title {
+        font-size: 20px
+    }
+
+    /* Video pages */
+    .videos-card__top-row {
+        flex-direction: column;
+    }
+
+    .videos-card__thumb,
+    .videos-card__title {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .videos-card__title {
+        font-size: 16px;
+    }
+
+    /* Channel pages */
+    .channels-list {
+        flex-direction: column;
+    }
+
+    .channels-list__part {
+        width: 100%;
+    }
+
+    /* Photo pages */
+    .photos-list {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Contacts page */
+    .contacts__row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .contacts__desc {
+        margin-bottom: 20px;
+    }
+
+    .feedback-form {
+        padding: 12px 20px;
+    }
+
+    /* Profile page */
+    .profile-edit__update-ava-row {
+        flex-direction: column;
+    }
 }

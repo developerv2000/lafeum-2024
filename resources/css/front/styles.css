@@ -655,8 +655,21 @@ a {
     min-width: 280px;
 }
 
-.leftbar__title {
+/* Collapse button */
+.leftbar__collapse-button {
     margin-bottom: 16px;
+    border: none;
+    padding: 0;
+    /* Remove cursor: pointer, because collapse is always opened for PC */
+    cursor: text;
+}
+
+.leftbar__collapse-button .main-title {
+    margin-bottom: 0;
+}
+
+.leftbar__collapse-button .collapse-button__icon {
+    display: none;
 }
 
 .leftbar__body {
@@ -848,10 +861,24 @@ a {
     min-width: 280px;
 }
 
-.rightbar__title {
+/* Collapse button */
+.rightbar__collapse-button {
     margin-bottom: 16px;
+    border: none;
+    padding: 0;
+    /* Remove cursor: pointer, because collapse is always opened for PC */
+    cursor: text;
 }
 
+.rightbar__collapse-button .main-title {
+    margin-bottom: 0;
+}
+
+.rightbar__collapse-button .collapse-button__icon {
+    display: none;
+}
+
+/* Rightbar body */
 .rightbar__body {
     border-radius: var(--theme-border-radius);
     background-color: white;

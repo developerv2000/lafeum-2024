@@ -79,6 +79,7 @@ function initCollapsibles() {
             }
 
             collapse.classList.toggle('collapse--open');
+            toggler.classList.toggle('collapse-button--active');
         });
     });
 }
