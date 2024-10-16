@@ -115,3 +115,4 @@ Route::middleware(['guest.or.verified'])->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/dashboard.php';
