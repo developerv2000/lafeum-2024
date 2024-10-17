@@ -8,10 +8,10 @@
 @import '../../../public/plugins/normalize.css';
 
 /* Form */
-@import 'form.css';
+@import '../global/form.css';
 
 /* Components */
-@import 'components.css';
+@import '../global/components.css';
 
 /* Base styles */
 @import 'styles.css';

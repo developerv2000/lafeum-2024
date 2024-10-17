@@ -16,7 +16,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard
     Route::redirect('/', '/dashboard/quotes');
 
     Route::controller(QuoteController::class)->prefix('/quotes')->name('quotes.')->group(function () {
-        CrudRouteGenerator::defineAllDefaultRoutes();
+        CrudRouteGenerator::defineDefaultRoutesExcept(['index']);   
+        Route::get('/', 'dashboardIndex');
+        Route::get('/{record}', 'dashboardShow');
     });
 
     Route::controller(AuthorController::class)->prefix('/authors')->name('authors.')->group(function () {
