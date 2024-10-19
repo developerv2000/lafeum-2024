@@ -4,11 +4,14 @@
 /* Material Symbols */
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
+/* Normalize CSS */
+@import '../../../public/plugins/normalize.css';
+
 /* Selectize */
-@import '../../public/plugins/selectize/selectize.css';
+@import '../../../public/plugins/selectize/selectize.css';
 
 /* Simditor */
-@import '../../public/plugins/simditor/simditor.css';
+@import '../../../public/plugins/simditor/simditor.css';
 
 /* Form */
 @import '../global/form.css';

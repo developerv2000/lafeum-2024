@@ -72,7 +72,7 @@ Route::middleware(['guest.or.verified'])->group(function () {
         });
 
         Route::prefix('/quote')->group(function () {
-            CrudRouteGenerator::defineDefaultRoutesOnly(['showByID']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['show']);
         });
     });
 
@@ -90,12 +90,12 @@ Route::middleware(['guest.or.verified'])->group(function () {
         });
 
         Route::prefix('/video')->group(function () {
-            CrudRouteGenerator::defineDefaultRoutesOnly(['showByID']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['show']);
         });
     });
 
     Route::controller(ChannelController::class)->name('channels.')->prefix('/channels')->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'showBySlug']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'show'], 'slug');
     });
 
     Route::controller(TermController::class)->name('terms.')->group(function () {
@@ -105,7 +105,7 @@ Route::middleware(['guest.or.verified'])->group(function () {
         });
 
         Route::prefix('/term')->group(function () {
-            CrudRouteGenerator::defineDefaultRoutesOnly(['showByID']);
+            CrudRouteGenerator::defineDefaultRoutesOnly(['show']);
         });
     });
 

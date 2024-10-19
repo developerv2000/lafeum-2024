@@ -9,6 +9,12 @@ use App\Models\QuoteCategory;
 
 class QuoteController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Front actions
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Display a listing of the resource.
      */
@@ -34,6 +40,17 @@ class QuoteController extends Controller
     public function show(Quote $record)
     {
         return view('front.quotes.show', compact('record'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard actions
+    |--------------------------------------------------------------------------
+    */
+
+    public function dashboardIndex()
+    {
+        return view('dashboard.quotes.index');
     }
 
     /**

@@ -7,28 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <title>Админка — {{ env('APP_NAME') }}</title>
 
+    {{-- Noindex tags --}}
     <x-global.noindex-tags />
 
-    {{-- All css plugins are included in main.css file --}}
+    {{-- All css plugins are included inside main.css --}}
     @vite('resources/css/dashboard/main.css')
 </head>
 
 <body class="body {{ $pageName }}">
-    @include('dashboard.layouts.leftbar')
     @include('dashboard.layouts.header')
+    {{-- @include('dashboard.layouts.leftbar') --}}
 
     <main class="main">
         @yield('content')
     </main>
 
+    {{-- Spinner --}}
     <x-global.spinner />
 
     {{-- JQuery --}}
-    <script src="{{ asset('plugins/jquery/jquery-3.6.4.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-3.6.4.min.js') }}"></script>
 
     {{-- Selectize --}}
     <script src="{{ asset('plugins/selectize/selectize.min.js') }}"></script>
@@ -44,7 +46,7 @@
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
     {{-- JQuery Nested Sortable --}}
-    <script src="{{ asset('plugins/jq-nested-sortable/jq-nested-sortable.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-nested-sortable.js') }}"></script>
 
     @vite('resources/js/dashboard/main.js')
 </body>

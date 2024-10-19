@@ -7,11 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     {{-- blade-formatter-disable-next-line --}}
     <title>@isset($title){{ $title . ' — ЛАФЕЮМ' }}@else{{ 'ЛАФЕЮМ' }}@endisset</title>
 
-    {{-- !!!!!!!!!!!!!!!!!!!!!!!!!! Remove after development !!!!!!!!!!!!!!!!!!!!!!!!!! --}}
-    <x-global.noindex-tags />
+    {{-- Noindex on non-production --}}
+    @unless (app()->environment('production'))
+        <x-global.noindex-tags />
+    @endunless
 
     {{-- Noindex tags --}}
     @if (isset($noindex) && $noindex)
@@ -55,4 +59,3 @@
 </body>
 
 </html>
-    
