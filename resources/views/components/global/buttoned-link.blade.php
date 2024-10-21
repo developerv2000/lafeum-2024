@@ -1,9 +1,9 @@
-@props(['style' => 'main', 'icon' => null])
+@props(['link', 'style' => 'main', 'icon' => null])
 
-<button {{ $attributes->merge(['class' => 'button button--' . $style]) }}>
+<a {{ $attributes->merge(['class' => 'button button--' . $style]) }} href="{{ $link }}">
     @if ($icon)
         <x-global.material-symbol-outlined class="button__icon" :icon="$icon" />
     @endif
 
     <span class="button__text">{{ $slot }}</span>
-</button>
+</a>

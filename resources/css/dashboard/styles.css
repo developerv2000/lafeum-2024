@@ -19,7 +19,7 @@ body {
     --theme-default-hover-background-color: #eff4fb;
 
     --leftbar-width: 240px;
-    --header-height: 64px;
+    --header-height: 56px;
 }
 
 body::-webkit-scrollbar,
@@ -108,6 +108,7 @@ a {
     text-decoration: none;
     border: none;
     border-radius: 8px;
+    cursor: pointer;
     transition: 0.3s ease;
 }
 
@@ -187,7 +188,7 @@ a {
 }
 
 .header__inner {
-    padding: 12px 0;
+    padding: 8px 0;
     display: flex;
 }
 
@@ -207,6 +208,7 @@ a {
 .header__logo-text {
     margin-bottom: 0;
     font-size: 24px;
+    font-weight: 500;
     text-transform: uppercase;
 }
 
@@ -259,6 +261,7 @@ a {
 .profile-dropdown__button .material-symbols-outlined {
     font-size: 20px;
 }
+
 /* ------------ /end Header ------------ */
 
 
@@ -342,7 +345,7 @@ a {
 
 .leftbar__collapse-link {
     padding: 12px 16px 12px 56px;
-    border-radius: 8px;
+    border-radius: var(--theme-border-radius);
     transition: 0.3s;
 }
 
@@ -353,4 +356,139 @@ a {
 .leftbar__collapse-link:not(.leftbar__collapse-link--active):hover {
     background-color: white;
 }
+
 /* ------------ /end Leftbar ------------ */
+
+
+/* ------------ Form ------------ */
+.input,
+.textarea,
+.select {
+    border-radius: 20px;
+}
+
+/* ------------ /end Form ------------ */
+
+
+/* ------------ Searches ------------ */
+.keyworded-search {
+    margin-bottom: 20px;
+}
+
+.keyworded-search__form {
+    position: relative;
+}
+
+.keyworded-search__input {
+    background-color: white;
+    padding: 12px 44px 12px 20px;
+    border-color: transparent;
+}
+
+.keyworded-search__icon {
+    position: absolute;
+    right: 16px;
+    top: -4px;
+    transform: translateY(50%);
+    color: var(--lighter-text-color);
+    pointer-events: none;
+}
+
+/* ------------ /end Searches ------------ */
+
+
+/* ------------ Main ------------ */
+.main {
+    padding-top: 28px;
+    padding-bottom: 20px;
+    padding-left: calc(var(--leftbar-width) + 28px);
+    padding-right: 28px;
+}
+
+/* ------------ /end Main ------------ */
+
+/* ------------ Content ------------ */
+.main-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* ------------ /end Content ------------ */
+
+
+/* ------------ Table actions ------------ */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.toolbar__button {
+    padding: 6px 20px;
+    border: 1px solid #c2ccd9;
+    background-color: transparent;
+    color: var(--text-color);
+
+    &:hover {
+        background-color: var(--main-color);
+        color: white;
+    }
+}
+
+.toolbar__button .button__icon {
+    font-size: 20px;
+}
+
+/* ------------ /end Table actions ------------ */
+
+
+/* ------------ Main talbe ------------ */
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Thead */
+.main-table thead {
+    position: sticky;
+    top: 0;
+    text-align: left;
+    font-size: 14px;
+    background-color: #d9e4ff;
+}
+
+.main-table th {
+    vertical-align: middle;
+    padding: 8px;
+    font-weight: 400;
+    word-break: break-word;
+}
+
+.main-table thead a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+}
+
+.main-table thead a.active {
+    font-weight: 500;
+    color: var(--theme-default-text-hover-color);
+}
+
+.main-table thead a .material-symbols-outlined {
+    font-size: 14px;
+}
+
+.main-table .th__iconed-title {
+    font-size: 22px;
+}
+
+.main-table .th__select-all {
+    cursor: pointer;
+}
+/* ------------ /end Main table ------------ */
