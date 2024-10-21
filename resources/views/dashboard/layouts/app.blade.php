@@ -20,7 +20,7 @@
 
 <body class="body {{ $pageName }}">
     @include('dashboard.layouts.header')
-    {{-- @include('dashboard.layouts.leftbar') --}}
+    @include('dashboard.layouts.leftbar')
 
     <main class="main">
         @yield('content')

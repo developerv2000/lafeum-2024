@@ -9,7 +9,7 @@
             Мой профиль
         </a>
 
-        <a class="profile-dropdown__link" href="{{ route('likes.index') }}">
+        <a class="profile-dropdown__link" href="{{ route('home') }}">
             <x-global.material-symbol-outlined icon="language" />
             Перейти на сайт
         </a>

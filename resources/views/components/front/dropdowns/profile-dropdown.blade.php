@@ -4,6 +4,11 @@
     </x-slot:button>
 
     <x-slot:content>
+        <a class="profile-dropdown__link" href="{{ route('dashboard.quotes.index') }}" target="_blank">
+            <x-global.material-symbol-outlined icon="settings" filled="true" />
+            Админка
+        </a>
+
         <a class="profile-dropdown__link" href="{{ route('profile.edit') }}">
             <x-global.material-symbol-outlined icon="account_circle" filled="true" />
             Мой профиль
