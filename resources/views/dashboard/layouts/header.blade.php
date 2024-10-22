@@ -1,9 +1,9 @@
 <header class="header">
     <div class="header__inner">
         {{-- Logo --}}
-        <div class="header__logo">
-            <x-global.material-symbol-outlined class="header__logo-icon" icon="dashboard" filled="true" />
-            <h4 class="header__logo-text">{{ env('APP_NAME') }}</h4>
+        <div class="header__logo-wrapper">
+            <x-global.material-symbol-outlined class="header__body-width-toggler" icon="hide" title="Изменить максимальную ширину" />
+            <h4 class="header__logo">{{ env('APP_NAME') }}</h4>
         </div>
 
         {{-- Menu --}}

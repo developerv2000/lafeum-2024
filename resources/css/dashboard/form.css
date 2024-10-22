@@ -1,0 +1,126 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Label */
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label__text {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.label__required {
+    color: var(--theme-danger-color);
+}
+
+/* Form Group */
+.form-group__input-container {
+    position: relative;
+}
+
+.form-group__error-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 8px;
+    display: none;
+    font-size: 20px;
+    color: var(--theme-danger-color);
+}
+
+.form-group--error .form-group__error-icon {
+    display: inline-block;
+}
+
+.form-group__error-message:empty {
+    display: none;
+}
+
+.form-group__error-message {
+    margin: 8px 0 0;
+    font-size: 12px;
+    color: var(--theme-danger-color);
+}
+
+/* Input & Textarea */
+.input,
+.textarea,
+.select {
+    width: 100%;
+    display: block;
+    padding: 8px 16px;
+    font-size: 15px;
+    background-color: transparent;
+    border: var(--theme-border);
+    border-radius: var(--theme-border-radius);
+    transition: var(--theme-transition);
+    outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    opacity: 0.7;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: var(--theme-main-color);
+}
+
+.form-group--error .input:focus,
+.form-group--error .textarea:focus,
+.form-group--error .select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(230, 55, 87, .25);
+}
+
+.form-group--error .input {
+    padding-right: 40px;
+}
+
+.form-group--error .input,
+.form-group--error .textarea,
+.form-group--error .select {
+    border-color: var(--theme-danger-color);
+}
+
+/* File input */
+.input[type="file"]::-webkit-file-upload-button,
+.input[type="file"]::file-selector-button {
+    display: none;
+}
+
+/* Checkbox */
+.checkbox {
+    width: 1em;
+    height: 1em;
+    margin-top: 0.25em;
+    font-size: 16px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: var(--theme-border);
+    border-radius: 4px;
+    appearance: none;
+    print-color-adjust: exact;
+    cursor: pointer;
+}
+
+.checkbox:checked {
+    background-color: var(--theme-main-color);
+    border-color: var(--theme-main-color);
+    background-image: url(/img/form/checkbox-checked.svg);
+}
+
+.checkbox:focus {
+    box-shadow: 0 0 0 0.25rem rgba(44, 123, 229, .25);
+}

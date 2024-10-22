@@ -13,11 +13,11 @@
 /* Simditor */
 @import '../../../public/plugins/simditor/simditor.css';
 
-/* Form */
-@import '../global/form.css';
-
 /* Components */
 @import '../global/components.css';
+
+/* Form */
+@import 'form.css';
 
 /* Base styles */
 @import 'styles.css';

@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Http\Requests\StoreQuoteRequest;
 use App\Http\Requests\UpdateQuoteRequest;
 use App\Models\QuoteCategory;
+use Illuminate\Http\Request;
 
 class QuoteController extends Controller
 {
@@ -48,9 +49,12 @@ class QuoteController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function dashboardIndex()
+    public function dashboardIndex(Request $request)
     {
-        return view('dashboard.quotes.index');
+        Quote::AddModelQueryParamsToRequest($request);
+        $records = Quote::getFinalizedRecordsForDashboard($request);
+
+        return view('dashboard.quotes.index', compact('records'));
     }
 
     /**
