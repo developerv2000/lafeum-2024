@@ -19,12 +19,21 @@
 </head>
 
 <body class="body {{ $pageName }}">
-    @include('dashboard.layouts.header')
-    @include('dashboard.layouts.leftbar')
+    <div class="body__inner">
+        @include('dashboard.layouts.header')
 
-    <main class="main">
-        @yield('content')
-    </main>
+        <div class="main-wrapper">
+            @include('dashboard.layouts.leftbar')
+
+            <main class="main">
+                @yield('content')
+            </main>
+
+            @hasSection('rightbar')
+                @yield('rightbar')
+            @endif
+        </div>
+    </div>
 
     {{-- Spinner --}}
     <x-global.spinner />

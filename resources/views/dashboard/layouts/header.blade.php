@@ -3,7 +3,7 @@
         {{-- Logo --}}
         <div class="header__logo-wrapper">
             <x-global.material-symbol-outlined class="header__body-width-toggler" icon="hide" title="Изменить максимальную ширину" />
-            <h4 class="header__logo">{{ env('APP_NAME') }}</h4>
+            <h4 class="header__logo-text">{{ env('APP_NAME') }}</h4>
         </div>
 
         {{-- Menu --}}

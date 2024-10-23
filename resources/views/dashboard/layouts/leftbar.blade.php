@@ -2,6 +2,8 @@
     <div class="leftbar__inner">
         {{-- Main --}}
         <div class="leftbar__section leftbar__section--main">
+            <p class="leftbar__section-title">Основное</p>
+
             <nav class="leftbar__nav">
                 {{-- Quotes --}}
                 <div class="leftbar__collapse-wrapper">
