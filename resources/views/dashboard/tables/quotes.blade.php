@@ -29,8 +29,9 @@
         @foreach ($records as $record)
             <tr>
                 <x-dashboard.table.td.checkbox :value="$record->value" />
+                <x-dashboard.table.td.view :link="route('quotes.show', $record->id)" />
 
-                <td></td>
+                {{-- <td>{{ $record->body }}</td> --}}
                 <td></td>
                 <td></td>
                 <td></td>

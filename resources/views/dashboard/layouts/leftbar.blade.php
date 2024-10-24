@@ -297,7 +297,7 @@
                     @csrf
 
                     <button class="leftbar__nav-form-button">
-                        <x-global.material-symbol-outlined icon="logout" filled="true" />
+                        <x-global.material-symbol-outlined icon="logout" />
                         <span class="leftbar__nav-form-text">Выход</span>
                     </button>
                 </form>
