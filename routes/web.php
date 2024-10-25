@@ -17,6 +17,8 @@ use App\Http\Controllers\VocabularyController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/redirect-to-page', [MainController::class, 'redirectToPage'])->name('redirect.to.page'); // used in both front and dashboard routes
+
 Route::middleware(['guest.or.verified'])->group(function () {
     Route::controller(MainController::class)->group(function () {
         Route::get('/', 'home')->name('home');

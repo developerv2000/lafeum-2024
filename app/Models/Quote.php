@@ -27,6 +27,10 @@ class Quote extends Model
 
     protected $guarded = ['id'];
 
+    public $casts = [
+        'publish_at' => 'datetime',
+    ];
+
     protected $with = [
         'author:id,name,slug',
         'categories',

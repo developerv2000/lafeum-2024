@@ -10,6 +10,25 @@ use Illuminate\Support\Collection;
 
 class MainController extends Controller
 {
+    public function redirectToPage(Request $request)
+    {
+        $url = $request->input('full_url');
+        $redirectToPage = $request->input('redirect_to_page');
+
+        // Parse the URL and get the query as an array
+        $parsedUrl = parse_url($url);
+        parse_str($parsedUrl['query'] ?? '', $query);
+
+        // Update the 'page' parameter with the new page number
+        $query['page'] = $redirectToPage;
+
+        // Build the modified URL with the updated query
+        $newUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . $parsedUrl['path'] . '?' . http_build_query($query);
+
+        // Redirect to the modified URL
+        return redirect($newUrl);
+    }
+
     public function home(Request $request)
     {
         $rootCategories = $this->getCombinedCategoriesTree();
