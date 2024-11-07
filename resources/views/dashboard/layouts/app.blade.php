@@ -16,6 +16,9 @@
 
     {{-- All css plugins are included inside main.css --}}
     @vite('resources/css/dashboard/main.css')
+
+    {{-- Users prefered theme --}}
+    @vite('resources/css/dashboard/themes/' . request()->user()->settings['preferred_theme'] . '.css')
 </head>
 
 <body class="body {{ $pageName }}">

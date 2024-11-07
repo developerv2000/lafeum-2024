@@ -19,65 +19,6 @@ body {
 
     /* Material symbols */
     --filled-material-symbols-font-variation: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;
-
-    /* Theme different attributes */
-    --theme-scrollbar-color: #ABABAB;
-    --theme-transition: 0.3s ease;
-    --theme-box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
-
-    /* Theme Colors */
-    --theme-main-color: #2C7BE5;
-    --theme-secondary-color: #F5803E;
-    --theme-danger-color: #E63757;
-    --theme-success-color: #00D27A;
-    --theme-cancel-color: #748194;
-
-    /* Theme Background colors */
-    --theme-body-background-color: #EDF2F9;
-    --theme-box-background-color: white;
-    --theme-secondary-box-background-color: #f9fafd;
-    --theme-text-background-color-on-hover: #d8e2ef;
-
-    /* Theme Text colors */
-    --theme-text-color: #344050;
-    --theme-reversed-text-color: white;
-    --theme-text-color-on-hover: #232e3c;
-    --theme-lighter-text-color: #5e6e82;
-    --theme-lightest-text-color: #9da9bb;
-    --theme-button-text-color: white;
-
-    /* Theme Borders */
-    --theme-border: 1px solid var(--theme-border-color);
-    --theme-border-color: #d8e2ef;
-    --theme-border-radius: 6px;
-
-    /* Theme Form components */
-    --theme-checkbox-border-color: #b6c1d2;
-
-    /* Theme table  */
-    --theme-table-text-color: #475360;
-
-    /* Theme Badges */
-    --theme-yellow-badge-text-color: #66662c;
-    --theme-yellow-badge-background: #FFFFCC;
-
-    --theme-pink-badge-text-color: rgb(147, 35, 56);
-    --theme-pink-badge-background: rgb(250, 215, 221);
-
-    --theme-orange-badge-text-color: rgb(157, 82, 40);
-    --theme-orange-badge-background: rgb(253, 230, 216);
-
-    --theme-blue-badge-text-color: rgb(25, 120, 162);
-    --theme-blue-badge-background: rgb(212, 242, 255);
-
-    --theme-red-badge-text-color: rgb(255, 212, 220);
-    --theme-red-badge-background: rgb(230, 55, 87);
-
-    --theme-grey-badge-text-color: rgb(125, 137, 155);
-    --theme-grey-badge-background: rgb(227, 230, 234);
-
-    --theme-green-badge-text-color: rgb(0, 134, 78);
-    --theme-green-badge-background: rgb(204, 246, 228);
 }
 
 body::-webkit-scrollbar,
@@ -215,6 +156,7 @@ a {
     background-color: var(--theme-box-background-color);
 
     &:hover {
+        color: var(--theme-text-color);
         box-shadow: var(--theme-box-shadow);
     }
 }
@@ -432,6 +374,7 @@ a {
     padding: 8px;
     border-radius: var(--theme-border-radius);
     box-shadow: #0a0a0a33 2px 2px 10px 0px;
+    background-color: var(--theme-box-background-color);
 }
 
 .dropdown__content-link,
@@ -451,6 +394,7 @@ a {
 
 .dropdown__content-link:hover,
 .dropdown__content-button:hover {
+    color: var(--theme-text-color);
     background-color: var(--theme-body-background-color);
 }
 
@@ -462,6 +406,10 @@ a {
 
 
 /* ------------ Form ------------ */
+.input, .textarea, .select {
+    color: var(--theme-text-color);
+}
+
 .checkbox {
     border-color: var(--theme-checkbox-border-color);
 }
@@ -527,7 +475,7 @@ a {
     transition: var(--theme-transition);
 
     &:hover {
-        background-color: var(--theme-text-background-color-on-hover);
+        background-color: var(--theme-icon-background-color);
     }
 }
 
@@ -562,13 +510,13 @@ a {
 
 /* Theme toggler */
 .theme-toggler-form__button {
-    background-color: var(--theme-text-background-color-on-hover);
+    background-color: var(--theme-icon-background-color);
     padding: 6px;
     border-radius: 50%;
-    color: var(--theme-lighter-text-color);
+    color: var(--theme-main-color);
 
     &:hover {
-        background-color: var(--theme-box-background-color);
+        background-color: var(--theme-icon-background-color-on-hover);
     }
 }
 /* ------------ /end Header ------------ */
@@ -892,7 +840,7 @@ a {
     border-bottom: var(--theme-border);
 
     &:hover {
-        background-color: var(--theme-secondary-box-background-color)
+        background-color: var(--theme-table-tr-hover-background-color);
     }
 }
 

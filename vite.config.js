@@ -5,13 +5,20 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                // Front styles
                 'resources/css/front/main.css',
                 'resources/css/front/auth.css',
-                'resources/css/dashboard/dashboard.css',
-                
+
+                // Dashboard styles
+                'resources/css/dashboard/main.css',
+                'resources/css/dashboard/themes/*',
+
+                // Front js
                 'resources/js/front/main.js',
                 'resources/js/front/auth.js',
-                'resources/js/dashboard/dashboard.js',
+
+                // Dashboard js
+                'resources/js/dashboard/main.js',
             ],
             refresh: true,
         }),
