@@ -59,7 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            // 'birthday' => 'date',
+            'settings' => 'array',
         ];
     }
 
@@ -201,5 +201,21 @@ class User extends Authenticatable implements MustVerifyEmail
         $details = json_decode($response);
 
         return $details->country ?? 'Unknown';
+    }
+
+    /**
+     * Update the specified setting for the user.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function updateSetting($key, $value): void
+    {
+        $settings = $this->settings;
+        $settings[$key] = $value;
+
+        $this->settings = $settings;
+        $this->save();
     }
 }

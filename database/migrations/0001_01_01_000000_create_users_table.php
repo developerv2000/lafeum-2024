@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('birthday')->nullable();
             $table->text('biography')->nullable();
             $table->string('photo')->nullable();
+            $table->json('settings')->nullable();
 
             $table->ipAddress('registered_ip_address')->nullable();
             $table->string('registered_browser')->nullable();

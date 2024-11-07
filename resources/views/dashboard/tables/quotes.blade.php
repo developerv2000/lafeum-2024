@@ -38,7 +38,7 @@
                 <td>
                     <div class="badges-wrapper">
                         @foreach ($record->categories as $category)
-                            <span class="badge badge--orange">{{ $category->name }}</span>
+                            {{ $category->name }}<br>
                         @endforeach
                     </div>
                 </td>

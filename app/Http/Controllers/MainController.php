@@ -10,17 +10,17 @@ use Illuminate\Support\Collection;
 
 class MainController extends Controller
 {
-    public function redirectToPage(Request $request)
+    public function navigateToPageNumber(Request $request)
     {
         $url = $request->input('full_url');
-        $redirectToPage = $request->input('redirect_to_page');
+        $navigateToPage = $request->input('navigate_to_page');
 
         // Parse the URL and get the query as an array
         $parsedUrl = parse_url($url);
         parse_str($parsedUrl['query'] ?? '', $query);
 
         // Update the 'page' parameter with the new page number
-        $query['page'] = $redirectToPage;
+        $query['page'] = $navigateToPage;
 
         // Build the modified URL with the updated query
         $newUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . $parsedUrl['path'] . '?' . http_build_query($query);

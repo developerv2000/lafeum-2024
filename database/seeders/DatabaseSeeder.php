@@ -30,5 +30,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->roles()->attach([1]);
+
+        $settings = [
+            'preferred_theme' => 'light',
+            'collapsed_dashboard_leftbar' => false,
+        ];
+
+        $user->update([
+            'settings' => $settings,
+        ]);
     }
 }

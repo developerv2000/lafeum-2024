@@ -6,6 +6,7 @@ use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TermController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
@@ -13,7 +14,14 @@ use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard.')->group(function () {
-    Route::redirect('/', '/dashboard/quotes');
+    Route::redirect('/', function () {
+        return to_route('dashboard.quotes.index');
+    });
+
+    Route::controller(SettingController::class)->name('settings.')->group(function () {
+        Route::patch('preferred-theme', 'toggleTheme')->name('toggle.theme');
+        Route::patch('collapsed-leftbar', 'toggleDashboardLeftbar')->name('toggle.leftbar'); // ajax request
+    });
 
     Route::controller(QuoteController::class)->prefix('/quotes')->name('quotes.')->group(function () {
         CrudRouteGenerator::defineAllDefaultRoutes('id', 'dashboard');
