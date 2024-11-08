@@ -1,10 +1,20 @@
-import { removeElementStylePropertyDelayed } from './utilities'
-
 /*
 |--------------------------------------------------------------------------
-| Components helper functions
+| Helper functions
 |--------------------------------------------------------------------------
 */
+
+/**
+ * Removes a specific inline style property of an element after a certain duration.
+ * @param {HTMLElement} element - The DOM element whose style property should be removed.
+ * @param {string} property - The CSS property to remove (e.g., 'height', 'width').
+ * @param {number} duration - The duration in milliseconds to wait before removing the property.
+ */
+export function removeElementStylePropertyDelayed(element, property, duration) {
+    setTimeout(() => {
+        element.style[property] = '';
+    }, duration);
+}
 
 /**
  * Function to collapse an element with smooth transition.
@@ -24,6 +34,24 @@ function collapseElement(element) {
 function expandElement(element) {
     element.style.height = element.scrollHeight + 'px';
     removeElementStylePropertyDelayed(element, 'height', 300);
+}
+
+// Modal helpers
+export function showModal(modal) {
+    modal.classList.add('modal--visible');
+}
+
+export function hideVisibleModal() {
+    document.querySelector('.modal--visible')?.classList.remove('modal--visible');
+}
+
+// Spinner helpers
+export function showSpinner() {
+    document.querySelector('.spinner').classList.add('spinner--visible');
+}
+
+export function hideSpinner() {
+    document.querySelector('.spinner').classList.remove('spinner--visible');
 }
 
 /*
@@ -124,6 +152,28 @@ function initAccordions() {
 
 /*
 |--------------------------------------------------------------------------
+| Modal
+|--------------------------------------------------------------------------
+*/
+
+function initModals() {
+    const showButtons = document.querySelectorAll('[data-click-action="show-modal"]');
+    const hideButtons = document.querySelectorAll('[data-click-action="hide-visible-modal"]');
+
+    showButtons.forEach((button) => {
+        button.addEventListener('click', (evt) => {
+            hideVisibleModal();
+            showModal(document.querySelector(evt.currentTarget.dataset.modalSelector));
+        });
+    });
+
+    hideButtons.forEach((button) => {
+        button.addEventListener('click', hideVisibleModal);
+    });
+}
+
+/*
+|--------------------------------------------------------------------------
 | Initialization
 |--------------------------------------------------------------------------
 */
@@ -132,4 +182,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initDropdowns();
     initCollapsibles();
     initAccordions();
+    initModals();
 });

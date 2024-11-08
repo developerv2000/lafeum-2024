@@ -13,8 +13,8 @@
 /* Simditor */
 @import '../../../public/plugins/simditor/simditor.css';
 
-/* Components */
-@import '../global/components.css';
+/* Custom components */
+@import '../../custom-components/styles.css';
 
 /* Form */
 @import 'form.css';

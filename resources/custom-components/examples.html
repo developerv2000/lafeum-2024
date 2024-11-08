@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Custom component examples</title>
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -77,7 +77,37 @@
 
     <br><br><br><br>
 
-    <script src="scripts.js"></script>
+    <!-- Modal -->
+    <button data-click-action="show-modal" data-modal-selector=".modal">Show modal!</button>
+
+    <div class="modal">
+        <div class="modal__overlay" data-click-action="hide-visible-modal"></div>
+
+        <div class="modal__inner">
+            <div class="modal__box">
+                <div class="modal__header">
+                    <p class="modal__title">Modal</p>
+                    <span class="material-symbols-outlined modal__dismiss-button" data-click-action="hide-visible-modal">close</span>
+                </div>
+
+                <div class="modal__body thin-scrollbar">Modal content here!</div>
+
+                <div class="modal__footer">
+                    <button data-click-action="hide-visible-modal">Close</button>
+                    <button data-click-action="hide-visible-modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spinner -->
+    <div class="spinner">
+        <div class="spinner__inner">
+            <img class="spinner__img" src="img/spinner.gif" alt="spinner">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

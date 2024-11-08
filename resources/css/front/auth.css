@@ -8,7 +8,7 @@
 @import '../../../public/plugins/normalize.css';
 
 /* Form */
-@import '../global/form.css';
+@import 'form.css';
 
 body {
     display: flex;

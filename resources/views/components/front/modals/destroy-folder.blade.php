@@ -10,7 +10,7 @@
     </x-slot:body>
 
     <x-slot:footer>
-        <x-global.button style="cancel" data-click-action="hide-active-modals">Отмена</x-global.button>
+        <x-global.button style="cancel" data-click-action="hide-visible-modal">Отмена</x-global.button>
         <x-global.button style="danger" type="submit" form="destroy-folder-form">Удалить</x-global.button>
     </x-slot:footer>
 </x-global.modal>

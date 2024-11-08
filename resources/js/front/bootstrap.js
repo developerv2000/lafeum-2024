@@ -1,5 +1,5 @@
 import axios from 'axios';
-import '../global/components'
+import '../../custom-components/script';
 import '../../../public/plugins/yandex-share'
 
 window.axios = axios;

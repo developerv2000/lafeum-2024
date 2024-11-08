@@ -18,7 +18,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard
         return to_route('dashboard.quotes.index');
     });
 
-    Route::controller(SettingController::class)->name('settings.')->group(function () {
+    Route::controller(SettingController::class)->prefix('/settings')->name('settings.')->group(function () {
         Route::patch('preferred-theme', 'toggleTheme')->name('toggle.theme');
         Route::patch('collapsed-leftbar', 'toggleDashboardLeftbar')->name('toggle.leftbar'); // ajax request
     });

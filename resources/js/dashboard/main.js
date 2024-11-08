@@ -5,6 +5,7 @@
 */
 
 import './bootstrap';
+import * as functions from './functions';
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +19,25 @@ import './bootstrap';
 |--------------------------------------------------------------------------
 */
 
+const mainTable = document.querySelector('.main-table');
+const leftbarToggler = document.querySelector('.header__leftbar-toggler');
+
 /*
 |--------------------------------------------------------------------------
 | Event Listeners
 |--------------------------------------------------------------------------
 */
 
-/*
-|--------------------------------------------------------------------------
-| Functions
-|--------------------------------------------------------------------------
-*/
+mainTable.addEventListener('click', (evt) => {
+    const target = evt.target;
+
+    // Delegate text max lines toggling
+    if (target.closest('[data-on-click="toggle-td-text-max-lines"]')) {
+        functions.toggleTextMaxLines(target);
+    }
+});
+
+leftbarToggler.addEventListener('click', functions.toggleLeftbar);
 
 /*
 |--------------------------------------------------------------------------

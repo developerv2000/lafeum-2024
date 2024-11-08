@@ -1,4 +1,4 @@
-<aside class="leftbar thin-scrollbar">
+<aside class="leftbar leftbar--collapsed thin-scrollbar">
     <div class="leftbar__inner">
         {{-- Main --}}
         <div class="leftbar__section leftbar__section--main">

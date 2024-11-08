@@ -6,6 +6,7 @@
 
 import './bootstrap';
 import { debounce, removeElementStylePropertyDelayed } from '../global/utilities';
+import { showModal, showSpinner, hideSpinner } from '../../custom-components/script';
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,6 @@ const GET_VOCABULARY_BODY_URL = '/vocabulary/get-body'
 */
 
 // Spinner
-const spinner = document.querySelector('.spinner');
 const spinnableForms = document.querySelectorAll('[data-on-submit="show-spinner"]');
 
 // Mobile menu
@@ -44,8 +44,7 @@ const termCardsBodyLinks = document.querySelectorAll('.terms-card__body-text a')
 const vocabularyList = document.querySelector('.vocabulary-list');
 
 // Modal buttons
-const showModalButtons = document.querySelectorAll('[data-click-action="show-modal"]');
-const hideActiveModalButtons = document.querySelectorAll('[data-click-action="hide-active-modals"]');
+const hideModalButtons = document.querySelectorAll('[data-click-action="hide-visible-modal"]')
 const showVideoModalButtons = document.querySelectorAll('[data-click-action="show-youtube-video-modal"]');
 const showPhotoModalButtons = document.querySelectorAll('[data-click-action="show-photos-modal"]');
 const renameFolderButtons = document.querySelectorAll('[data-click-action="rename-folder"]');
@@ -80,6 +79,7 @@ const feedbackForm = document.querySelector('.feedback-form');
 const recaptchaToken = document.querySelector('#recaptcha_token');
 
 // Local search elements
+const localSearchInputs = document.querySelectorAll('input[data-action="local-search"]');
 const localSearchClearButtons = document.querySelectorAll('.local-search__clear-button');
 
 /*
@@ -99,17 +99,6 @@ mobileMenuTogglers.forEach((button) => {
 window.addEventListener('scroll', handleScroll);
 scrollTopBtn.addEventListener('click', scrollTop);
 scrollBottomBtn.addEventListener('click', scrollBottom);
-
-showModalButtons.forEach((button) => {
-    button.addEventListener('click', (evt) => {
-        hideAllActiveModals();
-        showModal(document.querySelector(evt.currentTarget.dataset.modalSelector));
-    });
-});
-
-hideActiveModalButtons.forEach((button) => {
-    button.addEventListener('click', hideAllActiveModals);
-});
 
 updateAvaInput?.addEventListener('change', handleUpdateAvaInputChange);
 
@@ -151,7 +140,7 @@ destroyFolderButtons.forEach((button) => {
 });
 
 // Initialize local search functionality
-document.querySelectorAll('input[data-action="local-search"]').forEach((input) => {
+localSearchInputs.forEach((input) => {
     input.addEventListener('input', debounce(handleLocalSearch));
 });
 
@@ -204,6 +193,13 @@ localSearchClearButtons.forEach((button) => {
     button.addEventListener('click', handleLocalSearchClearing);
 });
 
+// Prevent video modals iframe from playing in the background
+hideModalButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        removeIframeFromYoutubeVideoModal();
+    });
+});
+
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -250,27 +246,6 @@ function scrollBottom() {
         top: document.body.scrollHeight,
         behavior: "smooth",
     });
-}
-
-function showSpinner() {
-    spinner.classList.add('spinner--visible');
-}
-
-function hideSpinner() {
-    spinner.classList.remove('spinner--visible');
-}
-
-function showModal(modal) {
-    modal.classList.add('modal--visible');
-}
-
-function hideModal(modal) {
-    modal.classList.remove('modal--visible');
-}
-
-function hideAllActiveModals() {
-    document.querySelectorAll('.modal--visible').forEach(hideModal);
-    removeIframeFromYoutubeVideoModal(); // remove iframe to stop video from playing in background
 }
 
 /**
