@@ -53,12 +53,12 @@ Route::middleware(['guest.or.verified'])->group(function () {
     });
 
     Route::controller(FolderController::class)->name('folders.')->prefix('/folders')->middleware(['auth'])->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesOnly(['showByID', 'store', 'destroy']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['show', 'store', 'destroy']);
         Route::patch('/rename', 'rename')->name('rename');
     });
 
     Route::controller(KnowledgeController::class)->prefix('/knowledge')->name('knowledge.')->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'showBySlug']);
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'show'], identifierAttribute: 'slug');
     });
 
     Route::controller(VocabularyController::class)->prefix('/vocabulary')->name('vocabulary.')->group(function () {
@@ -82,7 +82,7 @@ Route::middleware(['guest.or.verified'])->group(function () {
     Route::controller(AuthorController::class)->prefix('/authors')->name('authors.')->group(function () {
         CrudRouteGenerator::defineDefaultRoutesOnly(['index']);
 
-        // CrudRouteGenerator is not used because AuthorGroup can be used instead of Author
+        // CrudRouteGenerator is not used because AuthorGroup Model can be used instead of Author
         Route::get('/{slug}', 'show')->name('show');
     });
 

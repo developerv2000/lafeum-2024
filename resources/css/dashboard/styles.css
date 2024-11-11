@@ -12,6 +12,7 @@ body {
     --shrinked-body-max-width: 1680px;
     --header-height: 48px;
     --leftbar-width: 180px;
+    --collapsed-leftbar-max-width: 24px;
     --rightbar-width: 200px;
     --toolbar-height: 52px;
     --main-table-side-paddings: 24px;
@@ -485,31 +486,38 @@ a {
     height: calc(100vh - var(--header-height));
     width: var(--leftbar-width);
     padding-top: 8px;
-    overflow-y: auto;
+    overflow: hidden;
     transition: 0.3s;
     z-index: 10;
 }
 
-.leftbar::-webkit-scrollbar {
-    width: 4px;
-}
-
-/* Hide scroll on static state */
-.leftbar:not(.leftbar:hover)::-webkit-scrollbar-track {
-    box-shadow: none;
-}
-
-/* Hide scroll on static state */
-.leftbar:not(.leftbar:hover)::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    outline: none;
+.main-wrapper.fullscreen .leftbar {
+    display: none;
 }
 
 .leftbar__inner {
+    width: var(--leftbar-width);
+    max-height: 100%;
     display: flex;
     flex-direction: column;
     gap: 24px;
     padding-bottom: 12px;
+    overflow: auto;
+}
+
+.leftbar__inner::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Hide scrollbars on static state */
+.leftbar:not(.leftbar:hover) .leftbar__inner::-webkit-scrollbar-track {
+    box-shadow: none;
+}
+
+/* Hide scrollbars on static state */
+.leftbar:not(.leftbar:hover) .leftbar__inner::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    outline: none;
 }
 
 .leftbar__section-title {
@@ -629,33 +637,22 @@ a {
 
 /* Collapsed leftbar */
 .leftbar--collapsed {
-    max-width: 28px;
-    padding-right: 12px;
+    max-width: var(--collapsed-leftbar-max-width);
     overflow-x: hidden;
     background-color: var(--theme-body-background-color);
-    transition: 0.2s;
+    transition: 0.3s;
+}
+
+.leftbar--collapsed .leftbar__inner {
+    padding-right: 12px;
 }
 
 .leftbar--collapsed .leftbar__section-title {
     display: none;
-    transition-delay: display 0.3s;
 }
 
 .leftbar--collapsed .leftbar__collapse {
     display: none;
-    transition-delay: display 0.3s;
-}
-
-.leftbar--collapsed .leftbar__collapse-button .collapse-button__text,
-.leftbar--collapsed .leftbar__collapse-button .collapse-button__icon {
-    display: none;
-    transition-delay: display 0.3s;
-}
-
-.leftbar--collapsed .leftbar__nav-link-text,
-.leftbar--collapsed .leftbar__nav-form-text {
-    display: none;
-    transition-delay: display 0.3s;
 }
 
 /* leftbar hover */
@@ -672,16 +669,6 @@ a {
     display: flex;
 }
 
-.leftbar--collapsed:hover .leftbar__collapse-button .collapse-button__text,
-.leftbar--collapsed:hover .leftbar__collapse-button .collapse-button__icon {
-    display: block;
-}
-
-.leftbar--collapsed:hover .leftbar__nav-link-text,
-.leftbar--collapsed:hover .leftbar__nav-form-text {
-    display: block;
-}
-
 /* ------------ /end Leftbar ------------ */
 
 
@@ -692,12 +679,20 @@ a {
     gap: 32px;
 }
 
+.main-wrapper.fullscreen {
+    background-color: var(--theme-body-background-color);
+}
+
 .main {
     /* .leftbar:width + 32px .main-wrapper:gap */
     margin-left: calc(var(--leftbar-width) + 32px);
     flex-grow: 1;
     overflow: auto;
     transition: 0.3s;
+}
+
+.main-wrapper.fullscreen .main {
+    margin-left: 0;
 }
 
 .leftbar--collapsed+.main {
@@ -714,6 +709,10 @@ a {
     max-height: calc(100vh - var(--header-height));
     height: 100%;
     overflow-y: auto;
+}
+
+.main-wrapper.fullscreen .rightbar {
+    max-height: 100%;
 }
 
 .rightbar::-webkit-scrollbar {
@@ -806,6 +805,10 @@ a {
 .main-table-wrapper {
     max-height: calc(100vh - var(--header-height) - var(--toolbar-height) - var(--main-table-pagination-height));
     overflow: auto;
+}
+
+.main-wrapper.fullscreen .main-table-wrapper {
+    max-height: calc(100vh - var(--toolbar-height) - var(--main-table-pagination-height));
 }
 
 .main-table-wrapper--without-pagination {
@@ -924,6 +927,7 @@ a {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    cursor: pointer;
 }
 
 /* ------------ /end Main table ------------ */

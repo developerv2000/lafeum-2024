@@ -14,4 +14,13 @@ class SettingController extends Controller
 
         return redirect()->back();
     }
+
+    public function toggleDashboardLeftbar(Request $request)
+    {
+        $user = $request->user();
+        $reversedLeftbar = !$user->settings['collapsed_dashboard_leftbar'];
+        $user->updateSetting('collapsed_dashboard_leftbar', $reversedLeftbar);
+
+        return true;
+    }
 }

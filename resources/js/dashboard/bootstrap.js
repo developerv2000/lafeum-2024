@@ -4,7 +4,11 @@
 |--------------------------------------------------------------------------
 */
 
+import axios from 'axios';
 import '../../custom-components/script';
+
+window.axios = axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /*
 |--------------------------------------------------------------------------

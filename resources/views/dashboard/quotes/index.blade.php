@@ -26,7 +26,7 @@
                     style="shadowed"
                     icon="fullscreen"
                     data-click-action="request-fullscreen"
-                    data-target-selector="{{ '.main-table' }}">На весь экран
+                    data-target-selector="{{ '.main-wrapper' }}">На весь экран
                 </x-global.button>
             </div>
         </div>

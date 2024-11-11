@@ -1,5 +1,11 @@
-<aside class="leftbar leftbar--collapsed thin-scrollbar">
-    <div class="leftbar__inner">
+<aside
+    @class([
+        'leftbar',
+        'leftbar--collapsed' => auth()->user()->settings[
+            'collapsed_dashboard_leftbar'
+        ],
+    ])>
+    <div class="leftbar__inner thin-scrollbar">
         {{-- Main --}}
         <div class="leftbar__section leftbar__section--main">
             <p class="leftbar__section-title">Основное</p>

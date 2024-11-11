@@ -5,7 +5,7 @@
 
         <div class="ava-box__text-wrapper">
             <h3 class="ava-box__name">{{ $user->name }}</h3>
-            <p class="ava-box__role">{{ $user->isAdmin() ? 'Администратор' : 'Пользователь' }}</p>
+            <p class="ava-box__role">{{ $user->isAdministrator() ? 'Администратор' : 'Пользователь' }}</p>
         </div>
     </div>
 
