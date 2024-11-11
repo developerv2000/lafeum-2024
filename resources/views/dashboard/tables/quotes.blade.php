@@ -27,10 +27,10 @@
     <x-slot:tbody-rows>
         @foreach ($records as $record)
             <tr>
-                <x-dashboard.table.td.checkbox :value="$record->value" />
+                <x-dashboard.table.td.checkbox :value="$record->id" />
                 <x-dashboard.table.td.edit :link="route('dashboard.quotes.edit', $record->id)" />
                 <x-dashboard.table.td.view :link="route('quotes.show', $record->id)" />
-                <x-dashboard.table.td.delete />
+                <x-dashboard.table.td.delete :form-action="route('dashboard.quotes.destroy')" :record-id="$record->id" />
 
                 <td>{{ $record->author->name }}</td>
                 <td><x-dashboard.table.td.max-lines-limited-text :text="$record->body" /></td>

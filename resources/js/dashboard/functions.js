@@ -1,5 +1,13 @@
 /*
 |--------------------------------------------------------------------------
+| Necessary dependencies
+|--------------------------------------------------------------------------
+*/
+
+import { showModal } from "../../custom-components/script";
+
+/*
+|--------------------------------------------------------------------------
 | Constants
 |--------------------------------------------------------------------------
 */
@@ -13,6 +21,7 @@ const TOGGLE_LEFTBAR_URL = '/dashboard/settings/collapsed-leftbar';
 */
 
 const leftbar = document.querySelector('.leftbar');
+const targetDeleteModal = document.querySelector('.target-delete-modal');
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +44,12 @@ export function toggleTableCheckboxes(table) {
     const checkboxes = table.querySelectorAll('.td__checkbox');
     const checkedAll = table.querySelector('.td__checkbox:not(:checked)') ? false : true;
 
-    // toggle checkbox statements
     checkboxes.forEach((checkbox) => {
         checkbox.checked = !checkedAll;
     });
 }
 
-export function exitFullscreen (target) {
+function exitFullscreen(target) {
     target.classList.remove('fullscreen');
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -53,7 +61,6 @@ export function exitFullscreen (target) {
 };
 
 export function enterFullscreen(target) {
-    console.log(target);
     if (target.requestFullscreen) {
         target.requestFullscreen();
     } else if (target.webkitRequestFullscreen) {
@@ -71,4 +78,29 @@ export function toggleFullscreenClass(target) {
     }
 };
 
-// function handleFullscreen
+export function appendFormInputsBeforeSubmit(evt) {
+    evt.preventDefault();
+    const form = evt.target;
+    const inputs = document.querySelectorAll(form.dataset.inputsSelector);
+
+    // Append each input to the form
+    const inputsContainer = form.querySelector('.form__hidden-appended-inputs-container');
+
+    inputs.forEach((input) => {
+        const inputCopy = input.cloneNode(true);
+        inputsContainer.appendChild(inputCopy);
+    });
+
+    form.submit();
+}
+
+export function showTargetDeleteModal(button) {
+    // Update form before modal show
+    const form = targetDeleteModal.querySelector('form');
+    const idInput = targetDeleteModal.querySelector('input[name="id"]');
+
+    idInput.value = button.dataset.targetId;
+    form.action = button.dataset.formAction;
+
+    showModal(targetDeleteModal);
+}

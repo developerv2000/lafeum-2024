@@ -18,7 +18,9 @@
                 <x-global.button
                     class="toolbar__button"
                     style="shadowed"
-                    icon="delete">Удалить
+                    icon="delete"
+                    data-click-action="show-modal"
+                    data-modal-selector=".multiple-delete-modal">Удалить
                 </x-global.button>
 
                 <x-global.button
@@ -33,6 +35,9 @@
 
         @include('dashboard.tables.quotes')
     </div>
+
+    <x-dashboard.modals.multiple-delete form-action="{{ route('dashboard.quotes.destroy') }}" :force-delete="false" />
+    <x-dashboard.modals.target-delete :force-delete="false" />
 @endsection
 
 @section('rightbar')

@@ -6,10 +6,15 @@ use App\Models\Quote;
 use App\Http\Requests\StoreQuoteRequest;
 use App\Http\Requests\UpdateQuoteRequest;
 use App\Models\QuoteCategory;
+use App\Support\Traits\Controller\DestroysModelRecords;
 use Illuminate\Http\Request;
 
 class QuoteController extends Controller
 {
+    use DestroysModelRecords;
+
+    public static $model = Quote::class; // Required in multiple destroy/restore traits
+
     /*
     |--------------------------------------------------------------------------
     | Front actions

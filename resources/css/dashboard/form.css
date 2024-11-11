@@ -4,6 +4,11 @@
     gap: 20px;
 }
 
+/* Used to hold appended inputs before submiting form by JS */
+.form__hidden-appended-inputs-container {
+    display: none;
+}
+
 /* Label */
 .label {
     display: flex;
