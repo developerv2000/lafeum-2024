@@ -11,7 +11,7 @@
     $hasError = $errorFieldName && $inputErrors->has($errorFieldName);
 @endphp
 
-<div {{ $attributes->merge(['class' => 'form-group ' . ($hasError ? 'form-group--error' : '')]) }}>
+<div {{ $attributes->merge(['class' => 'form-group' . ($hasError ? ' form-group--error' : '')]) }}>
     {{-- Render the label and indicate if the field is required --}}
     <label class="label">
         <p class="label__text">

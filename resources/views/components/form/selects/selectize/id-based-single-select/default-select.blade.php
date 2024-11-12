@@ -6,7 +6,6 @@
     'initialValue' => null, // Initial value of the input field.
     'validationErrorKey' => null, // Validation error bag key, if any.
     'isRequired' => false, // Determines if the field is required.
-    'placeholderText' => null, // Optional placeholder for the select input.
 ])
 
 @php
@@ -21,14 +20,14 @@
     :isRequired="$isRequired">
 
     <select
-        {{ $attributes->merge(['class' => 'select']) }}
+        {{ $attributes->merge(['class' => 'single-selectize']) }}
         name="{{ $inputName }}"
         @if ($isRequired) required @endif>
 
-        {{-- Placeholder option, if specified --}}
-        @if ($placeholderText)
-            <option value="" disabled selected>{{ $placeholderText }}</option>
-        @endif
+        {{-- Empty option for placeholder --}}
+        @unless ($isRequired)
+            <option></option>
+        @endunless
 
         {{-- Loop through the options and generate each option tag --}}
         @foreach ($options as $option)

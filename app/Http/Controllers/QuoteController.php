@@ -85,8 +85,9 @@ class QuoteController extends Controller
     public function dashboardEdit(Quote $record)
     {
         $authors = Author::select('id', 'name')->withOnly([])->get();
+        $categories = QuoteCategory::all();
 
-        return view('dashboard.quotes.edit', compact('record', 'authors'));
+        return view('dashboard.quotes.edit', compact('record', 'authors', 'categories'));
     }
 
     /**

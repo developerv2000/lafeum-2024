@@ -1,16 +1,17 @@
 @props([
     'labelText', // Label text for the input field.
-    'inputName', // Name for the input field.
+    'model', // Model instance being edited to populate the selected option.
+    'field', // Model attribute to select as default.
     'options', // Options to be displayed in the select field.
-    'initialValue' => null, // Initial value of the input field.
+    'inputName' => $field . '[]', // Name for the input field.
+    'taggable' => false, // Whether user can and new options or not
     'validationErrorKey' => null, // Validation error bag key, if any.
     'isRequired' => false, // Determines if the field is required.
-    'placeholderText' => null, // Optional placeholder for the select input.
 ])
 
 @php
-    // Set the currently selected option value, preferring old input or the initial value.
-    $selectedValue = old($inputName, $initialValue);
+    // Retrieve selected values, preferring old input data or the model's field values.
+    $selectedValues = old(rtrim($inputName, '[]'), $model->{$field});
 @endphp
 
 <x-form.groups.default-group
@@ -20,18 +21,14 @@
     :isRequired="$isRequired">
 
     <select
-        {{ $attributes->merge(['class' => 'select']) }}
+    {{ $attributes->merge(['class' => ($taggable ? 'multiple-taggable-selectize' : 'multiple-selectize')]) }}
         name="{{ $inputName }}"
+        multiple
         @if ($isRequired) required @endif>
-
-        {{-- Placeholder option, if specified --}}
-        @if ($placeholderText)
-            <option value="" disabled selected>{{ $placeholderText }}</option>
-        @endif
 
         {{-- Loop through the options and generate each option tag --}}
         @foreach ($options as $option)
-            <option value="{{ $option }}" @selected($option == $selectedValue)>
+            <option value="{{ $option }}" @selected(in_array($option->id, $selectedValues))>
                 {{ $option }}
             </option>
         @endforeach

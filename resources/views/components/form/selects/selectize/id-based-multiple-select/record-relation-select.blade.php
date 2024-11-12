@@ -1,17 +1,18 @@
 @props([
     'labelText', // Label text for the input field.
+    'model', // Model instance being edited to populate the selected option.
     'inputName', // Name for the input field.
     'options', // Options to be displayed in the select field.
     'optionCaptionField' => 'name', // Attribute of each option used as the display caption.
-    'initialValue' => null, // Initial value of the input field.
+    'relationName' => str_replace('[]', '', $inputName), // Relationship name on the model.
     'validationErrorKey' => null, // Validation error bag key, if any.
     'isRequired' => false, // Determines if the field is required.
-    'placeholderText' => null, // Optional placeholder for the select input.
 ])
 
 @php
-    // Set the currently selected option value, preferring old input or the initial value.
-    $selectedValue = old($inputName, $initialValue);
+    // Retrieve selected values, preferring old input data or the model's related IDs.
+    $relatedIds = $model->{$relationName}->pluck('id')->toArray();
+    $selectedValues = old(rtrim($inputName, '[]'), $relatedIds);
 @endphp
 
 <x-form.groups.default-group
@@ -21,18 +22,14 @@
     :isRequired="$isRequired">
 
     <select
-        {{ $attributes->merge(['class' => 'select']) }}
+        {{ $attributes->merge(['class' => 'multiple-selectize']) }}
         name="{{ $inputName }}"
+        multiple
         @if ($isRequired) required @endif>
-
-        {{-- Placeholder option, if specified --}}
-        @if ($placeholderText)
-            <option value="" disabled selected>{{ $placeholderText }}</option>
-        @endif
 
         {{-- Loop through the options and generate each option tag --}}
         @foreach ($options as $option)
-            <option value="{{ $option->id }}" @selected($option->id == $selectedValue)>
+            <option value="{{ $option->id }}" @selected(in_array($option->id, $selectedValues))>
                 {{ $option->{$optionCaptionField} }}
             </option>
         @endforeach

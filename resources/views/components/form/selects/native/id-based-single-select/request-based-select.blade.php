@@ -10,7 +10,7 @@
 ])
 
 @php
-    // Set the currently selected option value, preferring old input or the initial value.
+    // Set the currently selected option value, preferring request input or the initial value.
     $selectedValue = request()->input($inputName, $initialValue);
 @endphp
 
@@ -22,7 +22,7 @@
 
     {{-- The select element with dynamic attributes --}}
     <select
-        {{ $attributes->merge(['class' => 'select']) }}
+        {{ $attributes->merge(['class' => 'select' . (request()->has($inputName) ? ' select--highlight' : '')]) }}
         name="{{ $inputName }}"
         @if ($isRequired) required @endif>
 

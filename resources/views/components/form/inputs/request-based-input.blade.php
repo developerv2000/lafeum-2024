@@ -13,7 +13,7 @@
     :isRequired="$isRequired">
 
     <input
-        {{ $attributes->merge(['class' => 'input '  . (request()->has($inputName) ? 'input--highlight' : '')]) }}
+        {{ $attributes->merge(['class' => 'input'  . (request()->has($inputName) ? ' input--highlight' : '')]) }}
         name="{{ $inputName }}"
         value="{{ request()->input($inputName, $initialValue) }}"
         @if ($isRequired) required @endif>

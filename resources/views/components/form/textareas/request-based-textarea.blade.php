@@ -14,7 +14,7 @@
     :isRequired="$isRequired">
 
     <textarea
-        {{ $attributes->merge(['class' => 'textarea']) }}
+        {{ $attributes->merge(['class' => 'textarea'  . (request()->has($inputName) ? ' textarea--highlight' : '')]) }}
         name="{{ $inputName }}"
         rows={{ $rows }}
         @if ($isRequired) required @endif>{{ request()->input($inputName, $initialValue) }}</textarea>

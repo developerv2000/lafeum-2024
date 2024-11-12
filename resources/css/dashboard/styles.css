@@ -24,7 +24,8 @@ body {
 
 body::-webkit-scrollbar,
 .thin-scrollbar::-webkit-scrollbar {
-    width: 7px;
+    width: 6px;
+    height: 10px;
 }
 
 body::-webkit-scrollbar-track,
@@ -700,11 +701,14 @@ a {
 }
 
 .main {
-    /* .leftbar:width + 32px .main-wrapper:gap */
+    /* .leftbar:width .main-wrapper:gap */
     margin-left: calc(var(--leftbar-width) + 32px);
     flex-grow: 1;
-    overflow: auto;
     transition: 0.3s;
+}
+
+.main--auto-overflowed {
+    overflow: auto;
 }
 
 .main-wrapper.fullscreen .main {

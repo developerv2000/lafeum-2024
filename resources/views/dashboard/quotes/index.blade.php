@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.app', [
     'pageName' => 'quotes-index',
+    'mainAutoOverflowed' => true,
 ])
 
 @section('content')

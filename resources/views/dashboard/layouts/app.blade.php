@@ -28,7 +28,7 @@
         <div class="main-wrapper">
             @include('dashboard.layouts.leftbar')
 
-            <main class="main">
+            <main class="main @if ($mainAutoOverflowed) main--auto-overflowed @endif">
                 @yield('content')
             </main>
 

@@ -17,7 +17,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 */
 
 const SELECTIZE_CLASSES = {
-    SINGULAR: '.singular-selectize:not(.manually-initializable-selectize):not(.linked-selectize)',
+    SINGLE: '.single-selectize:not(.manually-initializable-selectize):not(.linked-selectize)',
     LINKED: '.linked-selectize:not(.manually-initializable-selectize)',
     MULTIPLE: '.multiple-selectize:not(.manually-initializable-selectize)',
     MULTIPLE_TAGGABLE: '.multiple-taggable-selectize:not(.manually-initializable-selectize)',
@@ -27,8 +27,8 @@ const SELECTIZE_CLASSES = {
  * Initializes the selectize components based on class selectors.
  */
 function initializeSelectizes() {
-    // Singular Selectize
-    $(SELECTIZE_CLASSES.SINGULAR).selectize({
+    // Single Selectize
+    $(SELECTIZE_CLASSES.SINGLE).selectize({
         plugins: ["auto_position", "preserve_on_blur"],
     });
 
