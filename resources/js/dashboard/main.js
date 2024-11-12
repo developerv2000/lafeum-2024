@@ -41,7 +41,7 @@ const showsSpinnerOnSubmitForms = document.querySelectorAll('[data-on-submit="sh
 /**
  * Handle main table click events by delegating of some child element events
  */
-mainTable.addEventListener('click', (evt) => {
+mainTable?.addEventListener('click', (evt) => {
     const target = evt.target;
 
     // Text max lines toggling

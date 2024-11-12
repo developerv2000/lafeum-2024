@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quote;
 use App\Http\Requests\StoreQuoteRequest;
 use App\Http\Requests\UpdateQuoteRequest;
+use App\Models\Author;
 use App\Models\QuoteCategory;
 use App\Support\Traits\Controller\DestroysModelRecords;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ class QuoteController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function dashboardCreate()
     {
         //
     }
@@ -73,7 +74,7 @@ class QuoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreQuoteRequest $request)
+    public function dashboardStore(StoreQuoteRequest $request)
     {
         //
     }
@@ -81,23 +82,17 @@ class QuoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Quote $quote)
+    public function dashboardEdit(Quote $record)
     {
-        //
+        $authors = Author::select('id', 'name')->withOnly([])->get();
+
+        return view('dashboard.quotes.edit', compact('record', 'authors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateQuoteRequest $request, Quote $quote)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Quote $quote)
+    public function dashboardUpdate(UpdateQuoteRequest $request, Quote $quote)
     {
         //
     }
