@@ -23,4 +23,17 @@ class QuoteCategory extends Model
     {
         return $this->belongsToMany(Quote::class, 'category_quote', 'category_id');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queries
+    |--------------------------------------------------------------------------
+    */
+
+    public static function getAllMinified()
+    {
+        return self::select('id', 'name')
+            ->orderBY('name', 'asc')
+            ->get();
+    }
 }

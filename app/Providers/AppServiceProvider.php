@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\DailyPost;
+use App\Support\ViewComposerDefiners\DashboardViewComposersDefiner;
+use App\Support\ViewComposerDefiners\FrontViewComposersDefiner;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,14 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Rightbar
-        View::composer('front.layouts.rightbar', function ($view) {
-            $view->with('todaysPost', DailyPost::getLatestRecord());
-        });
-
-        // Account leftbar
-        View::composer('front.leftbars.account', function ($view) {
-            $view->with('user', auth()->user());
-        });
+        FrontViewComposersDefiner::defineAll();
+        DashboardViewComposersDefiner::defineAll();
     }
 }

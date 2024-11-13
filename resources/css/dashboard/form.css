@@ -61,9 +61,11 @@
 .select {
     width: 100%;
     display: block;
-    padding: 8px 16px;
-    font-size: 15px;
-    background-color: transparent;
+    padding: var(--form-input-padding);
+    font-size: var(--form-input-font-size);
+    line-height: var(--form-input-line-height);
+    color: var(--form-input-text-color);
+    background-color: var(--form-input-background-color);
     border: var(--theme-border);
     border-radius: var(--theme-border-radius);
     transition: var(--theme-transition);
@@ -128,4 +130,101 @@
 
 .checkbox:focus {
     box-shadow: 0 0 0 0.25rem rgba(44, 123, 229, .25);
+}
+
+/* Selectize */
+/* Single/multiple selectizes input */
+.selectize-input {
+    padding: var(--form-input-padding);
+    font-size: var(--form-input-font-size);
+    line-height: var(--form-input-line-height);
+    color: var(--form-input-text-color);
+    background-color: var(--form-input-background-color);
+    border: var(--theme-border);
+    border-radius: var(--theme-border-radius);
+    transition: var(--theme-transition);
+}
+
+/* Single/multiple selectizes input text color while typing/searching */
+.selectize-input>input {
+    color: var(--theme-text-color);
+}
+
+/* Single selectize input on focus */
+.single-selectize.selectize-control .selectize-input.input-active {
+    background-color: var(--form-input-background-color);
+    color: var(--form-input-text-color);
+}
+
+/* Single/multiple selectizes input on dropdown show */
+.selectize-input.dropdown-active {
+    border-radius: var(--theme-border-radius);
+}
+
+/* Single/multiple selectizes 1px height divider (between input & dropdown) on dropdown show */
+.selectize-input.dropdown-active::before {
+    background-color: var(--theme-lightest-text-color);
+}
+
+/* Single selectize selected input value (not dropdown item) */
+.single-selectize .selectize-input .item {
+    font-size: var(--form-input-font-size);
+    line-height: var(--form-input-line-height);
+    color: var(--form-input-text-color);
+}
+
+/* Single/multiple selectizes input select limit reached (1 item on single and max-limit items on multi) */
+.selectize-input.full {
+    background-color: var(--form-input-background-color);
+}
+
+/* Single/multiple selectizes dropdown */
+.selectize-dropdown {
+    font-size: 14px;
+    line-height: 1.3;
+    color: var(--theme-lighter-text-color);
+    background-color: var(--theme-box-background-color);
+    border: var(--theme-border);
+    border-radius: var(--theme-border-radius);
+    box-shadow: var(--theme-box-shadow);
+}
+
+/* Single/multiple selectizes dropdown options wrapper */
+.selectize-dropdown-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.selectize-dropdown-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, .2);
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, .2)
+}
+
+.selectize-dropdown-content::-webkit-scrollbar-thumb {
+    background-color: var(--theme-scrollbar-color);
+    outline: 1px solid var(--theme-scrollbar-color);
+}
+
+/* Single/multiple selectizes selected & hovered dropdown options */
+.selectize-dropdown-content .option.selected,
+.selectize-dropdown-content .option.active {
+    color: var(--theme-text-color);
+    background-color: var(--theme-body-background-color);
+}
+
+/* Single/multiple higlighted keyword of dropdown option */
+.selectize-dropdown-content .option .highlight {
+    background-color: var(--theme-main-color);
+    color: var(--theme-button-text-color);
+}
+
+/* Multiple selectize selected options on input */
+.multiple-selectize.selectize-control .selectize-input>div {
+    background: var(--theme-body-background-color);
+    color: var(--theme-text-color);
+}
+
+/* Highlight selectize inputs (used on request based selects while filtering etc) */
+.single-selectize--highlight .selectize-input,
+.multiple-selectize--highlight .selectize-input {
+    border-color: var(--theme-main-color);
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Quote;
 use App\Http\Requests\StoreQuoteRequest;
 use App\Http\Requests\UpdateQuoteRequest;
-use App\Models\Author;
 use App\Models\QuoteCategory;
 use App\Support\Traits\Controller\DestroysModelRecords;
 use Illuminate\Http\Request;
@@ -25,17 +24,21 @@ class QuoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $records = Quote::getFinalizedRecordsForFront();
+        Quote::addQueryParamsToRequest($request);
+        $records = Quote::finalizeQueryForFront(Quote::query(), $request, 'paginate');
+
         $categories = QuoteCategory::get()->toTree(); // for leftbar
 
         return view('front.quotes.index', compact('records', 'categories'));
     }
 
-    public function category(QuoteCategory $category)
+    public function category(Request $request, QuoteCategory $category)
     {
-        $records = Quote::getFinalizedRecordsForFront($category->quotes());
+        Quote::addQueryParamsToRequest($request);
+        $records = Quote::finalizeQueryForFront($category->quotes(), $request, 'paginate');
+
         $categories = QuoteCategory::get()->toTree(); // for leftbar
 
         return view('front.quotes.category', compact('category', 'records', 'categories'));
@@ -57,8 +60,8 @@ class QuoteController extends Controller
 
     public function dashboardIndex(Request $request)
     {
-        Quote::AddModelQueryParamsToRequest($request);
-        $records = Quote::getFinalizedRecordsForDashboard($request);
+        Quote::addQueryParamsToRequest($request);
+        $records = Quote::finalizeQueryForDashboard(Quote::query(), $request, 'paginate');
 
         return view('dashboard.quotes.index', compact('records'));
     }
@@ -84,10 +87,7 @@ class QuoteController extends Controller
      */
     public function dashboardEdit(Quote $record)
     {
-        $authors = Author::select('id', 'name')->withOnly([])->get();
-        $categories = QuoteCategory::all();
-
-        return view('dashboard.quotes.edit', compact('record', 'authors', 'categories'));
+        return view('dashboard.quotes.edit', compact('record'));
     }
 
     /**

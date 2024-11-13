@@ -13,11 +13,11 @@ use App\Http\Controllers\VideoController;
 use App\Support\Generators\CrudRouteGenerator;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard.')->group(function () {
-    Route::redirect('/', function () {
-        return to_route('dashboard.quotes.index');
-    });
+Route::get('/dashboard', function () {
+    return to_route('dashboard.quotes.index');
+})->name('dashboard.index');
 
+Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard.')->group(function () {
     Route::controller(SettingController::class)->prefix('/settings')->name('settings.')->group(function () {
         Route::patch('preferred-theme', 'toggleTheme')->name('toggle.theme');
         Route::patch('collapsed-leftbar', 'toggleDashboardLeftbar')->name('toggle.leftbar'); // ajax request

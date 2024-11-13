@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use App\Support\Traits\Model\AddsModelQueryParamsToRequest;
+use App\Support\Helpers\QueryFilterHelper;
+use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\Favoriteable;
+use App\Support\Traits\Model\FinalizesQueryForRequest;
 use App\Support\Traits\Model\Likeable;
 use App\Support\Traits\Model\Publishable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,9 +19,12 @@ class Quote extends Model
     use Publishable;
     use Likeable;
     use Favoriteable;
-    use AddsModelQueryParamsToRequest;
+    use AddsQueryParamsToRequest;
+    use FinalizesQueryForRequest;
 
-    const PAGINATION_LIMIT_FOR_FRONT = 20;
+    const DEFAULT_FRONT_ORDER_BY = 'publish_at';
+    const DEFAULT_FRONT_ORDER_TYPE = 'desc';
+    const DEFAULT_FRONT_PAGINATION_LIMIT = 20;
 
     const DEFAULT_DASHBOARD_ORDER_BY = 'updated_at';
     const DEFAULT_DASHBOARD_ORDER_TYPE = 'desc';
@@ -74,66 +79,45 @@ class Quote extends Model
     */
 
     /**
-     * Get finalized records for the front-end based on the specified query and action.
+     * Finalized query for the front based on the specified query and action.
      *
      * @param \Illuminate\Database\Eloquent\Builder|null $query The query builder instance (optional).
-     * @param string $action The action to perform: 'paginate', 'get', or 'query'.
+     * @param \Illuminate\Http\Request $request The HTTP request containing parameters like order, pagination, etc.
+     * @param string $action The action to perform: 'paginate', 'get', or 'query'
      * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder
      *         The modified query or the retrieved results.
      */
-    public static function getFinalizedRecordsForFront($query = null, $action = 'paginate')
+    public static function finalizeQueryForFront($query, $request, $action)
     {
-        // Use the provided query or default to a new query.
-        $query = $query ?: self::query();
+        $query = $query->onlyPublished();
+        $query = self::finalizeQueryForRequest($query, $request, $action);
 
-        // Apply common query modifications
-        $query->onlyPublished()
-            ->orderBy('publish_at', 'desc');
-
-        // Handle the different action: paginate, get, or return the query itself.
-        switch ($action) {
-            case 'paginate':
-                return $query->paginate(self::PAGINATION_LIMIT_FOR_FRONT);
-
-            case 'get':
-                return $query->get();
-
-            case 'query':
-            default:
-                return $query;
-        }
+        return $query;
     }
 
     /**
-     * Get finalized records for the dashboard based on the specified query and action.
+     * Finalized query for the dashboard based on the specified query and action.
      *
-     * @param \Illuminate\Http\Request $request The HTTP request containing parameters like order, pagination, etc.
      * @param \Illuminate\Database\Eloquent\Builder|null $query The query builder instance (optional).
-     * @param string $action The action to perform: 'paginate', 'get', or 'query'. Defaults to 'paginate'.
+     * @param \Illuminate\Http\Request $request The HTTP request containing parameters like order, pagination, etc.
+     * @param string $action The action to perform: 'paginate', 'get', or 'query'
      * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder
      *         The modified query or the retrieved results.
      */
-    public static function getFinalizedRecordsForDashboard($request, $query = null, $action = 'paginate')
+    public static function finalizeQueryForDashboard($query, $request, $action)
     {
-        // Use the provided query or default to a new query.
-        $query = $query ?: self::query();
+        $query = QueryFilterHelper::applyFilters($query, $request, self::getDashboardFilterConfig());
+        $query = self::finalizeQueryForRequest($query, $request, $action);
 
-        // Apply sorting based on request parameters
-        $query->orderBy($request->order_by, $request->order_type)
-            ->orderBy('id', $request->order_type); // Secondary ordering by 'id'.
+        return $query;
+    }
 
-        // Handle the different actions: paginate, get, or return the query itself.
-        switch ($action) {
-            case 'paginate':
-                return $query->paginate($request->pagination_limit, ['*'], 'page', $request->get('page', 1))
-                    ->appends($request->except(['page', 'reversed_order_url']));
-
-            case 'get':
-                return $query->get();
-
-            case 'query':
-            default:
-                return $query;
-        }
+    public static function getDashboardFilterConfig(): array
+    {
+        return [
+            'whereEqual' => ['author_id'],
+            'like' => ['body', 'notes'],
+            'belongsToMany' => ['categories'],
+        ];
     }
 }

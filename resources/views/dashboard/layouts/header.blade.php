@@ -3,7 +3,10 @@
         {{-- Logo --}}
         <div class="header__logo-wrapper">
             <x-global.material-symbol-outlined class="header__leftbar-toggler unselectable" icon="menu" title="Переключить меню" />
-            <h4 class="header__logo-text">{{ env('APP_NAME') }}</h4>
+
+            <a class="header__logo-link" href="{{ route('dashboard.index') }}">
+                <h4 class="header__logo-text">{{ env('APP_NAME') }}</h4>
+            </a>
         </div>
 
         {{-- Menu --}}

@@ -14,7 +14,7 @@
     </table>
 </div>
 
-@if ($includePagination)
+@if ($includePagination && $records->hasPages())
     <div class="pagination-wrapper">
         <x-global.navigate-to-page-number :current-page="$records->currentPage()" :last-page="$records->lastPage()" />
         {{ $records->links('dashboard.layouts.pagination') }}

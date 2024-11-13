@@ -4,7 +4,7 @@
     </x-slot:button>
 
     <x-slot:content>
-        <a class="profile-dropdown__link" href="{{ route('dashboard.quotes.index') }}" target="_blank">
+        <a class="profile-dropdown__link" href="{{ route('dashboard.index') }}" target="_blank">
             <x-global.material-symbol-outlined icon="settings" filled="true" />
             Админка
         </a>

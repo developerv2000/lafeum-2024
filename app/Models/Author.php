@@ -96,6 +96,13 @@ class Author extends Model
         }
     }
 
+    public static function getAllMinified()
+    {
+        return self::select('id', 'name')
+            ->orderBy('name', 'asc')
+            ->get();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Miscellaneous
