@@ -2,6 +2,7 @@
 
 namespace App\Support\Helpers;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -88,8 +89,13 @@ class QueryFilterHelper
         foreach ($attributes as $attribute) {
             if ($request->filled($attribute)) {
                 [$fromDate, $toDate] = explode(' - ', $request->input($attribute));
+
+                // Parse dates to match valid timestamp format
+                $fromDate = Carbon::createFromFormat('d/m/Y', $fromDate)->format('Y-m-d');
+                $toDate = Carbon::createFromFormat('d/m/Y', $toDate)->format('Y-m-d');
+
                 $query->whereDate($attribute, '>=', $fromDate)
-                      ->whereDate($attribute, '<=', $toDate);
+                    ->whereDate($attribute, '<', $toDate);
             }
         }
         return $query;

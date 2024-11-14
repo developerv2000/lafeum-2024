@@ -48,17 +48,23 @@
     <script src="{{ asset('plugins/selectize/selectize.min.js') }}"></script>
     <script src="{{ asset('plugins/selectize/preserve-on-blur-plugin/preserve-on-blur.js') }}"></script>
 
-    {{-- Simditor v2.3.28 --}}
-    <script src="{{ asset('plugins/simditor/module.js') }}"></script>
-    <script src="{{ asset('plugins/simditor/hotkeys.js') }}"></script>
-    <script src="{{ asset('plugins/simditor/uploader.js') }}"></script>
-    <script src="{{ asset('plugins/simditor/simditor.js') }}"></script>
+    {{-- Moment.js (required in Date range picker) --}}
+    <script src="{{ asset('plugins/moment.min.js') }}"></script>
+
+    {{-- JQuery Date range picker --}}
+    <script src="{{ asset('plugins/date-range-picker/daterangepicker.min.js') }}"></script>
 
     {{-- JQuery UI. Required for JQuery Nested Sortable plugin --}}
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
     {{-- JQuery Nested Sortable --}}
     <script src="{{ asset('plugins/jquery-nested-sortable.js') }}"></script>
+
+    {{-- Simditor v2.3.28 --}}
+    <script src="{{ asset('plugins/simditor/module.js') }}"></script>
+    <script src="{{ asset('plugins/simditor/hotkeys.js') }}"></script>
+    <script src="{{ asset('plugins/simditor/uploader.js') }}"></script>
+    <script src="{{ asset('plugins/simditor/simditor.js') }}"></script>
 
     @vite('resources/js/dashboard/main.js')
 </body>

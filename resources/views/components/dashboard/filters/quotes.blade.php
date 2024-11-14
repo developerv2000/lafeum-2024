@@ -1,7 +1,13 @@
 <x-dashboard.filters.layout>
-    <x-form.selects.selectize.id-based-single-select.request-based-select
+    <x-form.inputs.request-based-input
+        labelText="Дата создания"
+        inputName="created_at"
+        class="date-range-picker-input"
+        autocomplete="off" />
+
+    <x-form.selects.selectize.id-based-multiple-select.request-based-select
         labelText="Автор"
-        inputName="author_id"
+        inputName="author_id[]"
         :options="$authors" />
 
     <x-form.selects.selectize.id-based-multiple-select.request-based-select
@@ -17,6 +23,6 @@
         labelText="Мысли автора"
         inputName="notes" />
 
-    {{-- Default filter elements --}}
-    <x-dashboard.filters.partials.default-elements />
+    {{-- Default filter inputs --}}
+    <x-dashboard.filters.partials.default-inputs />
 </x-dashboard.filters.layout>

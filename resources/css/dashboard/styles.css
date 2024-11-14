@@ -27,6 +27,9 @@ body {
     --form-input-line-height: 1.5;
     --form-input-text-color: var(--theme-text-color);
     --form-input-background-color: transparent;
+    --form-input-border: var(--theme-border);
+    --form-input-border-color: var(--theme-border-color);
+    --form-input-border-radius: var(--theme-border-radius);
 }
 
 /* Scrollbar width & height */
@@ -124,13 +127,6 @@ a {
     border-radius: var(--theme-border-radius);
     box-shadow: var(--theme-box-shadow);
 }
-
-/* ------------ Form ------------ */
-/* Remove filter pagination limit highlighting */
-.pagination-limit-single-selectize.single-selectize--highlight .selectize-input {
-    border-color: var(--theme-border-color);
-}
-/* ------------ /end Form ------------ */
 
 
 /* ------------ Buttons ------------ */

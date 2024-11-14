@@ -104,3 +104,27 @@ export function showTargetDeleteModal(button) {
 
     showModal(targetDeleteModal);
 }
+
+export function handleFilterFormSubmit(evt) {
+    const form = evt.target;
+
+    // Remove empty inputs
+    form.querySelectorAll('input, select.single-selectize').forEach((input) => {
+        if (!input.value) {
+            input.remove();
+        }
+    });
+}
+
+export function moveFilterActiveInputsToTop(form) {
+    if (!form) return;
+
+    const inputs = form.querySelectorAll('input.input--highlight, select.single-selectize--highlight, select.multiple-selectize--highlight');
+    // Reverse elements to keep same highlighted inputs order
+    const reversedInputs = Array.from(inputs).reverse();
+
+    reversedInputs.forEach((input) => {
+        const formGroup = input.closest('.form-group');
+        form.insertBefore(formGroup, form.firstChild);
+    });
+}

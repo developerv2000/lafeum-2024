@@ -24,7 +24,7 @@ class DashboardViewComposersDefiner
 
     private static function paginationLimitComposer()
     {
-        self::defineViewComposer('components.dashboard.filters.partials.pagination-limit', [
+        self::defineViewComposer('components.dashboard.filters.partials.pagination-limit-input', [
             'paginationLimitOptions' => ModelHelper::getPaginationLimitOptions(),
         ]);
     }

@@ -29,6 +29,7 @@ const fullscreenButtons = document.querySelectorAll('[data-click-action="request
 const targetDeleteModalButtons = document.querySelectorAll('[data-click-action="show-target-delete-modal"]');
 
 // Forms
+const filterForm = document.querySelector('.filter-form');
 const appendsInputsBeforeSubmitForms = document.querySelectorAll('[data-before-submit="appends-inputs"]');
 const showsSpinnerOnSubmitForms = document.querySelectorAll('[data-on-submit="show-spinner"]');
 
@@ -78,6 +79,8 @@ targetDeleteModalButtons.forEach((button) => {
     button.addEventListener('click', () => functions.showTargetDeleteModal(button));
 });
 
+filterForm?.addEventListener('submit', (evt) => functions.handleFilterFormSubmit(evt));
+
 /*
 |--------------------------------------------------------------------------
 | Initializations
@@ -86,4 +89,6 @@ targetDeleteModalButtons.forEach((button) => {
 
 init();
 
-function init() {}
+function init() {
+    functions.moveFilterActiveInputsToTop(filterForm);
+}

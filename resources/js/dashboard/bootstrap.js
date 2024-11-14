@@ -93,6 +93,26 @@ function initializeSimditors() {
     });
 }
 
+function initializeDateRangerPickers() {
+    $('.date-range-picker-input').daterangepicker({
+        autoUpdateInput: false, // Make picker nullable
+        opens: 'left',
+        locale: {
+            format: 'DD/MM/YYYY' // Change default format
+        },
+    });
+
+    // Set input value with updated format on apply
+    $('.date-range-picker-input').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+    });
+
+    // Make picker nullable
+    $('.date-range-picker-input').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('');
+    });
+}
+
 /*
 |--------------------------------------------------------------------------
 | Initializations
@@ -105,6 +125,7 @@ function initializeSimditors() {
 function init() {
     initializeSelectizes();
     initializeSimditors();
+    initializeDateRangerPickers();
 }
 
 init();

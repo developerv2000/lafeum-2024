@@ -115,9 +115,10 @@ class Quote extends Model
     public static function getDashboardFilterConfig(): array
     {
         return [
-            'whereEqual' => ['author_id'],
+            'whereIn' => ['author_id'],
             'like' => ['body', 'notes'],
             'belongsToMany' => ['categories'],
+            'dateRange' => ['created_at', 'updated_at'],
         ];
     }
 }

@@ -10,6 +10,9 @@
 /* Selectize */
 @import '../../../public/plugins/selectize/selectize.css';
 
+/* Date range picker */
+@import '../../../public/plugins/date-range-picker/daterangepicker.css';
+
 /* Simditor */
 @import '../../../public/plugins/simditor/simditor.css';
 
