@@ -4,12 +4,14 @@ namespace App\Support\ViewComposerDefiners;
 
 use App\Models\Author;
 use App\Models\QuoteCategory;
+use App\Support\Helpers\ModelHelper;
 use Illuminate\Support\Facades\View;
 
 class DashboardViewComposersDefiner
 {
     public static function defineAll()
     {
+        self::paginationLimitComposer();
         self::defineQuotesComposers();
     }
 
@@ -20,9 +22,16 @@ class DashboardViewComposersDefiner
         });
     }
 
+    private static function paginationLimitComposer()
+    {
+        self::defineViewComposer('components.dashboard.filters.partials.pagination-limit', [
+            'paginationLimitOptions' => ModelHelper::getPaginationLimitOptions(),
+        ]);
+    }
+
     private static function defineQuotesComposers()
     {
-        self::defineViewComposer('dashboard.filters.quotes',[
+        self::defineViewComposer('components.dashboard.filters.quotes', [
             'authors' => Author::getAllMinified(),
             'categories' => QuoteCategory::getAllMinified(),
         ]);

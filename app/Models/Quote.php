@@ -28,7 +28,7 @@ class Quote extends Model
 
     const DEFAULT_DASHBOARD_ORDER_BY = 'updated_at';
     const DEFAULT_DASHBOARD_ORDER_TYPE = 'desc';
-    const DEFAULT_DASHBOARD_PAGINATION_LIMIT = 40;
+    const DEFAULT_DASHBOARD_PAGINATION_LIMIT = 50;
 
     protected $guarded = ['id'];
 

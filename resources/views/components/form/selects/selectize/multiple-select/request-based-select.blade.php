@@ -4,6 +4,7 @@
     'options', // Options to be displayed in the select field.
     'requestedInput' => str_replace('[]', '', $inputName), // Input name with removed brackets.
     'initialValues' => [], // Initial values of the input field.
+    'taggable' => false, // Whether user can and new options or not
     'validationErrorKey' => null, // Validation error bag key, if any.
     'isRequired' => false, // Determines if the field is required.
 ])
@@ -20,9 +21,7 @@
     :isRequired="$isRequired">
 
     <select
-        {{ $attributes->merge([
-            'class' => $taggable ? 'multiple-taggable-selectize' : 'multiple-selectize' . (request()->has($requestedInput) ? ' multiple-selectize--highlight' : ''),
-        ]) }}
+        {{ $attributes->merge(['class' => 'multiple-selectize' . ($taggable ? ' multiple-selectize--taggable' : '') . (request()->has($requestedInput) ? ' multiple-selectize--highlight' : '')]) }}
         name="{{ $inputName }}"
         multiple
         @if ($isRequired) required @endif>

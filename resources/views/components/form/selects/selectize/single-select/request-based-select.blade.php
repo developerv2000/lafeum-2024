@@ -9,7 +9,7 @@
 
 @php
     // Set the currently selected option value, preferring request input or the initial value.
-    $selectedValue = request()->old($inputName, $initialValue);
+    $selectedValue = request()->input($inputName, $initialValue);
 @endphp
 
 <x-form.groups.default-group

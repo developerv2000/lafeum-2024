@@ -23,4 +23,17 @@ class ModelHelper
 
         return $namespace . $basename;
     }
+
+    public static function getPaginationLimitOptions()
+    {
+        return [
+            10,
+            20,
+            50,
+            100,
+            200,
+            250,
+            500,
+        ];
+    }
 }

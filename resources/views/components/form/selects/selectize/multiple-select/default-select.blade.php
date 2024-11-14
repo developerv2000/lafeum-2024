@@ -20,7 +20,7 @@
     :isRequired="$isRequired">
 
     <select
-        {{ $attributes->merge(['class' => ($taggable ? 'multiple-taggable-selectize' : 'multiple-selectize')]) }}
+        {{ $attributes->merge(['class' => 'multiple-selectize' . ($taggable ? ' multiple-selectize--taggable' : '')]) }}
         name="{{ $inputName }}"
         multiple
         @if ($isRequired) required @endif>

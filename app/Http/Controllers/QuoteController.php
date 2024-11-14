@@ -71,7 +71,7 @@ class QuoteController extends Controller
      */
     public function dashboardCreate()
     {
-        //
+        return view('dashboard.quotes.create');
     }
 
     /**

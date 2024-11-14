@@ -126,7 +126,10 @@ a {
 }
 
 /* ------------ Form ------------ */
-
+/* Remove filter pagination limit highlighting */
+.pagination-limit-single-selectize.single-selectize--highlight .selectize-input {
+    border-color: var(--theme-border-color);
+}
 /* ------------ /end Form ------------ */
 
 

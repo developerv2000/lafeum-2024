@@ -17,44 +17,44 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 */
 
 const SELECTIZE_CLASSES = {
-    SINGLE: '.single-selectize:not(.manually-initializable-selectize):not(.linked-selectize)',
-    LINKED: '.linked-selectize:not(.manually-initializable-selectize)',
-    MULTIPLE: '.multiple-selectize:not(.manually-initializable-selectize)',
-    MULTIPLE_TAGGABLE: '.multiple-taggable-selectize:not(.manually-initializable-selectize)',
+    SINGLE_UNLINKED: '.single-selectize:not(.single-selectize--linked):not(.single-selectize--manually-initializable)',
+    SINGLE_LINKED: '.single-selectize--linked:not(.single-selectize--manually-initializable)',
+    MULTIPLE_UNTAGGABLE: '.multiple-selectize:not(.multiple-selectize--taggable):not(.multiple-selectize--manually-initializable)',
+    MULTIPLE_TAGGABLE: '.multiple-selectize--taggable:not(.multiple-selectize--manually-initializable)',
 };
 
 /**
  * Initializes the selectize components based on class selectors.
  */
 function initializeSelectizes() {
-    // Single Selectize
-    $(SELECTIZE_CLASSES.SINGLE).selectize({
+    // Single unlinked selectize
+    $(SELECTIZE_CLASSES.SINGLE_UNLINKED).selectize({
         plugins: ["auto_position", "preserve_on_blur"],
     });
 
-    // Linked Selectize
-    $(SELECTIZE_CLASSES.LINKED).selectize({
-        plugins: ["auto_position"],
+    // Single linked selectize
+    $(SELECTIZE_CLASSES.SINGLE_LINKED).selectize({
+        plugins: ["auto_position", "preserve_on_blur"],
         onChange(value) {
             window.location = value;
         },
     });
 
-    // Multiple Selectize
-    $(SELECTIZE_CLASSES.MULTIPLE).selectize({
+    // Multiple untaggable selectize
+    $(SELECTIZE_CLASSES.MULTIPLE_UNTAGGABLE).selectize({
         plugins: ["auto_position", "preserve_on_blur"],
     });
 
     // Multiple Taggable Selectize
     $(SELECTIZE_CLASSES.MULTIPLE_TAGGABLE).selectize({
-        plugins: ["auto_position"],
+        plugins: ["auto_position", "preserve_on_blur"],
         create(input, callback) {
             callback({
                 value: input,
                 text: input,
             });
         },
-        createOnBlur: true,
+        // createOnBlur: true,
     });
 }
 

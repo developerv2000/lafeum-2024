@@ -159,6 +159,7 @@
 /* Single/multiple selectizes input on dropdown show */
 .selectize-input.dropdown-active {
     border-radius: var(--theme-border-radius);
+    border-color: var(--theme-main-color);
 }
 
 /* Single/multiple selectizes 1px height divider (between input & dropdown) on dropdown show */
@@ -191,7 +192,7 @@
 
 /* Single/multiple selectizes dropdown options wrapper */
 .selectize-dropdown-content::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
 }
 
 .selectize-dropdown-content::-webkit-scrollbar-track {
@@ -218,9 +219,22 @@
 }
 
 /* Multiple selectize selected options on input */
-.multiple-selectize.selectize-control .selectize-input>div {
+.multiple-selectize.selectize-control .selectize-input>.item {
+    background: var(--theme-body-background-color);
+    color: var(--theme-lighter-text-color);
+}
+
+/* Multiple selectize selected options focus on input */
+.multiple-selectize.selectize-control .selectize-input>.item.active {
     background: var(--theme-body-background-color);
     color: var(--theme-text-color);
+    font-weight: 500;
+}
+
+/* Multiple taggable selectize create option styles */
+.multiple-selectize .selectize-dropdown-content div.create.active {
+    background-color: transparent;
+    color: var(--theme-lighter-text-color);
 }
 
 /* Highlight selectize inputs (used on request based selects while filtering etc) */

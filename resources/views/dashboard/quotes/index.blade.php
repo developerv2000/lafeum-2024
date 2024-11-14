@@ -42,5 +42,5 @@
 @endsection
 
 @section('rightbar')
-    @include('dashboard.filters.quotes')
+    <x-dashboard.filters.quotes />
 @endsection
