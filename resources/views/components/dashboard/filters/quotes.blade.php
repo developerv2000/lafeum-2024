@@ -1,10 +1,4 @@
 <x-dashboard.filters.layout>
-    <x-form.inputs.request-based-input
-        labelText="Дата создания"
-        inputName="created_at"
-        class="date-range-picker-input"
-        autocomplete="off" />
-
     <x-form.selects.selectize.id-based-multiple-select.request-based-select
         labelText="Автор"
         inputName="author_id[]"

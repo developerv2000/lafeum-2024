@@ -5,8 +5,14 @@
 
 @section('content')
     <div class="main-box styled-box">
-        <div class="toolbar">
-            <h1 class="toolbar__title">Отфильтрованных записей — {{ $records->total() }}</h1>
+
+        <div class="toolbar toolbar--joined toolbar--for-table">
+            {{-- blade-formatter-disable --}}
+            <x-dashboard.layouts.breadcrumbs :crumbs="[
+                ['link' => null, 'text' => 'Все цитаты'],
+                ['link' => null, 'text' => 'Отфильтрованных записей — ' . $records->total()],
+            ]" />
+            {{-- blade-formatter-enable --}}
 
             <div class="toolbar__buttons-wrapper">
                 <x-global.buttoned-link

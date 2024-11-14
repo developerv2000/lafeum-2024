@@ -31,7 +31,10 @@ class DashboardViewComposersDefiner
 
     private static function defineQuotesComposers()
     {
-        self::defineViewComposer('components.dashboard.filters.quotes', [
+        self::defineViewComposer([
+            'components.dashboard.filters.quotes',
+            'dashboard.quotes.edit',
+        ], [
             'authors' => Author::getAllMinified(),
             'categories' => QuoteCategory::getAllMinified(),
         ]);
