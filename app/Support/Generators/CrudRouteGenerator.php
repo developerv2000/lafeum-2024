@@ -59,10 +59,10 @@ class CrudRouteGenerator
                 Route::get('/create', $controllerAction)->name('create');
                 break;
             case 'show':
-                Route::get('/{record:' . $identifierAttribute . '}', $controllerAction)->name('show');
+                Route::get('/show/{record:' . $identifierAttribute . '}', $controllerAction)->name('show');
                 break;
             case 'edit':
-                Route::get('/edit/{record}', $controllerAction)->name('edit');
+                Route::get('/edit/{record:' . $identifierAttribute . '}', $controllerAction)->name('edit');
                 break;
             case 'trash':
                 Route::get('/trash', $controllerAction)->name('trash');

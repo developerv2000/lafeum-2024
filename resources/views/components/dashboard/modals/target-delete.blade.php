@@ -1,6 +1,6 @@
 @props(['forceDelete'])
 
-<x-global.modal class="target-delete-modal" title="Удалить запись?">
+<x-global.modal class="target-delete-modal" title="Удаление записи">
     <x-slot:body>
         <form
             class="target-delete-form"

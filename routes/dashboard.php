@@ -24,27 +24,27 @@ Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard
     });
 
     Route::controller(QuoteController::class)->prefix('/quotes')->name('quotes.')->group(function () {
-        CrudRouteGenerator::defineAllDefaultRoutes('id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesExcept(['show'], 'id', 'dashboard');
     });
 
     Route::controller(AuthorController::class)->prefix('/authors')->name('authors.')->group(function () {
-        CrudRouteGenerator::defineAllDefaultRoutes('id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesExcept(['show'], 'id', 'dashboard');
     });
 
     Route::controller(TermController::class)->prefix('/terms')->name('terms.')->group(function () {
-        CrudRouteGenerator::defineAllDefaultRoutes('id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesExcept(['show'], 'id', 'dashboard');
     });
 
     Route::controller(PhotoController::class)->prefix('/photos')->name('photos.')->group(function () {
-        CrudRouteGenerator::defineAllDefaultRoutes('id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesExcept(['show'], 'id', 'dashboard');
     });
 
     Route::controller(VideoController::class)->prefix('/videos')->name('videos.')->group(function () {
-        CrudRouteGenerator::defineAllDefaultRoutes('id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesExcept(['show'], 'id', 'dashboard');
     });
 
     Route::controller(ChannelController::class)->prefix('/channels')->name('channels.')->group(function () {
-        CrudRouteGenerator::defineAllDefaultRoutes('id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesExcept(['show'], 'id', 'dashboard');
     });
 
     Route::controller(CategoryController::class)->prefix('/categories/{model}')->name('categories.')->group(function () {

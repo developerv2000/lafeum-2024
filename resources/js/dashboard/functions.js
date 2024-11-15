@@ -22,6 +22,7 @@ const TOGGLE_LEFTBAR_URL = '/dashboard/settings/collapsed-leftbar';
 
 const leftbar = document.querySelector('.leftbar');
 const targetDeleteModal = document.querySelector('.target-delete-modal');
+const targetRestoreModal = document.querySelector('.target-restore-modal');
 
 /*
 |--------------------------------------------------------------------------
@@ -95,14 +96,24 @@ export function appendFormInputsBeforeSubmit(evt) {
 }
 
 export function showTargetDeleteModal(button) {
-    // Update form before modal show
-    const form = targetDeleteModal.querySelector('form');
-    const idInput = targetDeleteModal.querySelector('input[name="id"]');
+    setupTargetedModalForSubmit(targetDeleteModal, button);
+    showModal(targetDeleteModal);
+}
+
+export function showTargetRestoreModal(button) {
+    setupTargetedModalForSubmit(targetRestoreModal, button);
+    showModal(targetRestoreModal);
+}
+
+/**
+ * Setup targeted modal before show for submit, on action button click
+ */
+function setupTargetedModalForSubmit(modal, button) {
+    const form = modal.querySelector('form');
+    const idInput = modal.querySelector('input[name="id"]');
 
     idInput.value = button.dataset.targetId;
     form.action = button.dataset.formAction;
-
-    showModal(targetDeleteModal);
 }
 
 export function handleFilterFormSubmit(evt) {

@@ -33,7 +33,7 @@ trait DestroysModelRecords
         if ($request->input('force_delete')) {
             foreach ($ids as $id) {
                 // Check if model exists before force deleting
-                $record = self::$model::withTrashed()->find($id);
+                $record = static::$model::withTrashed()->find($id);
                 if ($record) {
                     $record->forceDelete();
                 }
@@ -42,7 +42,7 @@ trait DestroysModelRecords
             // Soft delete or trash records
             foreach ($ids as $id) {
                 // Check if model exists before soft deleting
-                $record = self::$model::find($id);
+                $record = static::$model::find($id);
 
                 if ($record) {
                     $record->delete();

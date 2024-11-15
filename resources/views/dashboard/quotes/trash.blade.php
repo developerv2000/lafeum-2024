@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app', [
-    'pageName' => 'quotes-index',
+    'pageName' => 'quotes-trash',
     'mainAutoOverflowed' => true,
 ])
 
@@ -10,7 +10,8 @@
             {{-- blade-formatter-disable --}}
             @php
                 $crumbs = [
-                    ['link' => null, 'text' => 'Все цитаты'],
+                    ['link' => route('dashboard.quotes.index'), 'text' => 'Все цитаты'],
+                    ['link' => null, 'text' => 'Корзина'],
                     ['link' => null, 'text' => 'Отфильтрованных записей — ' . $records->total()]
                 ];
             @endphp
@@ -20,19 +21,20 @@
 
             {{-- Toolbar buttons --}}
             <div class="toolbar__buttons-wrapper">
-                <x-global.buttoned-link
-                    class="toolbar__button"
-                    style="shadowed"
-                    link="{{ route('dashboard.quotes.create') }}"
-                    icon="add">Добавить
-                </x-global.buttoned-link>
-
                 <x-global.button
                     class="toolbar__button"
                     style="shadowed"
                     icon="delete"
                     data-click-action="show-modal"
-                    data-modal-selector=".multiple-delete-modal">Удалить
+                    data-modal-selector=".multiple-delete-modal">Удалить навсегда
+                </x-global.button>
+
+                <x-global.button
+                    class="toolbar__button"
+                    style="shadowed"
+                    icon="history"
+                    data-click-action="show-modal"
+                    data-modal-selector=".multiple-restore-modal">Восстановить
                 </x-global.button>
 
                 <x-global.button
@@ -46,12 +48,14 @@
         </div>
 
         {{-- Table --}}
-        <x-dashboard.tables.quotes-table :records="$records" />
+        <x-dashboard.tables.quotes-table :records="$records" :trashedRecords="true" />
     </div>
 
     {{-- Modals --}}
-    <x-dashboard.modals.multiple-delete form-action="{{ route('dashboard.quotes.destroy') }}" :force-delete="false" />
-    <x-dashboard.modals.target-delete :force-delete="false" />
+    <x-dashboard.modals.multiple-delete form-action="{{ route('dashboard.quotes.destroy') }}" :force-delete="true" />
+    <x-dashboard.modals.target-delete :force-delete="true" />
+    <x-dashboard.modals.multiple-restore form-action="{{ route('dashboard.quotes.restore') }}" />
+    <x-dashboard.modals.target-restore />
 @endsection
 
 @section('rightbar')

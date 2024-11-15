@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app', [
-    'pageName' => 'quotes-edit',
+    'pageName' => 'quotes-create',
     'mainAutoOverflowed' => false,
 ])
 
@@ -9,16 +9,8 @@
         @php
             $crumbs = [
                 ['link' => route('dashboard.quotes.index'), 'text' => 'Все цитаты'],
+                ['link' => null, 'text' => 'Добавить'],
             ];
-
-            if ($record->trashed()) {
-                $crumbs[] = ['link' => route('dashboard.quotes.trash'), 'text' => 'Корзина'];
-            }
-
-            array_push($crumbs,
-                ['link' => null, 'text' => 'Редактировать'],
-                ['link' => null, 'text' => '#' . $record->id],
-            )
         @endphp
         {{-- blade-formatter-enable --}}
 
@@ -29,32 +21,29 @@
                 class="toolbar__button"
                 style="shadowed"
                 type="submit"
-                form="edit-form"
-                icon="done_all">Сохранить
+                form="create-form"
+                icon="done_all">Добавить
             </x-global.button>
         </div>
     </div>
 
-    <x-dashboard.form-templates.edit-template :action="route('dashboard.quotes.update', $record->id)">
+    <x-dashboard.form-templates.create-template :action="route('dashboard.quotes.store')">
         <div class="form__block">
             <div class="form__row">
-                <x-form.selects.selectize.id-based-single-select.record-field-select
+                <x-form.selects.selectize.id-based-single-select.default-select
                     labelText="Автор"
-                    :model="$record"
-                    field="author_id"
+                    inputName="author_id"
                     :options="$authors"
                     :isRequired="true" />
 
-                <x-form.inputs.record-field-input
+                <x-form.inputs.default-input
                     labelText="Дата публикации"
                     type="datetime-local"
-                    :model="$record"
-                    field="publish_at"
+                    inputName="publish_at"
                     :isRequired="true" />
 
-                <x-form.selects.selectize.id-based-multiple-select.record-relation-select
+                <x-form.selects.selectize.id-based-multiple-select.default-select
                     labelText="Категории"
-                    :model="$record"
                     inputName="categories[]"
                     :options="$categories"
                     :isRequired="true" />
@@ -63,19 +52,17 @@
 
         <div class="form__block">
             <div class="form__row">
-                <x-form.textareas.record-field-textarea
+                <x-form.textareas.default-textarea
                     class="simditor"
                     labelText="Текст"
-                    :model="$record"
-                    field="body"
+                    inputName="body"
                     :isRequired="true" />
 
-                <x-form.textareas.record-field-textarea
+                <x-form.textareas.default-textarea
                     class="simditor"
                     labelText="Мысли автора"
-                    :model="$record"
-                    field="notes" />
+                    inputName="notes" />
             </div>
         </div>
-    </x-dashboard.form-templates.edit-template>
+    </x-dashboard.form-templates.create-template>
 @endsection

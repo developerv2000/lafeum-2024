@@ -73,11 +73,13 @@ function initializeSimditors() {
         imageButton: 'upload',
     };
 
-    document.querySelectorAll('.simditor').forEach(textarea => {
+    // Unimaged simditor
+    document.querySelectorAll('.simditor:not(.simditor--imaged)').forEach(textarea => {
         new Simditor({ ...simditorConfigs, textarea });
     });
 
-    document.querySelectorAll('.imaged-simditor').forEach(textarea => {
+    // Imaged simditor
+    document.querySelectorAll('.simditor--imaged').forEach(textarea => {
         new Simditor({
             ...simditorConfigs,
             textarea,

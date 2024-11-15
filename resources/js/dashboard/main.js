@@ -27,6 +27,7 @@ const mainTable = document.querySelector('.main-table');
 const leftbarToggler = document.querySelector('.header__leftbar-toggler');
 const fullscreenButtons = document.querySelectorAll('[data-click-action="request-fullscreen"]');
 const targetDeleteModalButtons = document.querySelectorAll('[data-click-action="show-target-delete-modal"]');
+const targetRestoreModalButtons = document.querySelectorAll('[data-click-action="show-target-restore-modal"]');
 
 // Forms
 const filterForm = document.querySelector('.filter-form');
@@ -77,6 +78,10 @@ showsSpinnerOnSubmitForms.forEach((form) => {
 
 targetDeleteModalButtons.forEach((button) => {
     button.addEventListener('click', () => functions.showTargetDeleteModal(button));
+});
+
+targetRestoreModalButtons.forEach((button) => {
+    button.addEventListener('click', () => functions.showTargetRestoreModal(button));
 });
 
 filterForm?.addEventListener('submit', (evt) => functions.handleFilterFormSubmit(evt));

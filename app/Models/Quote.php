@@ -51,7 +51,7 @@ class Quote extends Model
 
     public function author()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(Author::class)->withTrashed();
     }
 
     public function categories()
@@ -67,6 +67,12 @@ class Quote extends Model
 
     protected static function booted(): void
     {
+        static::restoring(function ($record) {
+            if ($record->author->trashed()) {
+                $record->author->restoreQuietly();
+            }
+        });
+
         static::forceDeleting(function ($record) {
             $record->categories()->detach();
         });
@@ -115,10 +121,32 @@ class Quote extends Model
     public static function getDashboardFilterConfig(): array
     {
         return [
-            'whereIn' => ['author_id'],
+            'whereIn' => ['id', 'author_id'],
             'like' => ['body', 'notes'],
             'belongsToMany' => ['categories'],
-            'dateRange' => ['created_at', 'updated_at'],
+            'dateRange' => ['created_at', 'updated_at', 'publish_at'],
         ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Create and Update
+    |--------------------------------------------------------------------------
+    */
+
+    public static function createFromRequest($request)
+    {
+        $instance = self::create($request->all());
+
+        // BelongsToMany relations
+        $instance->categories()->attach($request->input('categories'));
+    }
+
+    public function updateFromRequest($request)
+    {
+        $this->update($request->all());
+
+        // BelongsToMany relations
+        $this->categories()->sync($request->input('categories'));
     }
 }
