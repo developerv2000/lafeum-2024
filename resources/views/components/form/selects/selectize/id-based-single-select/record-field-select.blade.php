@@ -11,7 +11,7 @@
 
 @php
     // Set the currently selected option value, preferring old input or the model's current value.
-    $currentValue = old($inputName, $model->{$field});
+    $selectedValue = old($inputName, $model->{$field});
 @endphp
 
 <x-form.groups.default-group
@@ -32,7 +32,7 @@
 
         {{-- Generate options dynamically from the provided collection --}}
         @foreach ($options as $option)
-            <option value="{{ $option->id }}" @selected($option->id == $currentValue)>
+            <option value="{{ $option->id }}" @selected($option->id == $selectedValue)>
                 {{ $option->{$optionCaptionField} }}
             </option>
         @endforeach

@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Support\Helpers\QueryFilterHelper;
+use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\Favoriteable;
+use App\Support\Traits\Model\FinalizesQueryForRequest;
 use App\Support\Traits\Model\Likeable;
 use App\Support\Traits\Model\Publishable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,8 +19,22 @@ class Term extends Model
     use Publishable;
     use Likeable;
     use Favoriteable;
+    use AddsQueryParamsToRequest;
+    use FinalizesQueryForRequest;
 
-    const PAGINATION_LIMIT_FOR_FRONT = 20;
+    const DEFAULT_FRONT_ORDER_BY = 'publish_at';
+    const DEFAULT_FRONT_ORDER_TYPE = 'desc';
+    const DEFAULT_FRONT_PAGINATION_LIMIT = 20;
+
+    const DEFAULT_DASHBOARD_ORDER_BY = 'updated_at';
+    const DEFAULT_DASHBOARD_ORDER_TYPE = 'desc';
+    const DEFAULT_DASHBOARD_PAGINATION_LIMIT = 50;
+
+    protected $guarded = ['id'];
+
+    public $casts = [
+        'publish_at' => 'datetime',
+    ];
 
     protected $with = [
         'type',
@@ -47,6 +64,7 @@ class Term extends Model
         return $this->belongsToMany(TermCategory::class, 'category_term', 'term_id', 'category_id');
     }
 
+
     /*
     |--------------------------------------------------------------------------
     | Additional attributes
@@ -73,7 +91,23 @@ class Term extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | Queries
+    | Events
+    |--------------------------------------------------------------------------
+    */
+
+    protected static function booted(): void
+    {
+        static::forceDeleting(function ($record) {
+            $record->knowledges()->detach();
+            $record->categories()->detach();
+            $record->likes()->delete();
+            $record->favorites()->delete();
+        });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
     |--------------------------------------------------------------------------
     */
 
@@ -83,79 +117,96 @@ class Term extends Model
             ->where('name', '!=', '');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Queries
+    |--------------------------------------------------------------------------
+    */
+
     /**
-     * Get finalized records for the front-end based on the specified query and action.
+     * Finalized query for the front based on the specified query and action.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query The query builder instance.
-     * @param string $finaly The action to perform: 'paginate', 'get', or 'query'.
-     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder The modified query or the retrieved results.
+     * @param \Illuminate\Database\Eloquent\Builder|null $query The query builder instance (optional).
+     * @param \Illuminate\Http\Request $request The HTTP request containing parameters like order, pagination, etc.
+     * @param string $action The action to perform: 'paginate', 'get', or 'query'
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder
+     *         The modified query or the retrieved results.
      */
-    public static function getFinalizedRecordsForFront($query = null, $finaly = 'paginate')
+    public static function finalizeQueryForFront($query, $request, $action)
     {
-        $query = $query ?: self::query();
+        $query = $query->onlyPublished();
+        $query = self::finalizeQueryForRequest($query, $request, $action);
 
-        // Apply common query modifications
-        $query->onlyPublished()
-            ->orderBy('publish_at', 'desc');
-
-        // Return result based on the finaly option
-        switch ($finaly) {
-            case 'paginate':
-                return $query->paginate(self::PAGINATION_LIMIT_FOR_FRONT);
-
-            case 'get':
-                return $query->get();
-
-            case 'query':
-            default:
-                return $query;
-        }
+        return $query;
     }
 
     /**
-     * Get finalized vocabulary records for the front-end based on the specified query and action.
+     * Finalize vocabulary query for the front based on the specified query.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query The query builder instance.
-     * @param string $finaly The action to perform: 'paginate', 'get', or 'query'.
-     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder The modified query or the retrieved results.
+     * @param \Illuminate\Database\Eloquent\Builder|null $query The query builder instance (optional).
+     * @return \Illuminate\Pagination\LengthAwarePaginator Paginated results
      */
-    public static function getFinalizedVocabularyRecordsForFront($query = null, $finaly = 'get')
+    public static function finalizeVocabularyQueryForFront($query)
     {
-        $query = $query ?: self::query();
-
-        // Apply common query modifications
-        $query->onlyVocabulary()
+        $query = $query->onlyVocabulary()
             ->onlyPublished()
             ->select('id', 'name')
             ->withOnly([])
-            ->orderBy('name', 'asc');
+            ->orderBy('name', 'asc')
+            ->get();
 
-        // Return result based on the finaly option
-        switch ($finaly) {
-            case 'paginate':
-                return $query->paginate(self::PAGINATION_LIMIT_FOR_FRONT);
+        return $query;
+    }
 
-            case 'get':
-                return $query->get();
+    /**
+     * Finalized query for the dashboard based on the specified query and action.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder|null $query The query builder instance (optional).
+     * @param \Illuminate\Http\Request $request The HTTP request containing parameters like order, pagination, etc.
+     * @param string $action The action to perform: 'paginate', 'get', or 'query'
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder
+     *         The modified query or the retrieved results.
+     */
+    public static function finalizeQueryForDashboard($query, $request, $action)
+    {
+        $query = $query->with(['knowledges']); // eager load knownledges
+        $query = QueryFilterHelper::applyFilters($query, $request, self::getDashboardFilterConfig());
+        $query = self::finalizeQueryForRequest($query, $request, $action);
 
-            case 'query':
-            default:
-                return $query;
-        }
+        return $query;
+    }
+
+    public static function getAllNamedRecordsMinified()
+    {
+        return self::where('name', '!=', '')
+            ->select('id', 'name')
+            ->withOnly([])
+            ->orderBy('name', 'asc')
+            ->get();
     }
 
     /*
     |--------------------------------------------------------------------------
-    | Events
+    | Create and Update
     |--------------------------------------------------------------------------
     */
 
-    protected static function booted(): void
+    public static function createFromRequest($request)
     {
-        static::forceDeleting(function ($item) {
-            $item->knowledges()->detach();
-            $item->categories()->detach();
-        });
+        $record = self::create($request->all());
+
+        // BelongsToMany relations
+        $record->categories()->attach($request->input('categories'));
+        $record->knowledges()->attach($request->input('knowledges'));
+    }
+
+    public function updateFromRequest($request)
+    {
+        $this->update($request->all());
+
+        // BelongsToMany relations
+        $this->categories()->sync($request->input('categories'));
+        $this->knowledges()->sync($request->input('knowledges'));
     }
 
     /*
@@ -166,7 +217,7 @@ class Term extends Model
 
     /**
      * Generate an associative array of subterms from the given terms collection.
-     * Used in term cards
+     * Used in subterms text popup on term-cards subterm hover.
      *
      * @return array
      */
@@ -195,5 +246,16 @@ class Term extends Model
 
         // Return the associative array of subterms
         return $subtermsArray;
+    }
+
+    public static function getDashboardFilterConfig(): array
+    {
+        return [
+            'whereEqual' => ['term_type_id', 'show_in_vocabulary'],
+            'whereIn' => ['id'],
+            'like' => ['body'],
+            'belongsToMany' => ['categories', 'knowledges'],
+            'dateRange' => ['created_at', 'updated_at', 'publish_at'],
+        ];
     }
 }

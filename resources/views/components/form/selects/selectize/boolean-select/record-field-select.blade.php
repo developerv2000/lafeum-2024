@@ -2,11 +2,13 @@
     'labelText', // Label for the select input.
     'model', // Model instance being edited to populate the selected option.
     'field', // Model attribute to select as default.
-    'options', // Collection of available options for selection.
+    'trueOptionLabel' => 'Да',
+    'falseOptionLabel' => 'Нет',
+    'trueOptionValue' => 1,
+    'falseOptionValue' => 0,
     'inputName' => $field, // Name for the input field.
     'validationErrorKey' => null, // Validation error bag key, if any.
     'isRequired' => false, // If true, marks the field as required.
-    'placeholderText' => null, // Optional placeholder for the select input.
 ])
 
 @php
@@ -21,21 +23,17 @@
     :isRequired="$isRequired">
 
     <select
-        {{ $attributes->merge(['class' => 'select']) }}
+        {{ $attributes->merge(['class' => 'single-selectize']) }}
         name="{{ $inputName }}"
         @if ($isRequired) required @endif>
 
-        {{-- Display placeholder option if provided --}}
-        @if ($placeholderText)
-            <option value="" disabled selected>{{ $placeholderText }}</option>
-        @endif
+        {{-- Empty option for placeholder --}}
+        @unless ($isRequired)
+            <option></option>
+        @endunless
 
-        {{-- Generate options dynamically from the provided collection --}}
-        @foreach ($options as $option)
-            <option value="{{ $option }}" @selected($option == $selectedValue)>
-                {{ $option }}
-            </option>
-        @endforeach
+        <option value="{{ $trueOptionValue }}" @selected($selectedValue == $trueOptionValue)>{{ __($trueOptionLabel) }}</option>
+        <option value="{{ $falseOptionValue }}" @selected(isset($selectedValue) && $selectedValue == $falseOptionValue)>{{ __($falseOptionLabel) }}</option>
     </select>
 
 </x-form.groups.default-group>

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Gender extends Model
 {
     use HasFactory;
+    use GetsMinifiedRecordsWithName;
 
     const MALE_NAME = 'Мужской';
     const FEMALE_NAME = 'Женский';
@@ -23,16 +25,5 @@ class Gender extends Model
     public function users()
     {
         return $this->hasMany(User::class);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Querying
-    |--------------------------------------------------------------------------
-    */
-
-    public static function getAll()
-    {
-        return self::orderBy('name', 'asc')->get();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kalnoy\Nestedset\NodeTrait;
@@ -10,6 +11,7 @@ class TermCategory extends Model
 {
     use HasFactory;
     use NodeTrait;
+    use GetsMinifiedRecordsWithName;
 
     public $timestamps = false;
 

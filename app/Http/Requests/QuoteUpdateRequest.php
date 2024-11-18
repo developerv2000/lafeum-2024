@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Author;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class QuoteUpdateRequest extends FormRequest
 {
@@ -14,7 +16,7 @@ class QuoteUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'author_id' => Rule::exists(Author::class, 'id'),
         ];
     }
 }

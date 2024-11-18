@@ -20,8 +20,8 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $user = $request->user();
-        $countries = Country::getAll();
-        $genders = Gender::getAll();
+        $countries = Country::getMinifiedRecordsWithName();
+        $genders = Gender::getMinifiedRecordsWithName();
 
         return view('front.pages.profile', compact('user', 'countries', 'genders'));
     }

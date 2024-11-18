@@ -19,4 +19,19 @@ class GeneralHelper
             unset($array[$key]);
         }
     }
+
+    /**
+     * Get an array of boolean options represented by StdClass objects.
+     *
+     * Mainly used by radio groups.
+     *
+     * @return array
+     */
+    public static function getBooleanOptionsArray()
+    {
+        return [
+            (object) ['caption' => trans('Да'), 'value' => 1],
+            (object) ['caption' => trans('Нет'), 'value' => 0],
+        ];
+    }
 }

@@ -393,6 +393,10 @@ a {
 
 
 /* ------------ Form ------------ */
+.form {
+    padding-bottom: 40px;
+}
+
 .input,
 .textarea,
 .select {
@@ -403,6 +407,9 @@ a {
     border-color: var(--theme-checkbox-border-color);
 }
 
+.radio {
+    border-color: var(--theme-radio-border-color);
+}
 /* ------------ /end Form ------------ */
 
 
@@ -617,6 +624,11 @@ a {
 }
 
 /* Collapse */
+/* Prevent .leftbar__inner:x-overflow */
+.leftbar__collapse-wrapper {
+    overflow: hidden;
+}
+
 .leftbar__collapse {
     display: flex;
     flex-direction: column;

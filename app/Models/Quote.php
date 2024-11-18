@@ -75,6 +75,8 @@ class Quote extends Model
 
         static::forceDeleting(function ($record) {
             $record->categories()->detach();
+            $record->likes()->delete();
+            $record->favorites()->delete();
         });
     }
 
@@ -118,16 +120,6 @@ class Quote extends Model
         return $query;
     }
 
-    public static function getDashboardFilterConfig(): array
-    {
-        return [
-            'whereIn' => ['id', 'author_id'],
-            'like' => ['body', 'notes'],
-            'belongsToMany' => ['categories'],
-            'dateRange' => ['created_at', 'updated_at', 'publish_at'],
-        ];
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Create and Update
@@ -136,10 +128,10 @@ class Quote extends Model
 
     public static function createFromRequest($request)
     {
-        $instance = self::create($request->all());
+        $record = self::create($request->all());
 
         // BelongsToMany relations
-        $instance->categories()->attach($request->input('categories'));
+        $record->categories()->attach($request->input('categories'));
     }
 
     public function updateFromRequest($request)
@@ -148,5 +140,21 @@ class Quote extends Model
 
         // BelongsToMany relations
         $this->categories()->sync($request->input('categories'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Miscellaneous
+    |--------------------------------------------------------------------------
+    */
+
+    public static function getDashboardFilterConfig(): array
+    {
+        return [
+            'whereIn' => ['id', 'author_id'],
+            'like' => ['body', 'notes'],
+            'belongsToMany' => ['categories'],
+            'dateRange' => ['created_at', 'updated_at', 'publish_at'],
+        ];
     }
 }

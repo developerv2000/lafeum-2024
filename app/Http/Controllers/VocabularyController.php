@@ -10,7 +10,7 @@ class VocabularyController extends Controller
 {
     public function index()
     {
-        $records = Term::getFinalizedVocabularyRecordsForFront();
+        $records = Term::finalizeVocabularyQueryForFront(Term::query());
 
         // Chunk records by half
         $totalRecords = $records->count();
@@ -23,7 +23,7 @@ class VocabularyController extends Controller
 
     public function category(TermCategory $category)
     {
-        $records = Term::getFinalizedVocabularyRecordsForFront($category->terms());
+        $records = Term::finalizeVocabularyQueryForFront($category->terms());
 
         // Chunk records by half
         $totalRecords = $records->count();

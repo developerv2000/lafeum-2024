@@ -5,7 +5,6 @@ namespace App\Support\Traits\Model;
 use App\Models\Like;
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
  * Important: This trait assumes that the 'likes' relationship is eager loaded.
  * If the 'likes' relationship is not eager loaded, it will result in additional queries.

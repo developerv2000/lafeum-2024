@@ -2,26 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TermStoreRequest;
+use App\Http\Requests\TermUpdateRequest;
 use App\Models\Term;
-use App\Http\Requests\StoreTermRequest;
-use App\Http\Requests\UpdateTermRequest;
 use App\Models\TermCategory;
+use App\Support\Traits\Controller\DestroysModelRecords;
+use App\Support\Traits\Controller\RestoresModelRecords;
+use Illuminate\Http\Request;
 
 class TermController extends Controller
 {
-    public function index()
+    use DestroysModelRecords;
+    use RestoresModelRecords;
+
+    public static $model = Term::class; // Required in multiple destroy/restore traits
+
+    /*
+    |--------------------------------------------------------------------------
+    | Front actions
+    |--------------------------------------------------------------------------
+    */
+
+    public function index(Request $request)
     {
-        $records = Term::getFinalizedRecordsForFront();
-        $subtermsArray = Term::generateSubtermsArray($records); // for subterms popup on hover
+        Term::addQueryParamsToRequest($request);
+        $records = Term::finalizeQueryForFront(Term::query(), $request, 'paginate');
+        $subtermsArray = Term::generateSubtermsArray($records); // Used in subterms text popup on term-cards subterm hover.
         $categories = TermCategory::get()->toTree(); // for leftbar
 
         return view('front.terms.index', compact('records', 'categories', 'subtermsArray'));
     }
 
-    public function category(TermCategory $category)
+    public function category(Request $request, TermCategory $category)
     {
-        $records = Term::getFinalizedRecordsForFront($category->terms());
-        $subtermsArray = Term::generateSubtermsArray($records); // for subterms popup on hover
+        $records = Term::finalizeQueryForFront($category->terms(), $request, 'paginate');
+        $subtermsArray = Term::generateSubtermsArray($records); // Used in subterms text popup on term-cards subterm hover.
         $categories = TermCategory::get()->toTree(); // for leftbar
 
         return view('front.terms.category', compact('category', 'records', 'categories', 'subtermsArray'));
@@ -32,48 +47,71 @@ class TermController extends Controller
      */
     public function show(Term $record)
     {
-        $subtermsArray = Term::generateSubtermsArray(collect([$record])); // for subterms popup on hover
+        $subtermsArray = Term::generateSubtermsArray(collect([$record])); // Used in subterms text popup on term-cards subterm hover.
 
         return view('front.terms.show', compact('record', 'subtermsArray'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard actions
+    |--------------------------------------------------------------------------
+    */
+
+    public function dashboardIndex(Request $request)
+    {
+        Term::addQueryParamsToRequest($request);
+        $records = Term::finalizeQueryForDashboard(Term::query(), $request, 'paginate');
+
+        return view('dashboard.terms.index', compact('records'));
+    }
+
+    public function dashboardTrash(Request $request)
+    {
+        Term::addQueryParamsToRequest($request);
+        $records = Term::finalizeQueryForDashboard(Term::onlyTrashed(), $request, 'paginate');
+
+        return view('dashboard.terms.trash', compact('records'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function dashboardCreate()
     {
-        //
+        return view('dashboard.terms.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTermRequest $request)
+    public function dashboardStore(TermStoreRequest $request)
     {
-        //
+        Term::createFromRequest($request);
+
+        return to_route('dashboard.terms.index');
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * Route model binding not used, because trashed records can also be edited.
+     * Route model binding looks only for untrashed records!
      */
-    public function edit(Term $term)
+    public function dashboardEdit(Request $request, $record)
     {
-        //
+        $record = Term::withTrashed()->findOrFail($record);
+
+        return view('dashboard.terms.edit', compact('record'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTermRequest $request, Term $term)
+    public function dashboardUpdate(TermUpdateRequest $request, Term $record)
     {
-        //
-    }
+        $record->updateFromRequest($request);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Term $term)
-    {
-        //
+        return redirect($request->input('previous_url'));
     }
 }

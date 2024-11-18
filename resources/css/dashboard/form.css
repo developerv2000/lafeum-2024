@@ -64,6 +64,47 @@
     color: var(--theme-danger-color);
 }
 
+/* Radio form group */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Margin-top replaced by .radio-group:gap */
+.radio-group .form-group__error-message {
+    margin-top: 0;
+}
+
+.radio-group__options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.radio-group__option-label {
+    display: flex;
+    gap: 12px;
+}
+
+.radio-group__option-caption {
+    line-height: 1;
+}
+
+/* Horizontal radio form group */
+.radio-group--horizontal {
+    flex-direction: row;
+    gap: 24px;
+}
+
+.radio-group--horizontal .radio-group__options-container {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
 /* ------------ /end Form ------------ */
 
 
@@ -156,7 +197,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    border: var(--theme-border);
+    border: var(--form-input-border);
     border-radius: 4px;
     appearance: none;
     print-color-adjust: exact;
@@ -174,6 +215,31 @@
 }
 
 /* ------------ /end Checkbox ------------ */
+
+
+/* ------------ Radiobutton ------------ */
+.radio {
+    width: 1em;
+    height: 1em;
+    vertical-align: top;
+    background-color: rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: var(--form-input-border);
+    border-radius: 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    print-color-adjust: exact;
+}
+
+.radio:checked {
+    background-image: url(/img/form/radio-checked.svg);
+    background-color: var(--theme-main-color);
+    border-color: var(--theme-main-color);
+}
+/* ------------ /end Radiobutton ------------ */
 
 
 /* ------------ Selectize ------------ */
@@ -428,7 +494,8 @@
 }
 
 /* Link color */
-.simditor .simditor-body a, .editor-style a {
+.simditor .simditor-body a,
+.editor-style a {
     color: var(--theme-main-color);
 }
 
@@ -453,4 +520,5 @@
     border: var(--form-input-border);
     background-color: var(--form-input-background-color);
 }
+
 /* ------------ /end Simditor ------------ */

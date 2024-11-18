@@ -6,8 +6,8 @@ use App\Models\Favorite;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Important: This method assumes that the 'favorites' relationship is eager loaded.
- * If the 'favorites' relationship is not eager loaded, it will not work as expected.
+ * Important: This trait assumes that the 'favorites' relationship is eager loaded.
+ * If the 'favorites' relationship is not eager loaded, it will result in additional queries.
  */
 trait Favoriteable
 {

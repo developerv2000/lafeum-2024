@@ -2,18 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TermType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreVideoCategoryRequest extends FormRequest
+class TermStoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +16,7 @@ class StoreVideoCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'term_type_id' => Rule::exists(TermType::class, 'id'),
         ];
     }
 }
