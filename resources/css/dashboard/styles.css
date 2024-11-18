@@ -648,7 +648,7 @@ a {
     transition: var(--theme-transition);
 }
 
-.leftbar__collapse-button .collapse-button__decarative-icon {
+.leftbar__collapse-button .collapse-button__decorative-icon {
     font-size: 16px;
     font-variation-settings: var(--filled-material-symbols-font-variation);
 }

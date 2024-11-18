@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Generators\SlugGenerator;
 use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,8 @@ class Knowledge extends Model
     use GetsMinifiedRecordsWithName;
 
     public $timestamps = false;
+
+    protected $guarded = ['id'];
 
     /*
     |--------------------------------------------------------------------------
@@ -35,8 +38,14 @@ class Knowledge extends Model
 
     protected static function booted(): void
     {
+        static::saving(function ($record) {
+            $record->slug = SlugGenerator::generateUniqueSlug($record->name, self::class, $record->id);
+        });
+
         static::deleting(function ($record) {
             $record->terms()->detach();
+
+            
         });
     }
 

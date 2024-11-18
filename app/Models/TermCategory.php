@@ -15,6 +15,8 @@ class TermCategory extends Model
 
     public $timestamps = false;
 
+    protected $guarded = ['id'];
+
     /*
     |--------------------------------------------------------------------------
     | Relations

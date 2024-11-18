@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Generators\SlugGenerator;
 use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,8 @@ class QuoteCategory extends Model
 
     public $timestamps = false;
 
+    protected $guarded = ['id'];
+
     /*
     |--------------------------------------------------------------------------
     | Relations
@@ -24,5 +27,22 @@ class QuoteCategory extends Model
     public function quotes()
     {
         return $this->belongsToMany(Quote::class, 'category_quote', 'category_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Events
+    |--------------------------------------------------------------------------
+    */
+
+    protected static function booted(): void
+    {
+        static::saving(function ($record) {
+            $record->slug = SlugGenerator::generateUniqueSlug($record->name, self::class, $record->id);
+        });
+
+        static::deleting(function ($record) {
+            $record->quotes()->detach();
+        });
     }
 }

@@ -22,7 +22,7 @@
                         data-click-action="toggle-collapse"
                         data-collapse-selector=".leftbar__collapse--quotes">
 
-                        <x-global.material-symbol-outlined class="collapse-button__decarative-icon" icon="format_quote" />
+                        <x-global.material-symbol-outlined class="collapse-button__decorative-icon" icon="format_quote" />
                         <span class="collapse-button__text">Цитаты</span>
                         <x-global.material-symbol-outlined class="collapse-button__icon" icon="arrow_drop_down" />
                     </button>
@@ -66,7 +66,7 @@
                         data-click-action="toggle-collapse"
                         data-collapse-selector=".leftbar__collapse--terms">
 
-                        <x-global.material-symbol-outlined class="collapse-button__decarative-icon" icon="notes" />
+                        <x-global.material-symbol-outlined class="collapse-button__decorative-icon" icon="notes" />
                         <span class="collapse-button__text">Термины</span>
                         <x-global.material-symbol-outlined class="collapse-button__icon" icon="arrow_drop_down" />
                     </button>
@@ -110,7 +110,7 @@
                         data-click-action="toggle-collapse"
                         data-collapse-selector=".leftbar__collapse--videos">
 
-                        <x-global.material-symbol-outlined class="collapse-button__decarative-icon" icon="smart_display" />
+                        <x-global.material-symbol-outlined class="collapse-button__decorative-icon" icon="smart_display" />
                         <span class="collapse-button__text">Видео</span>
                         <x-global.material-symbol-outlined class="collapse-button__icon" icon="arrow_drop_down" />
                     </button>
@@ -154,7 +154,7 @@
                         data-click-action="toggle-collapse"
                         data-collapse-selector=".leftbar__collapse--photos">
 
-                        <x-global.material-symbol-outlined class="collapse-button__decarative-icon" icon="image" />
+                        <x-global.material-symbol-outlined class="collapse-button__decorative-icon" icon="image" />
                         <span class="collapse-button__text">Фото</span>
                         <x-global.material-symbol-outlined class="collapse-button__icon" icon="arrow_drop_down" />
                     </button>
@@ -198,7 +198,7 @@
                         data-click-action="toggle-collapse"
                         data-collapse-selector=".leftbar__collapse--authors">
 
-                        <x-global.material-symbol-outlined class="collapse-button__decarative-icon" icon="account_circle" />
+                        <x-global.material-symbol-outlined class="collapse-button__decorative-icon" icon="account_circle" />
                         <span class="collapse-button__text">Авторы</span>
                         <x-global.material-symbol-outlined class="collapse-button__icon" icon="arrow_drop_down" />
                     </button>
@@ -242,7 +242,7 @@
                         data-click-action="toggle-collapse"
                         data-collapse-selector=".leftbar__collapse--channels">
 
-                        <x-global.material-symbol-outlined class="collapse-button__decarative-icon" icon="video_library" />
+                        <x-global.material-symbol-outlined class="collapse-button__decorative-icon" icon="video_library" />
                         <span class="collapse-button__text">Каналы</span>
                         <x-global.material-symbol-outlined class="collapse-button__icon" icon="arrow_drop_down" />
                     </button>
@@ -271,6 +271,72 @@
                                     'dashboard.channels.trash'),
                             ])
                             href="{{ route('dashboard.channels.trash') }}">Корзина
+                        </a>
+                    </div>
+                </div>
+
+                {{-- Categories --}}
+                <div class="leftbar__collapse-wrapper">
+                    <button
+                        @class([
+                            'collapse-button',
+                            'collapse-button--active' => request()->routeIs('dashboard.categories.*'),
+                            'leftbar__collapse-button',
+                        ])
+                        data-click-action="toggle-collapse"
+                        data-collapse-selector=".leftbar__collapse--categories">
+
+                        <x-global.material-symbol-outlined class="collapse-button__decorative-icon" icon="category" />
+                        <span class="collapse-button__text">Категории</span>
+                        <x-global.material-symbol-outlined class="collapse-button__icon" icon="arrow_drop_down" />
+                    </button>
+
+                    <div
+                        @class([
+                            'collapse',
+                            'collapse--open' => request()->routeIs('dashboard.categories.*'),
+                            'leftbar__collapse',
+                            'leftbar__collapse--categories',
+                        ])>
+
+                        <a
+                            @class([
+                                'leftbar__collapse-link',
+                                'leftbar__collapse-link--active' =>
+                                    request()->routeIs('dashboard.categories.index') &&
+                                    request()->route('model') == 'Knowledge',
+                            ])
+                            href="{{ route('dashboard.categories.index', ['model' => 'Knowledge']) }}">Область знаний
+                        </a>
+
+                        <a
+                            @class([
+                                'leftbar__collapse-link',
+                                'leftbar__collapse-link--active' =>
+                                    request()->routeIs('dashboard.categories.index') &&
+                                    request()->route('model') == 'QuoteCategory',
+                            ])
+                            href="{{ route('dashboard.categories.index', ['model' => 'QuoteCategory']) }}">Цитаты
+                        </a>
+
+                        <a
+                            @class([
+                                'leftbar__collapse-link',
+                                'leftbar__collapse-link--active' =>
+                                    request()->routeIs('dashboard.categories.index') &&
+                                    request()->route('model') == 'TermCategory',
+                            ])
+                            href="{{ route('dashboard.categories.index', ['model' => 'TermCategory']) }}">Термины
+                        </a>
+
+                        <a
+                            @class([
+                                'leftbar__collapse-link',
+                                'leftbar__collapse-link--active' =>
+                                    request()->routeIs('dashboard.categories.index') &&
+                                    request()->route('model') == 'VideoCategory',
+                            ])
+                            href="{{ route('dashboard.categories.index', ['model' => 'VideoCategory']) }}">Видео
                         </a>
                     </div>
                 </div>

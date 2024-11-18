@@ -15,6 +15,8 @@ class VideoCategory extends Model
 
     public $timestamps = false;
 
+    protected $guarded = ['id'];
+
     /*
     |--------------------------------------------------------------------------
     | Relations
