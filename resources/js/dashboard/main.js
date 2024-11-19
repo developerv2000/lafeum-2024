@@ -35,6 +35,9 @@ const filterForm = document.querySelector('.filter-form');
 const appendsInputsBeforeSubmitForms = document.querySelectorAll('[data-before-submit="appends-inputs"]');
 const showsSpinnerOnSubmitForms = document.querySelectorAll('[data-on-submit="show-spinner"]');
 
+// Image inputs with preview
+const imageInputsWithPreview = document.querySelectorAll('.image-input-group-with-preview__input');
+
 /*
 |--------------------------------------------------------------------------
 | Event Listeners
@@ -88,6 +91,10 @@ targetRestoreModalButtons.forEach((button) => {
 filterForm?.addEventListener('submit', (evt) => functions.handleFilterFormSubmit(evt));
 
 nestedsetUpdater?.addEventListener('click', (evt) => functions.handleUpdateNestedsetSubmit(evt));
+
+imageInputsWithPreview.forEach((input) => {
+    input.addEventListener('change', (evt) => functions.displayLocalImage(evt));
+});
 
 /*
 |--------------------------------------------------------------------------

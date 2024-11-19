@@ -14,7 +14,7 @@
                     Цитата дня
                     <x-global.material-symbol-outlined icon="more_horiz" />
                 </h3>
- 
+
                 <div class="rightbar__quote">
                     <div class="rightbar__quote-header">
                         <h4 class="rightbar__quote-author">
@@ -60,10 +60,10 @@
 
                 <div class="rightbar__photo">
                     <img class="rightbar__photo-image"
-                        src="{{ $todaysPost->photo->thumb_asset_path }}"
+                        src="{{ $todaysPost->photo->thumb_asset_url }}"
                         alt="Изображение дня"
                         data-click-action="show-photos-modal"
-                        data-photo-src="{{ $todaysPost->photo->asset_path }}"
+                        data-photo-src="{{ $todaysPost->photo->asset_url }}"
                         data-photo-desc="{{ $todaysPost->photo->description }}">
 
                     <p class="rightbar__photo-body">{{ $todaysPost->photo->description }}</p>

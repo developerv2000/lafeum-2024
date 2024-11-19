@@ -74,6 +74,24 @@ class FileHelper
     }
 
     /**
+     * Create a thumbnail for an image using the resizeImage helper.
+     *
+     * @param string $imagePath The original image path.
+     * @param string $thumbPath The path to save the thumbnail.
+     * @param int|null $width The desired width of the thumbnail (optional).
+     * @param int|null $height The desired height of the thumbnail (optional).
+     * @return void
+     */
+    public static function createThumbnail(string $imagePath, string $thumbPath, ?int $width = null, ?int $height = null): void
+    {
+        // Copy the original image to the thumbnail path
+        copy($imagePath, $thumbPath);
+
+        // Resize the copied image using the helper
+        self::resizeImage($thumbPath, $width, $height);
+    }
+
+    /**
      * Sanitize a filename by removing unexpected symbols and characters.
      *
      * @param string $filename The original filename.

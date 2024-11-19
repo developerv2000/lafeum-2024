@@ -12,7 +12,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /*
 |--------------------------------------------------------------------------
-| Initialization Functions
+| Plugin initialization Functions
 |--------------------------------------------------------------------------
 */
 
@@ -160,7 +160,7 @@ function initializeNestedsets() {
 */
 
 /**
- * Initializes all components.
+ * Initializes all plugin components.
  */
 function init() {
     initializeSelectizes();

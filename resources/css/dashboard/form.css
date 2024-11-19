@@ -105,6 +105,18 @@
     gap: 24px;
 }
 
+/* Image input group with preview */
+.image-input-group-with-preview .form-group__input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.image-input-group-with-preview__image {
+    max-width: 420px;
+    display: flex;
+    border: 8px solid var(--theme-body-background-color);
+}
 /* ------------ /end Form ------------ */
 
 

@@ -161,3 +161,13 @@ export function handleUpdateNestedsetSubmit(evt) {
             hideSpinner();
         });
 }
+
+export function displayLocalImage(evt) {
+    const input = evt.target;
+    const file = input.files[0];
+    const image = input.nextElementSibling;
+
+    if (file) {
+        image.src = URL.createObjectURL(file);
+    }
+}
