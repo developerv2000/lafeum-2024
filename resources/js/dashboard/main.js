@@ -28,6 +28,7 @@ const leftbarToggler = document.querySelector('.header__leftbar-toggler');
 const fullscreenButtons = document.querySelectorAll('[data-click-action="request-fullscreen"]');
 const targetDeleteModalButtons = document.querySelectorAll('[data-click-action="show-target-delete-modal"]');
 const targetRestoreModalButtons = document.querySelectorAll('[data-click-action="show-target-restore-modal"]');
+const nestedsetUpdater = document.querySelector('[data-click-action="submit-nestedset-update"]');
 
 // Forms
 const filterForm = document.querySelector('.filter-form');
@@ -85,6 +86,8 @@ targetRestoreModalButtons.forEach((button) => {
 });
 
 filterForm?.addEventListener('submit', (evt) => functions.handleFilterFormSubmit(evt));
+
+nestedsetUpdater?.addEventListener('click', (evt) => functions.handleUpdateNestedsetSubmit(evt));
 
 /*
 |--------------------------------------------------------------------------

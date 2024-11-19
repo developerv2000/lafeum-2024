@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 */
 
-import { showModal } from "../../custom-components/script";
+import { hideSpinner, showModal, showSpinner } from "../../custom-components/script";
 
 /*
 |--------------------------------------------------------------------------
@@ -138,4 +138,26 @@ export function moveFilterActiveInputsToTop(form) {
         const formGroup = input.closest('.form-group');
         form.insertBefore(formGroup, form.firstChild);
     });
+}
+
+export function handleUpdateNestedsetSubmit(evt) {
+    showSpinner();
+    const button = evt.currentTarget;
+    const action = button.dataset.formAction;
+
+    const params = {
+        record_hierarchy: $('.nested').nestedSortable('toHierarchy', { startDepthCount: 0 }),
+        records_array: $('.nested').nestedSortable('toArray', { startDepthCount: 0 })
+    }
+
+    axios.post(action, params)
+        .then(() => {
+            window.location.reload();
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => {
+            hideSpinner();
+        });
 }

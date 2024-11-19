@@ -38,9 +38,12 @@ class QuoteCategory extends Model
     protected static function booted(): void
     {
         static::saving(function ($record) {
-            $record->slug = SlugGenerator::generateUniqueSlug($record->name, self::class, $record->id);
+            if ($record->isDirty('name')) {
+                $record->slug = SlugGenerator::generateUniqueSlug($record->name, self::class, $record->id);
+            }
         });
 
+        // Child records will be removed automatically
         static::deleting(function ($record) {
             $record->quotes()->detach();
         });

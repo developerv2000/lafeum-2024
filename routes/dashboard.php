@@ -48,7 +48,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard
     });
 
     Route::controller(CategoryController::class)->prefix('/categories/{model}')->name('categories.')->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesExcept(['trash', 'restore'], 'id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesExcept(['trash', 'restore', 'show'], 'id', 'dashboard');
 
         Route::get('/edit-nestedset', 'editNestedset')->name('edit.nestedset');
         Route::post('/update-nestedset', 'updateNestedset')->name('update.nestedset');
