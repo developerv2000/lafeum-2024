@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,6 +11,7 @@ class Channel extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use GetsMinifiedRecordsWithName;
 
     const PAGINATION_LIMIT_FOR_FRONT = 20;
 

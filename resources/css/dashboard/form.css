@@ -145,6 +145,11 @@
     outline: none;
 }
 
+.input:read-only,
+.textarea:read-only {
+    background-color: var(--theme-body-background-color);
+}
+
 .input--highlight,
 .textarea--highlight,
 .select--highlight {

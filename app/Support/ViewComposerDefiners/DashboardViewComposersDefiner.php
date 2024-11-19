@@ -3,11 +3,13 @@
 namespace App\Support\ViewComposerDefiners;
 
 use App\Models\Author;
+use App\Models\Channel;
 use App\Models\Knowledge;
 use App\Models\QuoteCategory;
 use App\Models\Term;
 use App\Models\TermCategory;
 use App\Models\TermType;
+use App\Models\VideoCategory;
 use App\Support\Helpers\GeneralHelper;
 use App\Support\Helpers\ModelHelper;
 use Illuminate\Support\Facades\View;
@@ -19,6 +21,7 @@ class DashboardViewComposersDefiner
         self::paginationLimitComposer();
         self::defineQuotesComposers();
         self::defineTermsComposers();
+        self::defineVideosComposers();
     }
 
     private static function defineViewComposer($views, array $data)
@@ -59,6 +62,18 @@ class DashboardViewComposersDefiner
             'booleanOptions' => GeneralHelper::getBooleanOptionsArray(),
             'categories' => TermCategory::getMinifiedRecordsWithName(),
             'knowledges' => Knowledge::getMinifiedRecordsWithName(),
+        ]);
+    }
+
+    private static function defineVideosComposers()
+    {
+        self::defineViewComposer([
+            'components.dashboard.filters.videos',
+            'dashboard.videos.edit',
+            'dashboard.videos.create',
+        ], [
+            'channels' => Channel::getMinifiedRecordsWithName(),
+            'categories' => VideoCategory::getMinifiedRecordsWithName(),
         ]);
     }
 }
