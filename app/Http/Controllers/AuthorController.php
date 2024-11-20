@@ -28,8 +28,7 @@ class AuthorController extends Controller
      */
     public function index(Request $request)
     {
-        Author::addQueryParamsToRequest($request);
-        $records = Author::finalizeQueryForFront(Author::onlyPeople(), $request, 'get');
+        $records = Author::getAllMinified();
         Author::prependNonPersonGroupLinks($records); // Prepend proverb & movie group links
 
         // Chunk records into 3 parts
@@ -44,8 +43,6 @@ class AuthorController extends Controller
      */
     public function show(Request $request, $slug)
     {
-        Author::addQueryParamsToRequest($request);
-
         // Author can be instance of App\Models\Author or App\Models\AuthorGroup
         $author = Author::getAuthorBySlug($slug);
 
@@ -58,13 +55,11 @@ class AuthorController extends Controller
                 break;
         }
 
-        // Manual query because finalizeQueryForFront() uses $request parameters for order & pagination
-        $quotes = $quotesQuery
-            ->onlyPublished()
-            ->orderBy(Quote::DEFAULT_FRONT_ORDER_BY, Quote::DEFAULT_FRONT_ORDER_TYPE)
-            ->paginate(Quote::DEFAULT_FRONT_PAGINATION_LIMIT);
+        // Get author quotes
+        Quote::addQueryParamsToRequest($request);
+        $quotes = Quote::finalizeQueryForFront($quotesQuery, $request, 'paginate');
 
-        $authors = Author::finalizeQueryForFront(Author::onlyPeople(), $request, 'get'); // for leftbar
+        $authors = Author::getAllMinified(); // for leftbar
         Author::prependNonPersonGroupLinks($authors); // Prepend proverb & movie group links
 
         return view('front.authors.show', compact('author', 'quotes', 'authors'));

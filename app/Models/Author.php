@@ -154,6 +154,14 @@ class Author extends Model
         return $query;
     }
 
+    public static function getAllMinified()
+    {
+        return self::onlyPeople()
+            ->orderBy('name', 'asc')
+            ->select('id', 'name', 'slug')
+            ->get();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Create and Update
