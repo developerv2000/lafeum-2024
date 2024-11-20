@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PhotoStoreRequest;
 use App\Http\Requests\PhotoUpdateRequest;
 use App\Models\Photo;
+use App\Support\Helpers\UrlHelper;
 use App\Support\Traits\Controller\DestroysModelRecords;
 use App\Support\Traits\Controller\RestoresModelRecords;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class PhotoController extends Controller
      */
     public function index(Request $request)
     {
-        Photo::addQueryParamsToRequest($request);
+        Photo::addFrontQueryParamsToRequest($request);
         $records = Photo::finalizeQueryForFront(Photo::query(), $request, 'paginate');
 
         return view('front.photos.index', compact('records'));
@@ -41,7 +42,8 @@ class PhotoController extends Controller
 
     public function dashboardIndex(Request $request)
     {
-        Photo::addQueryParamsToRequest($request);
+        Photo::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Photo::finalizeQueryForDashboard(Photo::query(), $request, 'paginate');
 
         return view('dashboard.photos.index', compact('records'));
@@ -49,7 +51,8 @@ class PhotoController extends Controller
 
     public function dashboardTrash(Request $request)
     {
-        Photo::addQueryParamsToRequest($request);
+        Photo::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Photo::finalizeQueryForDashboard(Photo::onlyTrashed(), $request, 'paginate');
 
         return view('dashboard.photos.trash', compact('records'));
@@ -88,9 +91,13 @@ class PhotoController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * Route model binding not used, because trashed records can also be updated.
+     * Route model binding looks only for untrashed records!
      */
-    public function dashboardUpdate(PhotoUpdateRequest $request, Photo $record)
+    public function dashboardUpdate(PhotoUpdateRequest $request, $record)
     {
+        $record = Photo::withTrashed()->findOrFail($record);
         $record->updateFromRequest($request);
 
         return redirect($request->input('previous_url'));

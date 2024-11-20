@@ -7,12 +7,24 @@ use Illuminate\Http\Request;
 class UrlHelper
 {
     /**
-     * Generates a URL with the reversed 'order_type' and removes 'order_by' from query parameters.
+     * Add current URL with the reversed 'order_type' and removed 'order_by' from query parameters to request.
+     *
+     * Mainlu used in order links of dashboard tables.
+     */
+    public static function addUrlWithReversedOrderTypeToRequest($request)
+    {
+        $request->mergeIfMissing([
+            'reversed_order_url' => self::generateUrlWithReversedOrderType($request),
+        ]);
+    }
+
+    /**
+     * Generates a URL with the reversed 'order_type' and removed 'order_by' from query parameters.
      *
      * @param Request $request
      * @return string The modified URL with reversed sorting order and without 'order_by'.
      */
-    public static function generateUrlWithReversedOrderType(Request $request): string
+    private static function generateUrlWithReversedOrderType(Request $request): string
     {
         // Get the existing query parameters from the request
         $queryParams = $request->query();

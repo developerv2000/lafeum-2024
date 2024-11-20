@@ -6,6 +6,7 @@ use App\Http\Requests\TermStoreRequest;
 use App\Http\Requests\TermUpdateRequest;
 use App\Models\Term;
 use App\Models\TermCategory;
+use App\Support\Helpers\UrlHelper;
 use App\Support\Traits\Controller\DestroysModelRecords;
 use App\Support\Traits\Controller\RestoresModelRecords;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class TermController extends Controller
 
     public function index(Request $request)
     {
-        Term::addQueryParamsToRequest($request);
+        Term::addFrontQueryParamsToRequest($request);
         $records = Term::finalizeQueryForFront(Term::query(), $request, 'paginate');
         $subtermsArray = Term::generateSubtermsArray($records); // Used in subterms text popup on term-cards subterm hover.
         $categories = TermCategory::get()->toTree(); // for leftbar
@@ -35,6 +36,7 @@ class TermController extends Controller
 
     public function category(Request $request, TermCategory $category)
     {
+        Term::addFrontQueryParamsToRequest($request);
         $records = Term::finalizeQueryForFront($category->terms(), $request, 'paginate');
         $subtermsArray = Term::generateSubtermsArray($records); // Used in subterms text popup on term-cards subterm hover.
         $categories = TermCategory::get()->toTree(); // for leftbar
@@ -60,7 +62,8 @@ class TermController extends Controller
 
     public function dashboardIndex(Request $request)
     {
-        Term::addQueryParamsToRequest($request);
+        Term::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Term::finalizeQueryForDashboard(Term::query(), $request, 'paginate');
 
         return view('dashboard.terms.index', compact('records'));
@@ -68,7 +71,8 @@ class TermController extends Controller
 
     public function dashboardTrash(Request $request)
     {
-        Term::addQueryParamsToRequest($request);
+        Term::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Term::finalizeQueryForDashboard(Term::onlyTrashed(), $request, 'paginate');
 
         return view('dashboard.terms.trash', compact('records'));
@@ -107,9 +111,13 @@ class TermController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * Route model binding not used, because trashed records can also be updated.
+     * Route model binding looks only for untrashed records!
      */
     public function dashboardUpdate(TermUpdateRequest $request, Term $record)
     {
+        $record = Term::withTrashed()->findOrFail($record);
         $record->updateFromRequest($request);
 
         return redirect($request->input('previous_url'));

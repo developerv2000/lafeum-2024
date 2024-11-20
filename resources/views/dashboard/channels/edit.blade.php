@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app', [
-    'pageName' => 'categories-edit',
+    'pageName' => 'channels-edit',
     'mainAutoOverflowed' => false,
 ])
 
@@ -8,11 +8,17 @@
         {{-- blade-formatter-disable --}}
         @php
             $crumbs = [
-                ['link' => null, 'text' => $model],
-                ['link' => route('dashboard.categories.index', ['model' => $model]), 'text' => 'Все категории'],
+                ['link' => route('dashboard.channels.index'), 'text' => 'Все каналы'],
+            ];
+
+            if ($record->trashed()) {
+                $crumbs[] = ['link' => route('dashboard.channels.trash'), 'text' => 'Корзина'];
+            }
+
+            array_push($crumbs,
                 ['link' => null, 'text' => 'Редактировать'],
                 ['link' => null, 'text' => '#' . $record->id],
-            ];
+            )
         @endphp
         {{-- blade-formatter-enable --}}
 
@@ -29,28 +35,19 @@
         </div>
     </div>
 
-    <x-dashboard.form-templates.edit-template :action="route('dashboard.categories.update', ['model' => $model, 'record' => $record->id])">
+    <x-dashboard.form-templates.edit-template :action="route('dashboard.channels.update', $record->id)">
         <div class="form__block">
-            <div class="form__row">
-                <x-form.inputs.record-field-input
-                    labelText="Имя"
-                    :model="$record"
-                    field="name"
-                    :isRequired="true" />
-
-                <x-form.selects.selectize.id-based-single-select.record-field-select
-                    labelText="Родитель"
-                    :model="$record"
-                    field="parent_id"
-                    :options="$roots" />
-            </div>
+            <x-form.inputs.record-field-input
+                labelText="Имя"
+                :model="$record"
+                field="name"
+                :isRequired="true" />
 
             <x-form.textareas.record-field-textarea
                 class="simditor"
-                labelText="Текст"
+                labelText="Описание"
                 :model="$record"
-                field="description"
-                :isRequired="true" />
+                field="description" />
         </div>
     </x-dashboard.form-templates.edit-template>
 @endsection

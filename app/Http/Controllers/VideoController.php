@@ -6,6 +6,7 @@ use App\Http\Requests\VideoStoreRequest;
 use App\Http\Requests\VideoUpdateRequest;
 use App\Models\Video;
 use App\Models\VideoCategory;
+use App\Support\Helpers\UrlHelper;
 use App\Support\Traits\Controller\DestroysModelRecords;
 use App\Support\Traits\Controller\RestoresModelRecords;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
-        Video::addQueryParamsToRequest($request);
+        Video::addFrontQueryParamsToRequest($request);
         $records = Video::finalizeQueryForFront(Video::query(), $request, 'paginate');
 
         $categories = VideoCategory::get()->toTree(); // for leftbar
@@ -38,7 +39,7 @@ class VideoController extends Controller
 
     public function category(VideoCategory $category, Request $request)
     {
-        Video::addQueryParamsToRequest($request);
+        Video::addFrontQueryParamsToRequest($request);
         $records = Video::finalizeQueryForFront($category->videos(), $request, 'paginate');
 
         $categories = VideoCategory::get()->toTree(); // for leftbar
@@ -62,7 +63,8 @@ class VideoController extends Controller
 
     public function dashboardIndex(Request $request)
     {
-        Video::addQueryParamsToRequest($request);
+        Video::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Video::finalizeQueryForDashboard(Video::query(), $request, 'paginate');
 
         return view('dashboard.videos.index', compact('records'));
@@ -70,7 +72,8 @@ class VideoController extends Controller
 
     public function dashboardTrash(Request $request)
     {
-        Video::addQueryParamsToRequest($request);
+        Video::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Video::finalizeQueryForDashboard(Video::onlyTrashed(), $request, 'paginate');
 
         return view('dashboard.videos.trash', compact('records'));

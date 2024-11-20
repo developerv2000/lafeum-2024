@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app', [
-    'pageName' => 'categories-create',
+    'pageName' => 'channels-create',
     'mainAutoOverflowed' => false,
 ])
 
@@ -8,8 +8,7 @@
         {{-- blade-formatter-disable --}}
         @php
             $crumbs = [
-                ['link' => null, 'text' => $model],
-                ['link' => route('dashboard.categories.index', ['model' => $model]), 'text' => 'Все категории'],
+                ['link' => route('dashboard.channels.index'), 'text' => 'Все каналы'],
                 ['link' => null, 'text' => 'Добавить'],
             ];
         @endphp
@@ -28,25 +27,17 @@
         </div>
     </div>
 
-    <x-dashboard.form-templates.create-template :action="route('dashboard.categories.store', ['model' => $model])">
+    <x-dashboard.form-templates.create-template :action="route('dashboard.channels.store')">
         <div class="form__block">
-            <div class="form__row">
-                <x-form.inputs.default-input
-                    labelText="Имя"
-                    inputName="name"
-                    :isRequired="true" />
-
-                <x-form.selects.selectize.id-based-single-select.default-select
-                    labelText="Родитель"
-                    inputName="parent_id"
-                    :options="$roots" />
-            </div>
+            <x-form.inputs.default-input
+                labelText="Имя"
+                inputName="name"
+                :isRequired="true" />
 
             <x-form.textareas.default-textarea
                 class="simditor"
-                labelText="Текст"
-                inputName="description"
-                :isRequired="true" />
+                labelText="Описание"
+                inputName="description" />
         </div>
     </x-dashboard.form-templates.create-template>
 @endsection

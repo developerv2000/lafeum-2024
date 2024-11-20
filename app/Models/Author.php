@@ -234,7 +234,8 @@ class Author extends Model
     public static function getDashboardFilterConfig(): array
     {
         return [
-            'whereEqual' => ['id', 'author_group_id'],
+            'whereIn' => ['id'],
+            'whereEqual' => ['author_group_id'],
             'like' => ['name'],
             'dateRange' => ['created_at', 'updated_at'],
         ];

@@ -6,6 +6,7 @@ use App\Http\Requests\QuoteStoreRequest;
 use App\Http\Requests\QuoteUpdateRequest;
 use App\Models\Quote;
 use App\Models\QuoteCategory;
+use App\Support\Helpers\UrlHelper;
 use App\Support\Traits\Controller\DestroysModelRecords;
 use App\Support\Traits\Controller\RestoresModelRecords;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class QuoteController extends Controller
      */
     public function index(Request $request)
     {
-        Quote::addQueryParamsToRequest($request);
+        Quote::addFrontQueryParamsToRequest($request);
         $records = Quote::finalizeQueryForFront(Quote::query(), $request, 'paginate');
 
         $categories = QuoteCategory::get()->toTree(); // for leftbar
@@ -38,7 +39,7 @@ class QuoteController extends Controller
 
     public function category(Request $request, QuoteCategory $category)
     {
-        Quote::addQueryParamsToRequest($request);
+        Quote::addFrontQueryParamsToRequest($request);
         $records = Quote::finalizeQueryForFront($category->quotes(), $request, 'paginate');
 
         $categories = QuoteCategory::get()->toTree(); // for leftbar
@@ -62,7 +63,8 @@ class QuoteController extends Controller
 
     public function dashboardIndex(Request $request)
     {
-        Quote::addQueryParamsToRequest($request);
+        Quote::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Quote::finalizeQueryForDashboard(Quote::query(), $request, 'paginate');
 
         return view('dashboard.quotes.index', compact('records'));
@@ -70,7 +72,8 @@ class QuoteController extends Controller
 
     public function dashboardTrash(Request $request)
     {
-        Quote::addQueryParamsToRequest($request);
+        Quote::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Quote::finalizeQueryForDashboard(Quote::onlyTrashed(), $request, 'paginate');
 
         return view('dashboard.quotes.trash', compact('records'));
@@ -109,9 +112,13 @@ class QuoteController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * Route model binding not used, because trashed records can also be updated.
+     * Route model binding looks only for untrashed records!
      */
-    public function dashboardUpdate(QuoteUpdateRequest $request, Quote $record)
+    public function dashboardUpdate(QuoteUpdateRequest $request, $record)
     {
+        $record = Quote::withTrashed()->findOrFail($record);
         $record->updateFromRequest($request);
 
         return redirect($request->input('previous_url'));

@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Author;
+use App\Models\Channel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AuthorUpdateRequest extends FormRequest
+class ChannelUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +16,7 @@ class AuthorUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [Rule::unique(Author::class)->ignore($this->id)],
+            'name' => [Rule::unique(Channel::class)->ignore($this->record)],
         ];
     }
 }

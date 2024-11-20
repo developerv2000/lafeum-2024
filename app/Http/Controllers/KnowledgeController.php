@@ -25,7 +25,7 @@ class KnowledgeController extends Controller
      */
     public function show(Request $request, Knowledge $record)
     {
-        Term::addQueryParamsToRequest($request);
+        Term::addFrontQueryParamsToRequest($request);
         $terms = $record->getTermsForFront();
         $subtermsArray = Term::generateSubtermsArray($terms); // for subterms popup on hover
         $knowledges = Knowledge::get()->toTree(); // for leftbar

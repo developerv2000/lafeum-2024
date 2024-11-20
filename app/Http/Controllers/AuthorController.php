@@ -6,6 +6,7 @@ use App\Http\Requests\AuthorStoreRequest;
 use App\Http\Requests\AuthorUpdateRequest;
 use App\Models\Author;
 use App\Models\Quote;
+use App\Support\Helpers\UrlHelper;
 use App\Support\Traits\Controller\DestroysModelRecords;
 use App\Support\Traits\Controller\RestoresModelRecords;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class AuthorController extends Controller
         }
 
         // Get author quotes
-        Quote::addQueryParamsToRequest($request);
+        Quote::addFrontQueryParamsToRequest($request);
         $quotes = Quote::finalizeQueryForFront($quotesQuery, $request, 'paginate');
 
         $authors = Author::getAllMinified(); // for leftbar
@@ -73,7 +74,8 @@ class AuthorController extends Controller
 
     public function dashboardIndex(Request $request)
     {
-        Author::addQueryParamsToRequest($request);
+        Author::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Author::finalizeQueryForDashboard(Author::query(), $request, 'paginate');
 
         return view('dashboard.authors.index', compact('records'));
@@ -81,7 +83,8 @@ class AuthorController extends Controller
 
     public function dashboardTrash(Request $request)
     {
-        Author::addQueryParamsToRequest($request);
+        Author::addDashboardQueryParamsToRequest($request);
+        UrlHelper::addUrlWithReversedOrderTypeToRequest($request);
         $records = Author::finalizeQueryForDashboard(Author::onlyTrashed(), $request, 'paginate');
 
         return view('dashboard.authors.trash', compact('records'));
@@ -120,9 +123,13 @@ class AuthorController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * Route model binding not used, because trashed records can also be updated.
+     * Route model binding looks only for untrashed records!
      */
-    public function dashboardUpdate(AuthorUpdateRequest $request, Author $record)
+    public function dashboardUpdate(AuthorUpdateRequest $request, $record)
     {
+        $record = Author::withTrashed()->findOrFail($record);
         $record->updateFromRequest($request);
 
         return redirect($request->input('previous_url'));
