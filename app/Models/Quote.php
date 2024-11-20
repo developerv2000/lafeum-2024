@@ -67,7 +67,7 @@ class Quote extends Model
 
     protected static function booted(): void
     {
-        static::restoring(function ($record) {
+        static::restored(function ($record) {
             if ($record->author->trashed()) {
                 $record->author->restoreQuietly();
             }

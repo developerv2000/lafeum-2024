@@ -33,7 +33,7 @@ trait FinalizesQueryForRequest
         switch ($action) {
             case 'paginate':
                 return $query->paginate(
-                    $request->input('pagination_limit', static::DEFAULT_DASHBOARD_PAGINATION_LIMIT),
+                    $request->input('pagination_limit', 20),
                     ['*'],
                     'page',
                     $request->input('page', 1)

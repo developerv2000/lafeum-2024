@@ -51,7 +51,7 @@ class Photo extends Model
         return asset(self::FOLDER_PATH . '/' . $this->filename);
     }
 
-    public function getFileSystemPathAttribute(): string
+    public function getFilePathAttribute(): string
     {
         return public_path(self::FOLDER_PATH . '/' . $this->filename);
     }
@@ -61,7 +61,7 @@ class Photo extends Model
         return asset(self::THUMBS_PATH . '/' . $this->filename);
     }
 
-    public function getThumbFileSystemPathAttribute(): string
+    public function getThumbFilePathAttribute(): string
     {
         return public_path(self::THUMBS_PATH . '/' . $this->filename);
     }
@@ -138,8 +138,6 @@ class Photo extends Model
 
     public function createThumbnail()
     {
-        $photoPath = public_path(self::FOLDER_PATH . '/' . $this->filename);
-        $thumbPath = public_path(self::THUMBS_PATH . '/' . $this->filename);
-        FileHelper::createThumbnail($photoPath, $thumbPath, self::THUMB_WIDTH, self::THUMB_HEIGHT);
+        FileHelper::createThumbnail($this->file_path, $this->thumb_file_path, self::THUMB_WIDTH, self::THUMB_HEIGHT);
     }
 }

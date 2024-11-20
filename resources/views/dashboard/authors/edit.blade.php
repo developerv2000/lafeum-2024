@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.app', [
-    'pageName' => 'photos-edit',
+    'pageName' => 'authors-edit',
     'mainAutoOverflowed' => false,
 ])
 
@@ -8,11 +8,11 @@
         {{-- blade-formatter-disable --}}
         @php
             $crumbs = [
-                ['link' => route('dashboard.photos.index'), 'text' => 'Все фото'],
+                ['link' => route('dashboard.authors.index'), 'text' => 'Все авторы'],
             ];
 
             if ($record->trashed()) {
-                $crumbs[] = ['link' => route('dashboard.photos.trash'), 'text' => 'Корзина'];
+                $crumbs[] = ['link' => route('dashboard.authors.trash'), 'text' => 'Корзина'];
             }
 
             array_push($crumbs,
@@ -35,27 +35,38 @@
         </div>
     </div>
 
-    <x-dashboard.form-templates.edit-template :action="route('dashboard.photos.update', $record->id)">
+    <x-dashboard.form-templates.edit-template :action="route('dashboard.authors.update', $record->id)">
+        <div class="form__block">
+            <div class="form__row">
+                <x-form.inputs.record-field-input
+                    labelText="Имя"
+                    :model="$record"
+                    field="name"
+                    :isRequired="true" />
+
+                <x-form.selects.selectize.id-based-single-select.record-field-select
+                    labelText="Группа"
+                    :model="$record"
+                    field="author_group_id"
+                    :options="$groups"
+                    :isRequired="true" />
+            </div>
+        </div>
+
         <div class="form__block">
             <x-form.image-inputs-with-preview.default-input
                 labelText="Фото"
                 accept=".png, .jpg, .jpeg"
-                inputName="filename"
-                :initialImageSrc="$record->asset_url" />
+                inputName="photo"
+                :initialImageSrc="$record->photo_asset_url" />
         </div>
 
         <div class="form__block">
-            <x-form.inputs.record-field-input
-                labelText="Дата публикации"
-                type="datetime-local"
-                :model="$record"
-                field="publish_at"
-                :isRequired="true" />
-
             <x-form.textareas.record-field-textarea
-                labelText="Мысли автора"
+                class="simditor"
+                labelText="Биография"
                 :model="$record"
-                field="notes" />
+                field="biography" />
         </div>
     </x-dashboard.form-templates.edit-template>
 @endsection

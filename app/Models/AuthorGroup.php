@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Support\Traits\Model\FindsRecordByName;
+use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,7 @@ class AuthorGroup extends Model
 {
     use HasFactory;
     use FindsRecordByName;
+    use GetsMinifiedRecordsWithName;
 
     const PEOPLE_NAME = 'Автор';
 

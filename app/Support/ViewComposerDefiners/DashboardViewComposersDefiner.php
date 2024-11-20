@@ -3,6 +3,7 @@
 namespace App\Support\ViewComposerDefiners;
 
 use App\Models\Author;
+use App\Models\AuthorGroup;
 use App\Models\Channel;
 use App\Models\Knowledge;
 use App\Models\QuoteCategory;
@@ -22,6 +23,7 @@ class DashboardViewComposersDefiner
         self::defineQuotesComposers();
         self::defineTermsComposers();
         self::defineVideosComposers();
+        self::defineAuthorsComposers();
     }
 
     private static function defineViewComposer($views, array $data)
@@ -74,6 +76,17 @@ class DashboardViewComposersDefiner
         ], [
             'channels' => Channel::getMinifiedRecordsWithName(),
             'categories' => VideoCategory::getMinifiedRecordsWithName(),
+        ]);
+    }
+
+    private static function defineAuthorsComposers()
+    {
+        self::defineViewComposer([
+            'components.dashboard.filters.authors',
+            'dashboard.authors.edit',
+            'dashboard.authors.create',
+        ], [
+            'groups' => AuthorGroup::getMinifiedRecordsWithName(),
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <div class="authors-card">
-    @if ($author->photo_asset_path)
-        <img class="authors-card__image" src="{{ $author->photo_asset_path }}" alt="{{ $author->name }}">
+    @if ($author->photo)
+        <img class="authors-card__image" src="{{ $author->photo_asset_url }}" alt="{{ $author->name }}">
     @endif
 
     <div class="authors-card__body">
