@@ -73,6 +73,12 @@ class Quote extends Model
             }
         });
 
+        // Trashing
+        static::deleting(function ($record) {
+            $record->likes()->delete();
+            $record->favorites()->delete();
+        });
+
         static::forceDeleting(function ($record) {
             $record->categories()->detach();
             $record->likes()->delete();

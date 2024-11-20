@@ -5,6 +5,8 @@ namespace App\Support\ViewComposerDefiners;
 use App\Models\Author;
 use App\Models\AuthorGroup;
 use App\Models\Channel;
+use App\Models\Country;
+use App\Models\Gender;
 use App\Models\Knowledge;
 use App\Models\QuoteCategory;
 use App\Models\Term;
@@ -24,6 +26,7 @@ class DashboardViewComposersDefiner
         self::defineTermsComposers();
         self::defineVideosComposers();
         self::defineAuthorsComposers();
+        self::defineUsersComposers();
     }
 
     private static function defineViewComposer($views, array $data)
@@ -87,6 +90,18 @@ class DashboardViewComposersDefiner
             'dashboard.authors.create',
         ], [
             'groups' => AuthorGroup::getMinifiedRecordsWithName(),
+        ]);
+    }
+
+    private static function defineUsersComposers()
+    {
+        self::defineViewComposer([
+            'components.dashboard.filters.users',
+            'dashboard.users.edit',
+            'dashboard.users.create',
+        ], [
+            'genders' => Gender::getMinifiedRecordsWithName(),
+            'countries' => Country::getMinifiedRecordsWithName(),
         ]);
     }
 }

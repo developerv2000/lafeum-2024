@@ -1,7 +1,7 @@
 <x-front.different.leftbar class="account-leftbar" title="Мой аккаунт">
     {{-- Ava box --}}
     <div class="ava-box">
-        <img class="ava-box__image" src="{{ $user->photo_asset_path }}" alt="{{ $user->name }}">
+        <img class="ava-box__image" src="{{ $user->photo_asset_url }}" alt="{{ $user->name }}">
 
         <div class="ava-box__text-wrapper">
             <h3 class="ava-box__name">{{ $user->name }}</h3>

@@ -11,33 +11,33 @@
     <form class="form register-form" action="{{ route('register') }}" method="POST">
         @csrf
 
-        <x-form.input.default-input
-            label="Имя, Фамилия"
-            name="name"
-            autofocus
-            required />
+        <x-form.inputs.default-input
+            labelText="Имя, Фамилия"
+            inputName="name"
+            :isRequired="true"
+            autofocus />
 
-        <x-form.input.default-input
-            label="Ваш Email"
-            name="email"
+        <x-form.inputs.default-input
+            labelText="Ваш Email"
+            inputName="email"
             type="email"
-            required />
+            :isRequired="true" />
 
-        <x-form.input.default-input
-            label="Пароль"
-            name="password"
+        <x-form.inputs.default-input
+            labelText="Пароль"
+            inputName="password"
             type="password"
             autocomplete="new-password"
             minlength="4"
-            required />
+            :isRequired="true" />
 
-        <x-form.input.default-input
-            label="Подтверждения пароля"
-            name="password_confirmation"
+        <x-form.inputs.default-input
+            labelText="Подтверждения пароля"
+            inputName="password_confirmation"
             type="password"
             autocomplete="new-password"
             minlength="4"
-            required />
+            :isRequired="true" />
 
         <button class="button submit">Зарегистрироваться</button>
     </form>

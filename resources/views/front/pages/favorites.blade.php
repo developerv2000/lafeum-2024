@@ -19,16 +19,16 @@
         <form class="create-folder__form form" action="{{ route('folders.store') }}" method="POST" data-on-submit="show-spinner">
             @csrf
 
-            <x-form.input.default-input
-                label="Имя папки"
-                name="name"
-                required />
+            <x-form.inputs.default-input
+                labelText="Имя папки"
+                inputName="name"
+                :isRequired="true" />
 
-            <x-form.select.native.id-based-single-select.default-select
-                label="Родитель"
-                name="parent_id"
+            <x-form.selects.native.id-based-single-select.default-select
+                labelText="Родитель"
+                inputName="parent_id"
                 :options="$rootFolders"
-                placeholder="Без родителя" />
+                placeholderText="Без родителя" />
 
             <x-global.button class="create-folder__form-submit">Сохранить</x-global.button>
         </form>

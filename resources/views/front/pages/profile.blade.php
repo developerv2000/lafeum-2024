@@ -17,7 +17,7 @@
         <h2 class="secondary-title">Фото профиля</h2>
 
         <div class="profile-edit__update-ava-row">
-            <img class="profile-edit__update-ava-image" src="{{ $user->photo_asset_path }}" alt="ava">
+            <img class="profile-edit__update-ava-image" src="{{ $user->photo_asset_url }}" alt="ava">
 
             {{-- Update Ava --}}
             <form class="update-ava-form" action="{{ route('profile.update.ava') }}" method="POST" enctype="multipart/form-data" data-on-submit="show-spinner">
@@ -49,42 +49,43 @@
             @csrf
             @method('PATCH')
 
-            <x-form.input.record-edit-input
-                label="Имя пользователя"
-                name="name"
-                :record="$user"
-                required />
+            <x-form.inputs.record-field-input
+                labelText="Имя пользователя"
+                field="name"
+                :model="$user"
+                :isRequired="true" />
 
-            <x-form.input.record-edit-input
-                label="Электронная почта"
-                name="email"
-                :record="$user"
-                required />
+            <x-form.inputs.record-field-input
+                labelText="Электронная почта"
+                field="email"
+                :model="$user"
+                :isRequired="true" />
 
-            <x-form.input.record-edit-input
-                label="День рождения"
-                name="birthday"
+            <x-form.inputs.record-field-input
+                labelText="День рождения"
+                field="birthday"
                 type="date"
-                :record="$user" />
+                :model="$user"
+                :initialValue="$user->birthday?->format('Y-m-d')" />
 
-            <x-form.select.native.id-based-single-select.record-edit-select
-                label="Пол"
-                name="gender_id"
-                :record="$user"
+            <x-form.selects.native.id-based-single-select.record-field-select
+                labelText="Пол"
+                field="gender_id"
+                :model="$user"
                 :options="$genders"
-                placeholder="Не выбрано" />
+                placeholderText="Не выбрано" />
 
-            <x-form.select.native.id-based-single-select.record-edit-select
-                label="Страна"
-                name="country_id"
-                :record="$user"
+            <x-form.selects.native.id-based-single-select.record-field-select
+                labelText="Страна"
+                field="country_id"
+                :model="$user"
                 :options="$countries"
-                placeholder="Не выбрано" />
+                placeholderText="Не выбрано" />
 
-            <x-form.textarea.record-edit-textarea
-                label="Коротко о себе"
-                name="biography"
-                :record="$user" />
+            <x-form.textareas.record-field-textarea
+                labelText="Коротко о себе"
+                field="biography"
+                :model="$user" />
 
             <x-global.button>Обновить</x-global.button>
         </form>
@@ -98,32 +99,32 @@
             @csrf
             @method('PUT')
 
-            <x-form.input.default-input
-                label="Старый пароль"
-                name="current_password"
-                bagged-error-name="updatePassword"
+            <x-form.inputs.default-input
+                labelText="Старый пароль"
+                inputName="current_password"
+                validationErrorKey="updatePassword"
                 type="password"
                 autocomplete="current-password"
                 minlength="4"
-                required />
+                :isRequired="true" />
 
-            <x-form.input.default-input
-                label="Новый пароль"
-                name="password"
-                bagged-error-name="updatePassword"
+            <x-form.inputs.default-input
+                labelText="Новый пароль"
+                inputName="password"
+                validationErrorKey="updatePassword"
                 type="password"
                 autocomplete="new-password"
                 minlength="4"
-                required />
+                :isRequired="true" />
 
-            <x-form.input.default-input
-                label="Подтвердите новый пароль"
-                name="password_confirmation"
-                bagged-error-name="updatePassword"
+            <x-form.inputs.default-input
+                labelText="Подтвердите новый пароль"
+                inputName="password_confirmation"
+                validationErrorKey="updatePassword"
                 type="password"
                 autocomplete="new-password"
                 minlength="4"
-                required />
+                :isRequired="true" />
 
             <x-global.button>Обновить</x-global.button>
         </form>

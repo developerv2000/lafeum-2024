@@ -97,6 +97,12 @@ class Term extends Model
 
     protected static function booted(): void
     {
+        // Trashing
+        static::deleting(function ($record) {
+            $record->likes()->delete();
+            $record->favorites()->delete();
+        });
+
         static::forceDeleting(function ($record) {
             $record->knowledges()->detach();
             $record->categories()->detach();

@@ -11,20 +11,20 @@
     <form class="form login-form" action="{{ route('login') }}" method="POST">
         @csrf
 
-        <x-form.input.default-input
-            label="Ваш Email"
-            name="email"
+        <x-form.inputs.default-input
+            labelText="Ваш Email"
+            inputName="email"
             type="email"
-            autofocus
-            required />
+            :isRequired="true"
+            autofocus />
 
-        <x-form.input.default-input
-            label="Пароль"
-            name="password"
+        <x-form.inputs.default-input
+            labelText="Пароль"
+            inputName="password"
             type="password"
             autocomplete="current-password"
             minlength="4"
-            required />
+            :isRequired="true"/>
 
         <div class="login__links-wrapper">
             <a class="login-link" href="{{ route('register') }}">У вас нет аккаунта?</a>

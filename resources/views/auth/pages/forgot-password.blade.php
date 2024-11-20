@@ -18,12 +18,12 @@
     <form class="form forgot-password-form" action="{{ route('password.email') }}" method="POST">
         @csrf
 
-        <x-form.input.default-input
-            label="Ваш Email"
-            name="email"
+        <x-form.inputs.default-input
+            labelText="Ваш Email"
+            inputName="email"
             type="email"
-            autofocus
-            required />
+            :isRequired="true"
+            autofocus />
 
         <button class="button submit">Запросить ссылку</button>
     </form>

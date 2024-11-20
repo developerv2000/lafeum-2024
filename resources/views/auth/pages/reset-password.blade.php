@@ -12,29 +12,29 @@
 
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <x-form.input.request-based-input
-            label="Ваш Email"
-            name="email"
+        <x-form.inputs.request-based-input
+            labelText="Ваш Email"
+            inputName="email"
             type="email"
             autocomplete="username"
-            autofocus
-            required />
+            :isRequired="true"
+            autofocus />
 
-        <x-form.input.default-input
-            label="Новый пароль"
-            name="password"
+        <x-form.inputs.default-input
+            labelText="Новый пароль"
+            inputName="password"
             type="password"
             autocomplete="new-password"
             minlength="4"
-            required />
+            :isRequired="true" />
 
-        <x-form.input.default-input
-            label="Подтверждения пароля"
-            name="password_confirmation"
+        <x-form.inputs.default-input
+            labelText="Подтверждения пароля"
+            inputName="password_confirmation"
             type="password"
             autocomplete="new-password"
             minlength="4"
-            required />
+            :isRequired="true" />
 
         <button class="button submit">Обновить пароль</button>
     </form>

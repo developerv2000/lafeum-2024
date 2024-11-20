@@ -12,7 +12,7 @@ class LikeController extends Controller
     {
         $user = $request->user();
         $records = $user->getLikedRecordsPaginated();
-
+        // dd($records[0]);
         // Generate subterms array for subterm popup on hover
         $terms = $records->where('likeable_type', 'App\Models\Term')->pluck('likeable');
         $subtermsArray = Term::generateSubtermsArray($terms);

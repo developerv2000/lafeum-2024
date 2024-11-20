@@ -34,25 +34,25 @@
                 {{-- reCAPTCHA v3 Token. Set automatically on form submit --}}
                 <input type="hidden" name="recaptcha_token" id="recaptcha_token">
 
-                <x-form.input.default-input
-                    label="Ваше имя"
-                    name="name"
-                    required />
+                <x-form.inputs.default-input
+                    labelText="Ваше имя"
+                    inputName="name"
+                    :isRequired="true" />
 
-                <x-form.input.default-input
-                    label="Ваш Email"
-                    name="email"
+                <x-form.inputs.default-input
+                    labelText="Ваш Email"
+                    inputName="email"
                     type="email"
-                    required />
+                    :isRequired="true" />
 
-                <x-form.input.default-input
-                    label="Тема"
-                    name="theme" />
+                <x-form.inputs.default-input
+                    labelText="Тема"
+                    inputName="theme" />
 
-                <x-form.textarea.default-textarea
-                    label="Текст"
-                    name="message"
-                    required />
+                <x-form.textareas.default-textarea
+                    labelText="Текст"
+                    inputName="message"
+                    :isRequired="true" />
 
                 <x-global.button class="feedback-form__submit">Отправить</x-global.button>
             </form>

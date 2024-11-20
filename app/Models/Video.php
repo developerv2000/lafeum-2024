@@ -88,6 +88,12 @@ class Video extends Model
 
     protected static function booted(): void
     {
+        // Trashing
+        static::deleting(function ($record) {
+            $record->likes()->delete();
+            $record->favorites()->delete();
+        });
+
         static::restoring(function ($record) {
             if ($record->channel->trashed()) {
                 $record->channel->restoreQuietly();

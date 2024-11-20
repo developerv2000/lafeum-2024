@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Support\Helpers\FileHelper;
+use App\Support\Helpers\QueryFilterHelper;
+use App\Support\Traits\Model\AddsQueryParamsToRequest;
+use App\Support\Traits\Model\FinalizesQueryForRequest;
 use App\Support\Traits\Model\UploadsFile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -14,9 +17,16 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     use UploadsFile;
+    use AddsQueryParamsToRequest;
+    use FinalizesQueryForRequest;
+
+    const DEFAULT_DASHBOARD_ORDER_BY = 'updated_at';
+    const DEFAULT_DASHBOARD_ORDER_TYPE = 'desc';
+    const DEFAULT_DASHBOARD_PAGINATION_LIMIT = 50;
 
     const PHOTO_PATH = 'img/users';
     const DEFAULT_PHOTO_NAME = '__default__.png';
+
     const PHOTO_WIDTH = 320;
     const PHOTO_HEIGHT = 320;
 
@@ -60,6 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'settings' => 'array',
+            'birthday' => 'date',
         ];
     }
 
@@ -125,7 +136,7 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
-    public function getPhotoAssetPathAttribute(): string
+    public function getPhotoAssetUrlAttribute(): string
     {
         return asset(self::PHOTO_PATH . '/' . $this->photo);
     }
@@ -145,6 +156,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         static::deleting(function ($record) {
             $record->roles()->detach();
+
+            $record->likes()->delete();
+            $record->favorites()->delete();
+
+            // Child folders will be removed automatically
+            $record->rootFolders->each(function ($rootFolder) {
+                $rootFolder->delete();
+            });
         });
     }
 
@@ -160,6 +179,30 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdministrator()
     {
         return $this->roles->contains('name', Role::ADMINISTRATOR_NAME);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queries
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Finalized query for the dashboard based on the specified query and action.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder|null $query The query builder instance (optional).
+     * @param \Illuminate\Http\Request $request The HTTP request containing parameters like order, pagination, etc.
+     * @param string $action The action to perform: 'paginate', 'get', or 'query'
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Builder
+     *         The modified query or the retrieved results.
+     */
+    public static function finalizeQueryForDashboard($query, $request, $action)
+    {
+        $query->with(['country', 'gender']);
+        $query = QueryFilterHelper::applyFilters($query, $request, self::getDashboardFilterConfig());
+        $query = self::finalizeQueryForRequest($query, $request, $action);
+
+        return $query;
     }
 
     /*
@@ -217,5 +260,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
         $this->settings = $settings;
         $this->save();
+    }
+
+    public static function getDashboardFilterConfig(): array
+    {
+        return [
+            'whereEqual' => ['registered_ip_address', 'registered_browser', 'registered_device', 'registered_country', 'gender_id'],
+            'whereIn' => ['id', 'country_id'],
+            'like' => ['name', 'email'],
+            'dateRange' => ['created_at', 'updated_at', 'publish_at'],
+        ];
     }
 }
