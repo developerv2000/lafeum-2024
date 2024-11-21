@@ -53,7 +53,7 @@
             submitIcon="lock_open_right">
 
             <div class="form__block">
-                <h2 class="main-title main-title--marginless">Разблокировать пользователья</h2>
+                <h2 class="main-title main-title--marginless">Разблокировать пользователя</h2>
 
                 <p>Текущий пользователь заблокирован. Он не может входить на сайт!</p>
             </div>

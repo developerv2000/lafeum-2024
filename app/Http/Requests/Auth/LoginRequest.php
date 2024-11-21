@@ -88,11 +88,11 @@ class LoginRequest extends FormRequest
         $user = User::where('email', $this->email)->first();
 
         if ($user && $user->isInactive()) {
+            Auth::logout();
+
             throw ValidationException::withMessages([
                 'email' => "Этот аккаунт заблокирован!",
             ]);
-
-            Auth::logout();
         }
     }
 
