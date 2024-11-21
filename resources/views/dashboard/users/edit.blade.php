@@ -50,7 +50,7 @@
         <x-dashboard.form-templates.edit-template
             :action="route('dashboard.users.toggle.inactive-role', $record->id)"
             submitText="Разблокировать"
-            submitIcon="lock_reset">
+            submitIcon="lock_open_right">
 
             <div class="form__block">
                 <h2 class="main-title main-title--marginless">Разблокировать пользователья</h2>
@@ -62,7 +62,7 @@
         <x-dashboard.form-templates.edit-template
             :action="route('dashboard.users.toggle.inactive-role', $record->id)"
             submitText="Заблокировать"
-            submitIcon="lock_reset">
+            submitIcon="block">
 
             <div class="form__block">
                 <h2 class="main-title main-title--marginless">Заблокировать пользователья</h2>
