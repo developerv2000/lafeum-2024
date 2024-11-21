@@ -55,10 +55,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard
     });
 
     Route::controller(UserController::class)->prefix('/users')->name('users.')->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'delete'], 'id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index'], 'id', 'dashboard');
     });
 
     Route::controller(FeedbackController::class)->prefix('/feedbacks')->name('feedbacks.')->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'delete'], 'id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'destroy'], 'id', 'dashboard');
     });
 });

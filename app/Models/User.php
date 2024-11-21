@@ -15,7 +15,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
     use UploadsFile;
     use AddsQueryParamsToRequest;
     use FinalizesQueryForRequest;
@@ -268,7 +269,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'whereEqual' => ['registered_ip_address', 'registered_browser', 'registered_device', 'registered_country', 'gender_id'],
             'whereIn' => ['id', 'country_id'],
             'like' => ['name', 'email'],
-            'dateRange' => ['created_at', 'updated_at', 'publish_at'],
+            'dateRange' => ['created_at', 'updated_at'],
         ];
     }
 }

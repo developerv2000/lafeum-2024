@@ -21,7 +21,7 @@
                             <a href="{{ route('authors.show', $todaysPost->quote->author->slug) }}" target="_blank">{{ $todaysPost->quote->author->name }}</a>
                         </h4>
 
-                        <img class="rightbar__quote-image" src="{{ $todaysPost->quote->author->photo_asset_path }}" alt="{{ $todaysPost->quote->author->name }}">
+                        <img class="rightbar__quote-image" src="{{ $todaysPost->quote->author->photo_asset_url }}" alt="{{ $todaysPost->quote->author->name }}">
                     </div>
 
                     <div class="rightbar__quote-body">{!! $todaysPost->quote->body !!}</div>

@@ -23,7 +23,7 @@ class LikeController extends Controller
     public function toggle(Request $request)
     {
         $modelFullName = ModelHelper::addFullNameSpaceToModelBasename($request->route('model'));
-        $record = $modelFullName::find($request->id);
+        $record = $modelFullName::findOrFail($request->id);
         $record->toggleLikeByCurrentUser();
         $record->refresh();
 

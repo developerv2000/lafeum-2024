@@ -17,7 +17,7 @@ class FavoriteController extends Controller
     public function refresh(Request $request)
     {
         $modelFullName = ModelHelper::addFullNameSpaceToModelBasename($request->route('model'));
-        $record = $modelFullName::find($request->id);
+        $record = $modelFullName::findOrFail($request->id);
         $record->refreshFavoritesFromRequest($request);
         $record->refresh();
 

@@ -15,29 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
+            UserSeeder::class,
             AuthorGroupSeeder::class,
-            AuthorSeeder::class,
+            // AuthorSeeder::class,
             TermTypeSeeder::class,
             CountrySeeder::class,
             GenderSeeder::class,
-        ]);
-
-        $user = User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@mail.com',
-            'password' => bcrypt('12345'),
-            'email_verified_at' => now(),
-        ]);
-
-        $user->roles()->attach([1]);
-
-        $settings = [
-            'preferred_theme' => 'light',
-            'collapsed_dashboard_leftbar' => false,
-        ];
-
-        $user->update([
-            'settings' => $settings,
         ]);
     }
 }

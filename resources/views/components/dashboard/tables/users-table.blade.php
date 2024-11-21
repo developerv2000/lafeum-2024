@@ -1,4 +1,4 @@
-@props(['records', 'trashedRecords' => false])
+@props(['records'])
 
 <x-dashboard.tables.main-template :records="$records">
     {{-- thead titles --}}
