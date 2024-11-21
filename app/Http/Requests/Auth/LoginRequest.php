@@ -89,6 +89,8 @@ class LoginRequest extends FormRequest
             throw ValidationException::withMessages([
                 'email' => "Этот аккаунт заблокирован!",
             ]);
+
+            Auth::logout();
         }
     }
 
