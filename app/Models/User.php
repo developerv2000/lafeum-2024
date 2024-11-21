@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -179,7 +181,15 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAdministrator()
     {
-        return $this->roles->contains('name', Role::ADMINISTRATOR_NAME);
+        return $this->hasRole(Role::ADMINISTRATOR_NAME);
+    }
+
+    /**
+     * Can`t not login
+     */
+    public function isInactive()
+    {
+        return $this->hasRole(Role::INACTIVE_NAME);
     }
 
     /*
@@ -211,6 +221,11 @@ class User extends Authenticatable implements MustVerifyEmail
     | Miscellaneous
     |--------------------------------------------------------------------------
     */
+
+    public function hasRole($role)
+    {
+        return $this->roles->contains('name', $role);
+    }
 
     public function updateProfileFromRequest($request)
     {
@@ -271,5 +286,43 @@ class User extends Authenticatable implements MustVerifyEmail
             'like' => ['name', 'email'],
             'dateRange' => ['created_at', 'updated_at'],
         ];
+    }
+
+    public function toggleInactiveRole()
+    {
+        $inactiveRoleID = Role::findByName(Role::INACTIVE_NAME)->id;
+        $this->roles()->toggle($inactiveRoleID);
+
+        // Logout user by clearing all users session, if user has been disabled
+        $this->refresh();
+
+        if ($this->isInactive()) {
+            $this->logoutFromAllSessions();
+        }
+    }
+
+    public function updatePasswordByAdmin($request): void
+    {
+        // Update the user's password with the new hashed password
+        $this->update([
+            'password' => bcrypt($request->password),
+        ]);
+
+        // Laravel automatically logouts user, while updating his own password
+        // Manually logout user from all devices by cleaning session, if not own password is being changed
+        if (Auth::user()->id != $this->id) {
+            $this->logoutFromAllSessions();
+        }
+    }
+
+    private function logoutFromAllSessions(): void
+    {
+        // Delete all sessions for the current user
+        DB::table('sessions')->where('user_id', $this->id)->delete();
+
+        // Also delete users remember_token. Important!
+        $this->refresh();
+        $this->remember_token = null;
+        $this->save();
     }
 }

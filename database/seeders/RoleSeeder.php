@@ -17,6 +17,7 @@ class RoleSeeder extends Seeder
             ['name' => Role::ADMINISTRATOR_NAME],
             ['name' => Role::AUTHOR_NAME],
             ['name' => Role::USER_NAME],
+            ['name' => Role::INACTIVE_NAME],
         ]);
     }
 }

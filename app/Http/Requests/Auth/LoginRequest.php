@@ -76,10 +76,27 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * Prevent inactive users from authenticating
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function ensureUserIsActive(): void
+    {
+        // Prevent inActive users from authenticating
+        $user = User::where('email', $this->email)->first();
+
+        if ($user && $user->isInactive()) {
+            throw ValidationException::withMessages([
+                'email' => "Этот аккаунт заблокирован!",
+            ]);
+        }
+    }
+
+    /**
      * Get the rate limiting throttle key for the request.
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('email')) . '|' . $this->ip());
     }
 }

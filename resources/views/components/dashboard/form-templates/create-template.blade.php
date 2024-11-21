@@ -1,4 +1,9 @@
-@props(['action', 'id' => 'create-form'])
+@props([
+    'action',
+    'id' => 'create-form',
+    'submitText' => 'Добавить',
+    'submitIcon' => 'done_all',
+])
 
 <form
     {{ $attributes->merge(['class' => 'form create-form']) }}
@@ -14,6 +19,6 @@
     {{ $slot }}
 
     <div class="form__buttons-wrapper">
-        <x-global.button class="form__submit" type="submit">Добавить</x-global.button>
+        <x-global.button class="form__submit" type="submit" icon="{{ $submitIcon }}">{{ $submitText }}</x-global.button>
     </div>
 </form>

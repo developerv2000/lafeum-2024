@@ -5,6 +5,8 @@
     <x-slot:thead-titles>
         <x-dashboard.tables.partials.th.select-all />
 
+        <x-dashboard.tables.partials.th.edit />
+
         <th width="80">Фото</th>
 
         <th width="200">
@@ -14,6 +16,8 @@
         <th width="140">
             <x-dashboard.tables.partials.th.order-link order-by="email" text="Почта" />
         </th>
+
+        <th width="130">Блокировка</th>
 
         <th width="140">
             <x-dashboard.tables.partials.th.order-link order-by="birthday" text="День рождения" />
@@ -68,12 +72,21 @@
             <tr>
                 <x-dashboard.tables.partials.td.checkbox :value="$record->id" />
 
+                <x-dashboard.tables.partials.td.edit :link="route('dashboard.users.edit', $record->id)" />
+
                 <td>
                     <img src="{{ $record->photo_asset_url }}">
                 </td>
 
                 <td>{{ $record->name }}</td>
                 <td>{{ $record->email }}</td>
+
+                <td>
+                    @if ($record->isInactive())
+                        <span class="badge badge--red">Заблокирован</span>
+                    @endif
+                </td>
+
                 <td>{{ $record->birthday?->isoFormat('DD MMM Y') }}</td>
                 <td>{{ $record->email_verified_at?->isoFormat('DD MMM Y') }}</td>
                 <td>{{ $record->gender?->name }}</td>

@@ -14,6 +14,7 @@ class Role extends Model
     const ADMINISTRATOR_NAME = 'Администратор';
     const AUTHOR_NAME = 'Автор';
     const USER_NAME = 'Пользователь';
+    const INACTIVE_NAME = 'Неактивный';
 
     public $timestamps = false;
 

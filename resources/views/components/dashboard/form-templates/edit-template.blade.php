@@ -1,4 +1,10 @@
-@props(['action', 'id' => 'edit-form', 'method' => 'PATCH'])
+@props([
+    'action',
+    'id' => 'edit-form',
+    'method' => 'PATCH',
+    'submitText' => 'Сохранить',
+    'submitIcon' => 'done_all',
+])
 
 <form
     {{ $attributes->merge(['class' => 'form edit-form']) }}
@@ -15,6 +21,6 @@
     {{ $slot }}
 
     <div class="form__buttons-wrapper">
-        <x-global.button class="form__submit" type="submit" icon="done_all">Сохранить</x-global.button>
+        <x-global.button class="form__submit" type="submit" icon="{{ $submitIcon }}">{{ $submitText }}</x-global.button>
     </div>
 </form>

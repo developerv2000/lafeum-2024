@@ -55,7 +55,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('/dashboard')->name('dashboard
     });
 
     Route::controller(UserController::class)->prefix('/users')->name('users.')->group(function () {
-        CrudRouteGenerator::defineDefaultRoutesOnly(['index'], 'id', 'dashboard');
+        CrudRouteGenerator::defineDefaultRoutesOnly(['index', 'edit'], 'id', 'dashboard');
+
+        Route::patch('/update-password/{record}', 'updatePassword')->name('update.password');
+        Route::patch('/toggle-inactive-role/{record}', 'toggleInactiveRole')->name('toggle.inactive-role');
     });
 
     Route::controller(FeedbackController::class)->prefix('/feedbacks')->name('feedbacks.')->group(function () {

@@ -806,13 +806,18 @@ a {
 /* ------------ /END Rightbar ------------ */
 
 
-/* ------------ Content ------------ */
+/* ------------ Titles ------------ */
 .main-title {
-    font-size: 20px;
     margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--theme-secondary-color);
 }
 
-/* ------------ /end Content ------------ */
+.main-title--marginless {
+    margin-bottom: 0;
+}
+/* ------------ /end Titles ------------ */
 
 
 /* ------------ Toolbar ------------ */

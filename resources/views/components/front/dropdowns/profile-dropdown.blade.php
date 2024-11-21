@@ -4,10 +4,12 @@
     </x-slot:button>
 
     <x-slot:content>
-        <a class="profile-dropdown__link" href="{{ route('dashboard.index') }}" target="_blank">
-            <x-global.material-symbol-outlined icon="settings" filled="true" />
-            Админка
-        </a>
+        @if (auth()->user()->isAdministrator())
+            <a class="profile-dropdown__link" href="{{ route('dashboard.index') }}" target="_blank">
+                <x-global.material-symbol-outlined icon="settings" filled="true" />
+                Админка
+            </a>
+        @endif
 
         <a class="profile-dropdown__link" href="{{ route('profile.edit') }}">
             <x-global.material-symbol-outlined icon="account_circle" filled="true" />
