@@ -11,7 +11,8 @@ export default defineConfig({
 
                 // Dashboard styles
                 'resources/css/dashboard/main.css',
-                'resources/css/dashboard/themes/*',
+                'resources/css/dashboard/themes/light.css',
+                'resources/css/dashboard/themes/dark.css',
 
                 // Front js
                 'resources/js/front/main.js',
