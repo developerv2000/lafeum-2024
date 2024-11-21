@@ -84,6 +84,23 @@ const localSearchClearButtons = document.querySelectorAll('.local-search__clear-
 
 /*
 |--------------------------------------------------------------------------
+| Initializations
+|--------------------------------------------------------------------------
+*/
+
+init();
+
+function init() {
+    handleScroll(); // Check scroll position on page load
+    removeRedundantExpandMoreButtons();
+}
+
+window.addEventListener('load', function () {
+    registerServiceWorker();
+});
+
+/*
+|--------------------------------------------------------------------------
 | Event Listeners
 |--------------------------------------------------------------------------
 */
@@ -505,20 +522,3 @@ function registerServiceWorker() {
         console.log('Service workers are not supported.');
     }
 }
-
-/*
-|--------------------------------------------------------------------------
-| Initializations
-|--------------------------------------------------------------------------
-*/
-
-init();
-
-function init() {
-    handleScroll(); // Check scroll position on page load
-    removeRedundantExpandMoreButtons();
-}
-
-window.addEventListener('load', function () {
-    registerServiceWorker();
-});
