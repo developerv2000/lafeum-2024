@@ -29,6 +29,16 @@ class Knowledge extends Model
         return $this->belongsToMany(Term::class);
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopewithRecordsCount($query)
+    {
+        return $query->withCount('terms as records_count');
+    }
 
     /*
     |--------------------------------------------------------------------------

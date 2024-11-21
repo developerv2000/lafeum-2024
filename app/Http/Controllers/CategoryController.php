@@ -19,6 +19,7 @@ class CategoryController extends Controller
     public function dashboardIndex(Request $request, $model)
     {
         $records = $this->namespacedModel::with('parent')
+            ->withRecordsCount()
             ->orderBy('name', 'asc')
             ->paginate(40)
             ->appends($request->except('page'));

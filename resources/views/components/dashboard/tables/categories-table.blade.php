@@ -8,6 +8,7 @@
         <th width="280">Заголовок</th>
         <th>Описание</th>
         <th width="200">Родитель</th>
+        <th width="80">Записей</th>
         <th width="80">ID</th>
     </x-slot:thead-titles>
 
@@ -20,6 +21,7 @@
                 <td>{{ $record->name }}</td>
                 <td><x-dashboard.tables.partials.td.max-lines-limited-text :text="$record->description" /></td>
                 <td>{{ $record->parent?->name }}</td>
+                <td>{{ $record->records_count }}</td>
                 <td>{{ $record->id }}</td>
             </tr>
         @endforeach
