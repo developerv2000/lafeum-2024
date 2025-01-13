@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PasswordUpdateByAdminRequest;
 use App\Models\User;
 use App\Support\Helpers\UrlHelper;
+use App\Support\Traits\Controller\DestroysModelRecords;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    use DestroysModelRecords;
+
+    public static $model = User::class; // Required in multiple destroy trait
+
     /*
     |--------------------------------------------------------------------------
     | Dashboard actions

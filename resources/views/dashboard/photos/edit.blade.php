@@ -50,7 +50,9 @@
                 type="datetime-local"
                 :model="$record"
                 field="publish_at"
-                :isRequired="true" />
+                :isRequired="true"
+                min="{{ date('Y') - 20 }}-01-01T00:00"
+                max="{{ date('Y') + 20 }}-01-01T00:00" />
 
             <x-form.textareas.record-field-textarea
                 labelText="Мысли автора"

@@ -30,6 +30,8 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
+        $request->ensureValidEmail();
+
         // Initialize the Agent instance
         $agent = new Agent();
 

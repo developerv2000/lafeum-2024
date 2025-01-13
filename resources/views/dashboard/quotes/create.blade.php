@@ -40,7 +40,9 @@
                     labelText="Дата публикации"
                     type="datetime-local"
                     inputName="publish_at"
-                    :isRequired="true" />
+                    :isRequired="true"
+                    min="{{ date('Y') - 20 }}-01-01T00:00"
+                    max="{{ date('Y') + 20 }}-01-01T00:00" />
 
                 <x-form.selects.selectize.id-based-multiple-select.default-select
                     labelText="Категории"

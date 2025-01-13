@@ -66,6 +66,8 @@
                 field="birthday"
                 type="date"
                 :model="$user"
+                min="1950-01-01"
+                max="2020-01-01"
                 :initialValue="$user->birthday?->format('Y-m-d')" />
 
             <x-form.selects.native.id-based-single-select.record-field-select
@@ -85,7 +87,8 @@
             <x-form.textareas.record-field-textarea
                 labelText="Коротко о себе"
                 field="biography"
-                :model="$user" />
+                :model="$user"
+                maxlength="32000" />
 
             <x-global.button>Обновить</x-global.button>
         </form>

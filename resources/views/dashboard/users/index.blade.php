@@ -23,6 +23,14 @@
                 <x-global.button
                     class="toolbar__button"
                     style="shadowed"
+                    icon="delete"
+                    data-click-action="show-modal"
+                    data-modal-selector=".multiple-delete-modal">Удалить
+                </x-global.button>
+
+                <x-global.button
+                    class="toolbar__button"
+                    style="shadowed"
                     icon="fullscreen"
                     data-click-action="request-fullscreen"
                     data-target-selector="{{ '.main-wrapper' }}">На весь экран
@@ -33,6 +41,9 @@
         {{-- Table --}}
         <x-dashboard.tables.users-table :records="$records" />
     </div>
+
+    {{-- Modals --}}
+    <x-dashboard.modals.multiple-delete form-action="{{ route('dashboard.users.destroy') }}" :force-delete="false" />
 @endsection
 
 @section('rightbar')
