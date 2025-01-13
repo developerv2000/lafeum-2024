@@ -4,10 +4,10 @@
     {{-- Header --}}
     <x-slot:header>
         {{-- Title --}}
-        <div class="quotes-card__title">
+        <a class="quotes-card__title" href="{{ route('authors.show', $quote->author->slug) }}" target="_blank">
             <x-global.material-symbol-outlined class="quotes-card__title-icon" icon="person" filled="1" />
             <p class="quotes-card__title-author-name">{{ $quote->author->name }}</p>
-        </div>
+        </a>
 
         {{-- ID --}}
         <x-front.cards.default.partials.id :id="$quote->id" :link="route('quotes.show', $quote->id)" />

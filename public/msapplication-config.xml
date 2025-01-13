@@ -7,7 +7,7 @@
 			<wide310x150logo src="/img/tiles/ms-icon-310x150.png" />
 			<square310x310logo src="/img/tiles/ms-icon-310x310.png" />
 			<TileColor>
-				#f0f8ff
+				#EEEEEE
 			</TileColor>
 		</tile>
 	</msapplication>
