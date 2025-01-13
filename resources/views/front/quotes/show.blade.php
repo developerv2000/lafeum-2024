@@ -7,8 +7,8 @@
     <meta name="description" content="{{ $record->share_text }}">
     <meta property="og:description" content="{{ $record->share_text }}">
     <meta property="og:title" content="{{ $record->author->name }}" />
-    <meta property="og:image" content="{{ asset('img/main/share-logo.png') }}">
-    <meta property="og:image:alt" content="ЛАФЕЮМ logo">
+    <meta property="og:image" content="{{ $record->author->photo_asset_url }}">
+    <meta property="og:image:alt" content="{{ $record->author->name }}">
 @endsection
 
 @section('content')
