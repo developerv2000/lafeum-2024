@@ -4,6 +4,14 @@
     'title' => 'Словарь',
 ])
 
+@section('meta-tags')
+    <meta name="description" content="На сегодня содержит более одной тысячи основных терминов, соответствующих тематике сайта. Для удобства термины дополнительно разбиты на темы. Большинство терминов взяты из Википедии с указанием ссылки на источник.">
+    <meta property="og:description" content="На сегодня содержит более одной тысячи основных терминов, соответствующих тематике сайта. Для удобства термины дополнительно разбиты на темы. Большинство терминов взяты из Википедии с указанием ссылки на источник.">
+    <meta property="og:title" content="Словарь" />
+    <meta property="og:image" content="{{ asset('img/main/share-logo.png') }}">
+    <meta property="og:image:alt" content="ЛАФЕЮМ logo">
+@endsection
+
 @section('leftbar')
     @include('front.leftbars.vocabulary')
 @endsection

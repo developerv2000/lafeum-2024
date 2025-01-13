@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Support\Generators\SlugGenerator;
+use App\Support\Helpers\GeneralHelper;
 use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,17 @@ class VideoCategory extends Model
     public function videos()
     {
         return $this->belongsToMany(Video::class, 'category_video', 'category_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional attributes
+    |--------------------------------------------------------------------------
+    */
+
+    public function getShareTextAttribute()
+    {
+        return GeneralHelper::generateShareTextFromStr($this->description);
     }
 
     /*

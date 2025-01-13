@@ -22,6 +22,20 @@
         <x-global.noindex-tags />
     @endif
 
+    <meta property="og:site_name" content="ЛАФЕЮМ">
+    <meta property="og:type" content="object">
+    <meta name="twitter:card" content="summary_large_image">
+
+    @hasSection('meta-tags')
+        @yield('meta-tags')
+    @else
+        <meta name="description" content="Информированность о методах развития личности и совершенствования профессиональных знаний, осведомленность в вопросах бытия и научно-популярных тем вместе взятых..">
+        <meta property="og:title" content="ЛАФЕЮМ">
+        <meta property="og:description" content="Информированность о методах развития личности и совершенствования профессиональных знаний, осведомленность в вопросах бытия и научно-популярных тем вместе взятых..">
+        <meta property="og:image" content="{{ asset('img/main/share-logo.png') }}">
+        <meta property="og:image:alt" content="ЛАФЕЮМ logo">
+    @endif
+
     @vite('resources/css/front/main.css')
 </head>
 

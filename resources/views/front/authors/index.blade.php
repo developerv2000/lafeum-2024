@@ -4,6 +4,14 @@
     'title' => 'Авторы',
 ])
 
+@section('meta-tags')
+    <meta name="description" content="Полный список всех авторов по алфавиту, а также есть возможность поиска.">
+    <meta property="og:description" content="Полный список всех авторов по алфавиту, а также есть возможность поиска.">
+    <meta property="og:title" content="Авторы" />
+    <meta property="og:image" content="{{ asset('img/main/share-logo.png') }}">
+    <meta property="og:image:alt" content="ЛАФЕЮМ logo">
+@endsection
+
 @section('content')
     <div class="authors-index__about">
         <div class="authors-index__about-inner">

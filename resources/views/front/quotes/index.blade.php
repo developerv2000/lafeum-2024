@@ -4,6 +4,14 @@
     'title' => 'Цитаты и Афоризмы',
 ])
 
+@section('meta-tags')
+    <meta name="description" content="Лучшие цитаты, афоризмы и высказывания великих ученых и мыслителей, и успешных людей на тематику сайта.">
+    <meta property="og:description" content="Лучшие цитаты, афоризмы и высказывания великих ученых и мыслителей, и успешных людей на тематику сайта.">
+    <meta property="og:title" content="Цитаты и Афоризмы" />
+    <meta property="og:image" content="{{ asset('img/main/share-logo.png') }}">
+    <meta property="og:image:alt" content="ЛАФЕЮМ logo">
+@endsection
+
 @section('leftbar')
     @include('front.leftbars.quotes')
 @endsection

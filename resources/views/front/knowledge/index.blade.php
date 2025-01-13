@@ -4,6 +4,14 @@
     'title' => 'Области знаний',
 ])
 
+@section('meta-tags')
+    <meta name="description" content="В этой рубрике термины и комментарии специалистов классифицированы более развернуто по группам и направлениям.">
+    <meta property="og:description" content="В этой рубрике термины и комментарии специалистов классифицированы более развернуто по группам и направлениям.">
+    <meta property="og:title" content="Области знаний" />
+    <meta property="og:image" content="{{ asset('img/main/share-logo.png') }}">
+    <meta property="og:image:alt" content="ЛАФЕЮМ logo">
+@endsection
+
 @section('content')
     <section class="knowledge-index__about">
         <div class="knowledge-index__about-inner">

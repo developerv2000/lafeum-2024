@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Helpers\GeneralHelper;
 use App\Support\Helpers\QueryFilterHelper;
 use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\Favoriteable;
@@ -70,6 +71,11 @@ class Term extends Model
     | Additional attributes
     |--------------------------------------------------------------------------
     */
+
+    public function getShareTextAttribute()
+    {
+        return GeneralHelper::generateShareTextFromStr($this->body);
+    }
 
     public function getMinifiedSubtermsAttribute()
     {

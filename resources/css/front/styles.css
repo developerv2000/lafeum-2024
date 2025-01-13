@@ -622,6 +622,14 @@ a {
     border-radius: 0 8px 8px 0;
 }
 
+.about-page__desc {
+    margin-bottom: 14px;
+
+    &:empty {
+        margin-bottom: 0;
+    }
+}
+
 /* ------------ /end About page ------------ */
 
 

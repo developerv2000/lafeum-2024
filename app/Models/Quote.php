@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Helpers\GeneralHelper;
 use App\Support\Helpers\QueryFilterHelper;
 use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\Favoriteable;
@@ -57,6 +58,17 @@ class Quote extends Model
     public function categories()
     {
         return $this->belongsToMany(QuoteCategory::class, 'category_quote', 'quote_id', 'category_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional attributes
+    |--------------------------------------------------------------------------
+    */
+
+    public function getShareTextAttribute()
+    {
+        return GeneralHelper::generateShareTextFromStr($this->body);
     }
 
     /*

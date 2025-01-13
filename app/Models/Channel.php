@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Support\Generators\SlugGenerator;
+use App\Support\Helpers\GeneralHelper;
 use App\Support\Helpers\QueryFilterHelper;
 use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\FinalizesQueryForRequest;
@@ -38,6 +39,17 @@ class Channel extends Model
     public function videos()
     {
         return $this->hasMany(Video::class);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional attributes
+    |--------------------------------------------------------------------------
+    */
+
+    public function getShareTextAttribute()
+    {
+        return GeneralHelper::generateShareTextFromStr($this->description);
     }
 
     /*

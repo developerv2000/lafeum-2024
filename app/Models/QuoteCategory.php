@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Support\Generators\SlugGenerator;
+use App\Support\Helpers\GeneralHelper;
 use App\Support\Traits\Model\GetsMinifiedRecordsWithName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,17 @@ class QuoteCategory extends Model
     public function quotes()
     {
         return $this->belongsToMany(Quote::class, 'category_quote', 'category_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional attributes
+    |--------------------------------------------------------------------------
+    */
+
+    public function getShareTextAttribute()
+    {
+        return GeneralHelper::generateShareTextFromStr($this->description);
     }
 
     /*

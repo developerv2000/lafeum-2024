@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Support\Generators\SlugGenerator;
+use App\Support\Helpers\GeneralHelper;
 use App\Support\Helpers\QueryFilterHelper;
 use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\FinalizesQueryForRequest;
@@ -54,6 +55,11 @@ class Author extends Model
     | Additional attributes
     |--------------------------------------------------------------------------
     */
+
+    public function getShareTextAttribute()
+    {
+        return GeneralHelper::generateShareTextFromStr($this->biography);
+    }
 
     public function getPhotoAssetUrlAttribute(): string
     {
