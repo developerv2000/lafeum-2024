@@ -38,7 +38,7 @@ class Quote extends Model
     ];
 
     protected $with = [
-        'author:id,name,slug',
+        'author:id,name,slug,photo',
         'categories',
         'likes',
         'favorites',
