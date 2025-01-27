@@ -6,6 +6,7 @@ use App\Support\Helpers\FileHelper;
 use App\Support\Helpers\QueryFilterHelper;
 use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\FinalizesQueryForRequest;
+use App\Support\Traits\Model\FormatsAttributeForDateTimeInput;
 use App\Support\Traits\Model\Publishable;
 use App\Support\Traits\Model\UploadsFile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +21,7 @@ class Photo extends Model
     use AddsQueryParamsToRequest;
     use FinalizesQueryForRequest;
     use UploadsFile;
+    use FormatsAttributeForDateTimeInput;
 
     const DEFAULT_FRONT_ORDER_BY = 'publish_at';
     const DEFAULT_FRONT_ORDER_TYPE = 'desc';

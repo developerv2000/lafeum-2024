@@ -115,7 +115,7 @@ class TermController extends Controller
      * Route model binding not used, because trashed records can also be updated.
      * Route model binding looks only for untrashed records!
      */
-    public function dashboardUpdate(TermUpdateRequest $request, Term $record)
+    public function dashboardUpdate(TermUpdateRequest $request, $record)
     {
         $record = Term::withTrashed()->findOrFail($record);
         $record->updateFromRequest($request);

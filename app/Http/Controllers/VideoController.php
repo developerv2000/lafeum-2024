@@ -113,8 +113,9 @@ class VideoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function dashboardUpdate(VideoUpdateRequest $request, Video $record)
+    public function dashboardUpdate(VideoUpdateRequest $request, $record)
     {
+        $record = Video::withTrashed()->findOrFail($record);
         $record->updateFromRequest($request);
 
         return redirect($request->input('previous_url'));

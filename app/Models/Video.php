@@ -6,6 +6,7 @@ use App\Support\Helpers\QueryFilterHelper;
 use App\Support\Traits\Model\AddsQueryParamsToRequest;
 use App\Support\Traits\Model\Favoriteable;
 use App\Support\Traits\Model\FinalizesQueryForRequest;
+use App\Support\Traits\Model\FormatsAttributeForDateTimeInput;
 use App\Support\Traits\Model\Likeable;
 use App\Support\Traits\Model\Publishable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,7 @@ class Video extends Model
     use Favoriteable;
     use AddsQueryParamsToRequest;
     use FinalizesQueryForRequest;
+    use FormatsAttributeForDateTimeInput;
 
     const DEFAULT_FRONT_ORDER_BY = 'publish_at';
     const DEFAULT_FRONT_ORDER_TYPE = 'desc';
