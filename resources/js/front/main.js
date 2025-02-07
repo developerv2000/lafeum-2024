@@ -455,6 +455,7 @@ function removeIframeFromYoutubeVideoModal() {
 }
 
 function showPhotosModal(src, desc) {
+    photosModalImage.removeAttribute('src');
     photosModalImage.src = src;
     photosModalDesc.innerHTML = desc;
 
