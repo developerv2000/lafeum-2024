@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quote;
 use App\Models\QuoteCategory;
+use App\Models\Term;
 use App\Models\TermCategory;
+use App\Models\Video;
 use App\Models\VideoCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
@@ -58,6 +62,35 @@ class MainController extends Controller
     public function termsOfUse()
     {
         return view('front.pages.terms-of-use');
+    }
+
+    /**
+     * Handle redirecting of old app version routes for 'post pages'
+     */
+    public function redirectToPost($postID)
+    {
+        $post = DB::table('posts')->where('id', $postID)->first();
+
+        if (!$post) {
+            abort(404);
+        }
+
+        switch ($post->postable_type) {
+            case 'App\Quote':
+                $record = Quote::findOrFail($post->postable_id);
+                return redirect()->route('quotes.show', $record->id)->setStatusCode(301);
+
+            case 'App\Term':
+                $record = Term::findOrFail($post->postable_id);
+                return redirect()->route('terms.show', $record->id)->setStatusCode(301);
+
+            case 'App\Video':
+                $record = Video::findOrFail($post->postable_id);
+                return redirect()->route('videos.show', $record->id)->setStatusCode(301);
+
+            default:
+                abort(404);
+        }
     }
 
     /**

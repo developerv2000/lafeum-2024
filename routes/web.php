@@ -119,3 +119,6 @@ Route::middleware(['guest.or.verified'])->group(function () {
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/dashboard.php';
+
+// Handle redirecting of old app version routes for 'post pages'
+Route::get('/{postID}', [MainController::class, 'redirectToPost'])->where('postID', '[0-9]+');;
