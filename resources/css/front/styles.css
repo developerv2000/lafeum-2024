@@ -724,6 +724,11 @@ a {
     display: flex;
     line-height: 1.2;
     transition: 0.3s;
+
+    &.leftbar__nav-link--active {
+        color: var(--main-color);
+        font-weight: bold;
+    }
 }
 
 .leftbar__nav-title {
