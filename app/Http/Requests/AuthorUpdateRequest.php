@@ -16,7 +16,7 @@ class AuthorUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [Rule::unique(Author::class)->ignore($this->id)],
+            'name' => [Rule::unique(Author::class)->ignore($this->record)],
         ];
     }
 }
