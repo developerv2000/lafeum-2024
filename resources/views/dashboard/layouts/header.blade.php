@@ -5,7 +5,7 @@
             <x-global.material-symbol-outlined class="header__leftbar-toggler unselectable" icon="menu" title="Переключить меню" />
 
             <a class="header__logo-link" href="{{ route('dashboard.index') }}">
-                <h4 class="header__logo-text">{{ env('APP_NAME') }}</h4>
+                <h4 class="header__logo-text">{{ config('app.name') }}</h4>
             </a>
         </div>
 
