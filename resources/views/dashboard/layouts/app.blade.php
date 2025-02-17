@@ -9,7 +9,7 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
-    <title>Админка — {{ env('APP_NAME') }}</title>
+    <title>Админка — {{ config('app.name') }}</title>
 
     {{-- Noindex tags --}}
     <x-global.noindex-tags />
