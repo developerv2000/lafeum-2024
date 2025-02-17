@@ -2,6 +2,7 @@
 
 namespace App\Support\Helpers;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -93,21 +94,28 @@ class GeneralHelper
      */
     public static function validateRecaptchaForRequest($request)
     {
+        // Fetch the secret key from config instead of env()
+        $secretKey = config('services.recaptcha.secret');
+
+        if (!$secretKey) {
+            throw new Exception('Google reCAPTCHA secret key is missing.');
+        }
+
         // Make a POST request to Google's reCAPTCHA siteverify endpoint
         $recaptchaResponse = Http::timeout(120)->asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'secret'   => $secretKey,
             'response' => $request->input('recaptcha_token'), // The reCAPTCHA token sent by the client
             'remoteip' => $request->ip(), // IP address of the user (optional but recommended)
         ]);
 
         $responseData = $recaptchaResponse->json();
 
-        // Check if reCAPTCHA was successful and the score is greater than or equal to 0.5 (indicating a human)
-        $isValid = isset($responseData['success']) && $responseData['success'] && $responseData['score'] >= 0.5;
+        // Check if reCAPTCHA was successful and the score is valid (>= 0.5)
+        $isValid = isset($responseData['success']) && $responseData['success'] && ($responseData['score'] ?? 0) >= 0.5;
 
         if (!$isValid) {
             throw ValidationException::withMessages([
-                'email' => trans('auth.invalid_recaptcha'),
+                'recaptcha' => trans('auth.invalid_recaptcha'),
             ]);
         }
     }
