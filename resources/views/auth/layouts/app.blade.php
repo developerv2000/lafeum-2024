@@ -24,6 +24,9 @@
 
     <x-global.spinner />
 
+    {{-- Google recaptcha v3 --}}
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeTtHcpAAAAANDcYSO5J8Kbpd6tYjERQ4-vocAG"></script>
+
     @vite('resources/js/front/auth.js')
 </body>
 

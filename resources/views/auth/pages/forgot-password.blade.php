@@ -15,8 +15,11 @@
         Забыли пароль? Без проблем. Просто сообщите нам свой адрес электронной почты, и мы отправим вам ссылку для сброса пароля, которая позволит вам выбрать новый.
     </p>
 
-    <form class="form forgot-password-form" action="{{ route('password.email') }}" method="POST">
+    <form class="form forgot-password-form form--with-recaptcha" action="{{ route('password.email') }}" method="POST">
         @csrf
+
+        {{-- reCAPTCHA v3 Token. Set automatically on form submit --}}
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token">
 
         <x-form.inputs.default-input
             labelText="Ваш Email"

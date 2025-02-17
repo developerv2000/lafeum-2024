@@ -21,4 +21,6 @@ return [
     'unique_email' => 'Пользователь с такой почтой уже существует.',
     'password_confirmation_failed' => 'Подтверждение пароля не совпадает.',
     'incorrect_email' => 'Неверный адрес электронной почты.',
+    'incorrect_email' => 'Неверный адрес электронной почты.',
+    'invalid_recaptcha' => 'Проверка recaptcha не пройдена.',
 ];

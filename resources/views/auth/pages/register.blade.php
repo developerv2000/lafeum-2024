@@ -8,8 +8,11 @@
     <h1 class="title">Регистрация</h1>
     <p class="desc"><a href="{{ route('login') }}">У Вас есть аккаунт?</a></p>
 
-    <form class="form register-form" action="{{ route('register') }}" method="POST">
+    <form class="form register-form form--with-recaptcha" action="{{ route('register') }}" method="POST">
         @csrf
+
+        {{-- reCAPTCHA v3 Token. Set automatically on form submit --}}
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token">
 
         <x-form.inputs.default-input
             labelText="Имя, Фамилия"

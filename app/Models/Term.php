@@ -76,6 +76,10 @@ class Term extends Model
 
     public function getShareTextAttribute()
     {
+        if ($this->show_in_vocabulary) {
+            return GeneralHelper::generateShareTextFromStr($this->name);
+        }
+
         return GeneralHelper::generateShareTextFromStr($this->body);
     }
 

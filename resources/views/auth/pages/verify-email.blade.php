@@ -11,8 +11,12 @@
         Спасибо за регистрацию! Прежде чем начать, не могли бы вы подтвердить свой адрес электронной почты, перейдя по ссылке, которую мы только что отправили вам по электронной почте? Если вы не получили электронное письмо, мы с радостью вышлем вам другое.
     </p>
 
-    <form class="form resend-email-verification-form" action="{{ route('verification.send') }}" method="POST">
+    <form class="form resend-email-verification-form form--with-recaptcha" action="{{ route('verification.send') }}" method="POST">
         @csrf
+
+        {{-- reCAPTCHA v3 Token. Set automatically on form submit --}}
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token">
+
         <button class="button submit">Выслать повторно</button>
     </form>
 

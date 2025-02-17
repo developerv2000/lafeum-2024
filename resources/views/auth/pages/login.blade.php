@@ -8,8 +8,11 @@
     <h1 class="title">Вход</h1>
     <p class="desc">Добро пожаловать, мы ждали Вас !</p>
 
-    <form class="form login-form" action="{{ route('login') }}" method="POST">
+    <form class="form login-form form--with-recaptcha" action="{{ route('login') }}" method="POST">
         @csrf
+
+        {{-- reCAPTCHA v3 Token. Set automatically on form submit --}}
+        <input type="hidden" name="recaptcha_token" id="recaptcha_token">
 
         <x-form.inputs.default-input
             labelText="Ваш Email"
@@ -24,7 +27,7 @@
             type="password"
             autocomplete="current-password"
             minlength="4"
-            :isRequired="true"/>
+            :isRequired="true" />
 
         <div class="login__links-wrapper">
             <a class="login-link" href="{{ route('register') }}">У вас нет аккаунта?</a>

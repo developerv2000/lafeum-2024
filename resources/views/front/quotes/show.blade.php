@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'quotes-show',
     'includeRightbar' => true,
+    'title' => $record->share_text,
 ])
 
 @section('meta-tags')

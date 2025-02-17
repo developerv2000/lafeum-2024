@@ -53,7 +53,7 @@ class RegisterRequest extends FormRequest
         $url = 'https://verify.maileroo.net/check';
 
         // Make the HTTP POST request
-        $response = Http::asJson()->post($url, [
+        $response = Http::timeout(120)->asJson()->post($url, [
             'api_key' => $apiKey,
             'email_address' => $email,
         ]);

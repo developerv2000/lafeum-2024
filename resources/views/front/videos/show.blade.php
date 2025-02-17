@@ -1,6 +1,7 @@
 @extends('front.layouts.app', [
     'bodyClass' => 'videos-show',
     'includeRightbar' => true,
+    'title' => $record->title,
 ])
 
 @section('meta-tags')

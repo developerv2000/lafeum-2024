@@ -2,7 +2,9 @@
 
 namespace App\Support\Helpers;
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class GeneralHelper
 {
@@ -56,27 +58,27 @@ class GeneralHelper
      */
     public static function getPlainTextFromStr($string)
     {
-        // Add a space after each closing tag to prevent text from joining
-        $withSpaces = preg_replace('/>(?!\s)/', '> ', $string);
+        if (empty($string)) {
+            return '';
+        }
 
-        // Strip HTML tags
-        $plainText = strip_tags($withSpaces);
-
-        // Normalize by decoding HTML entities
-        $decodedText = htmlspecialchars_decode($plainText);
-
-        // Replace multiple spaces with a single space
-        $normalizedText = preg_replace('/\s+/', ' ', $decodedText);
-
-        // Remove spaces before commas
-        $noSpacesBeforeCommas = preg_replace('/\s+,/', ',', $normalizedText);
-
-        // Trim the result
-        return Str::of($noSpacesBeforeCommas)->trim();
+        return Str::of($string)
+            // Add a space after each closing tag to prevent text from joining
+            ->replaceMatches('/>(?!\s)/', '> ')
+            // Strip HTML tags
+            ->stripTags()
+            // Decode HTML entities using PHP's htmlspecialchars_decode()
+            ->pipe(fn($str) => htmlspecialchars_decode($str))
+            // Replace multiple spaces with a single space
+            ->replaceMatches('/\s+/', ' ')
+            // Remove spaces before commas and dots
+            ->replaceMatches('/\s+([,.])/', '$1')
+            // Trim the result
+            ->trim();
     }
 
     /**
-     * Generate share text from string for meta-tages etc.
+     * Generate share text from string for meta-tags etc.
      */
     public static function generateShareTextFromStr($string)
     {
@@ -84,5 +86,29 @@ class GeneralHelper
         $truncedText = self::truncateString($plainText, 140);
 
         return $truncedText;
+    }
+
+    /**
+     * Validate Google reCAPTCHA v3 response for the request on form submit.
+     */
+    public static function validateRecaptchaForRequest($request)
+    {
+        // Make a POST request to Google's reCAPTCHA siteverify endpoint
+        $recaptchaResponse = Http::timeout(120)->asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('recaptcha_token'), // The reCAPTCHA token sent by the client
+            'remoteip' => $request->ip(), // IP address of the user (optional but recommended)
+        ]);
+
+        $responseData = $recaptchaResponse->json();
+
+        // Check if reCAPTCHA was successful and the score is greater than or equal to 0.5 (indicating a human)
+        $isValid = isset($responseData['success']) && $responseData['success'] && $responseData['score'] >= 0.5;
+
+        if (!$isValid) {
+            throw ValidationException::withMessages([
+                'email' => trans('auth.invalid_recaptcha'),
+            ]);
+        }
     }
 }
