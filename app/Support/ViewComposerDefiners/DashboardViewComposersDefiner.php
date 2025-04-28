@@ -21,7 +21,7 @@ class DashboardViewComposersDefiner
 {
     public static function defineAll()
     {
-        self::paginationLimitComposer();
+        self::definePaginationLimitComposer();
         self::defineQuotesComposers();
         self::defineTermsComposers();
         self::defineVideosComposers();
@@ -29,79 +29,84 @@ class DashboardViewComposersDefiner
         self::defineUsersComposers();
     }
 
-    private static function defineViewComposer($views, array $data)
+    private static function definePaginationLimitComposer()
     {
-        View::composer($views, function ($view) use ($data) {
-            $view->with($data);
+        View::composer('components.dashboard.filters.partials.pagination-limit-input', function ($view) {
+            $view->with([
+                'paginationLimitOptions' => ModelHelper::getPaginationLimitOptions(),
+            ]);
         });
-    }
-
-    private static function paginationLimitComposer()
-    {
-        self::defineViewComposer('components.dashboard.filters.partials.pagination-limit-input', [
-            'paginationLimitOptions' => ModelHelper::getPaginationLimitOptions(),
-        ]);
     }
 
     private static function defineQuotesComposers()
     {
-        self::defineViewComposer([
+        View::composer([
             'components.dashboard.filters.quotes',
             'dashboard.quotes.edit',
             'dashboard.quotes.create',
-        ], [
-            'authors' => Author::getMinifiedRecordsWithName(),
-            'categories' => QuoteCategory::getMinifiedRecordsWithName(),
-        ]);
+        ], function ($view) {
+            $view->with([
+                'authors' => Author::getMinifiedRecordsWithName(),
+                'categories' => QuoteCategory::getMinifiedRecordsWithName(),
+            ]);
+        });
     }
 
     private static function defineTermsComposers()
     {
-        self::defineViewComposer([
+        View::composer([
             'components.dashboard.filters.terms',
             'dashboard.terms.edit',
             'dashboard.terms.create',
-        ], [
-            'namedTerms' => Term::getAllNamedRecordsMinified(),
-            'types' => TermType::getMinifiedRecordsWithName(),
-            'booleanOptions' => GeneralHelper::getBooleanOptionsArray(),
-            'categories' => TermCategory::getMinifiedRecordsWithName(),
-            'knowledges' => Knowledge::getMinifiedRecordsWithName(),
-        ]);
+        ], function ($view) {
+            $view->with([
+                'namedTerms' => Term::getAllNamedRecordsMinified(),
+                'types' => TermType::getMinifiedRecordsWithName(),
+                'booleanOptions' => GeneralHelper::getBooleanOptionsArray(),
+                'categories' => TermCategory::getMinifiedRecordsWithName(),
+                'knowledges' => Knowledge::getMinifiedRecordsWithName(),
+            ]);
+        });
     }
 
     private static function defineVideosComposers()
     {
-        self::defineViewComposer([
+        View::composer([
             'components.dashboard.filters.videos',
             'dashboard.videos.edit',
             'dashboard.videos.create',
-        ], [
-            'channels' => Channel::getMinifiedRecordsWithName(),
-            'categories' => VideoCategory::getMinifiedRecordsWithName(),
-        ]);
+        ], function ($view) {
+            $view->with([
+                'channels' => Channel::getMinifiedRecordsWithName(),
+                'categories' => VideoCategory::getMinifiedRecordsWithName(),
+            ]);
+        });
     }
 
     private static function defineAuthorsComposers()
     {
-        self::defineViewComposer([
+        View::composer([
             'components.dashboard.filters.authors',
             'dashboard.authors.edit',
             'dashboard.authors.create',
-        ], [
-            'groups' => AuthorGroup::getMinifiedRecordsWithName(),
-        ]);
+        ], function ($view) {
+            $view->with([
+                'groups' => AuthorGroup::getMinifiedRecordsWithName(),
+            ]);
+        });
     }
 
     private static function defineUsersComposers()
     {
-        self::defineViewComposer([
+        View::composer([
             'components.dashboard.filters.users',
             'dashboard.users.edit',
             'dashboard.users.create',
-        ], [
-            'genders' => Gender::getMinifiedRecordsWithName(),
-            'countries' => Country::getMinifiedRecordsWithName(),
-        ]);
+        ], function ($view) {
+            $view->with([
+                'genders' => Gender::getMinifiedRecordsWithName(),
+                'countries' => Country::getMinifiedRecordsWithName(),
+            ]);
+        });
     }
 }
