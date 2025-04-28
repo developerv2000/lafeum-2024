@@ -70,6 +70,11 @@
     @endif
 
     @vite('resources/js/front/main.js')
+
+    {{-- Analytics --}}
+    @production
+        @include('front.layouts.analytics')
+    @endproduction
 </body>
 
 </html>
